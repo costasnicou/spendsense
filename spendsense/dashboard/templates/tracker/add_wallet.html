@@ -1,0 +1,8 @@
+
+<form method="post">
+    {% csrf_token %}
+    <h1>Add Wallet</h1>
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
