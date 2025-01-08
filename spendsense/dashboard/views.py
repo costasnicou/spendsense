@@ -27,7 +27,7 @@ class CustomLoginView(LoginView):
 
 
 def homepage(request):
-    return render(request, 'tracker/homepage.html')
+    return render(request, 'dashboard/homepage.html')
 
 
 def signup(request):
@@ -39,7 +39,7 @@ def signup(request):
     else:
         form = SignupForm()
 
-    return render(request, 'tracker/signup.html', {'form': form})
+    return render(request, 'dashboard/signup.html', {'form': form})
 
 
 @login_required
@@ -231,7 +231,7 @@ def dashboard(request):
     total_expenses = Decimal(Transaction.objects.filter(wallet__user=request.user, type='Expense').aggregate(total=Sum('amount'))['total'] or Decimal('0.00'))
     net_balance = Decimal(total_income) - Decimal(total_expenses)
     
-    return render(request, 'tracker/dashboard.html', {
+    return render(request, 'dashboard/dashboard.html', {
         'wallets': wallets,
         'wallet_forms': wallet_forms,
         'transactions': transactions,

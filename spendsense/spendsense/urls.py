@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage' ),
     path('dashboard/', include('dashboard.urls')),
-    path('login/', CustomLoginView.as_view(template_name='tracker/login.html'), name='login'),
+    path('login/', CustomLoginView.as_view(template_name='dashboard/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('signup/', views.signup, name='signup'),
 ]

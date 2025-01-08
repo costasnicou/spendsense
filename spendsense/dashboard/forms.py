@@ -43,16 +43,36 @@ class TransactionForm(forms.ModelForm):
 
 
 class SignupForm(UserCreationForm):
-    email = forms.EmailField(required=True, help_text="Enter a valid email address.")
+
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your username'
+        })
+    )   
+
+    email = forms.EmailField(required=True,
+        widget=forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Enter your Email'
+        }),               
+    )
     password1 = forms.CharField(
         label="Password",
-        widget=forms.PasswordInput,
-        help_text="Enter a strong password.",
+        widget=forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Enter Password'
+        }),
+        
     )
     password2 = forms.CharField(
         label="Confirm Password",
-        widget=forms.PasswordInput,
-        help_text="Enter the same password as above for verification.",
+       
+        widget=forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Confirm Password'
+        }),
+       
     )
 
     class Meta:
