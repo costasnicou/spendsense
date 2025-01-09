@@ -53,9 +53,31 @@
 
 
     <footer>
+        <div class="footer-social">
+            
+            <!-- instagram -->
+            <a class="social-link" target="_blank" href="https://www.instagram.com/cnicou.tech/"><i class="fa-brands fa-instagram"></i></a>
+            
+            <!-- facebook -->
+            <a class="social-link" target="_blank" href="https://www.facebook.com/costas.nicou.3"><i class="fa-brands fa-facebook"></i></a>
 
+            <!-- linkedin -->
+            <a class="social-link" target="_blank" href="https://www.linkedin.com/in/cnicou"><i class="fa-brands fa-linkedin"></i></a>
+
+            <!-- github -->
+            <a class="social-link" target="_blank" href="https://github.com/costasnicou"><i class="fa-brands fa-github"></i></a>
+
+       
+        </div>
+
+        <p> &copy; Copyright <span class="dynYear"></span> - Designed and Develop by <a target="_blank" href="https://costasnicou.com">Costas Nicou</a></p>
     </footer>
 
+    <script>
+        // copyright year
+        const dynYear = document.querySelector('.dynYear');
+        dynYear.innerHTML = (new Date().getFullYear());
+    </script>
     <script src="{% static 'js/dashboard.js'%}"></script>
     <script src="{% static 'js/slider.js'%}"></script>
 </body>
