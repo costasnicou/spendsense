@@ -294,15 +294,19 @@ section{
 
 .testimonials{
     text-align: center;
-    background-color: #f6f6f6; */ 
-}
+    background-color: #f6f6f6; 
+   
+    background:linear-gradient(0deg, rgba(4, 4, 4, 0.573), rgba(42, 143, 143, 0.49)), url('../images/testimonials.jpg');
+    background-size: cover;
+  }
 
 .testimonials-title {
-
-  color:  rgb(73, 124, 124);
+  border:none;
+  
+  color: white;
   /* color: red; */
   /* color: rgb(74, 74, 74); */
-  border-color:rgba(54, 106, 85, 0.637);
+  /* border-color:rgba(54, 106, 85, 0.637); */
   position: relative;
   top: 50px;
   font-weight: 400;
@@ -317,17 +321,16 @@ section{
 .slider {
   max-width: 100rem;
   height: 30rem;
-  margin: 100px auto;
+  margin: 50px auto;
   /* margin-top: 100px; */
   position: relative;
+  color: rgb(156, 156, 156);
+  /* /* background-color: rgb(87, 149, 149); */
   color: white;
-  background-color: rgb(87, 149, 149);
-  background-color: rgb(112, 146, 146);
   overflow: hidden;
+  
   border-radius: 90px;
-  /* box-shadow: 14px 10px 102px -23px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 14px 10px 102px -23px rgba(0,0,0,0.75);
-  -moz-box-shadow: 14px 10px 102px -23px rgba(0,0,0,0.75); */
+  
 
   transition: all ease-in 0.5s;
 }
@@ -486,6 +489,7 @@ font-size: 1.3rem;
   font-size: 30px;
   color: rgb(21, 114, 91);
   font-weight: 300;
+  margin-top: 0;
 }
 
 .call-to-action-article p{

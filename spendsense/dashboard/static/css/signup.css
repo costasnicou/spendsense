@@ -5,6 +5,10 @@
     text-align: center;
     padding: 100px;
 }
+
+.signup-container h1{
+    font-size: 40px;
+}
 .signup-container form{
     width: 70%;
     margin: 0 auto;
