@@ -132,6 +132,7 @@ section{
   
     background-color: rgb(72, 110, 90);
     background: rgb(57, 136, 116);
+    background: rgb(65,156,156);
     /* background: linear-gradient(90deg, rgb(57, 136, 136) 0%, rgb(8, 69, 56) 100%); */
     margin-top: 80px;
     height: 80px;
@@ -241,7 +242,7 @@ section{
 
 
 .why-flex img{
-    width: 300px !important;
+    width: 280px ;
     height: 500px;
     /* width: 50%; */
     
@@ -308,7 +309,7 @@ section{
   /* color: rgb(74, 74, 74); */
   /* border-color:rgba(54, 106, 85, 0.637); */
   position: relative;
-  top: 50px;
+  top: 90px;
   font-weight: 400;
   width: 250px;
   font-size: 30px;
