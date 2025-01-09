@@ -79,7 +79,7 @@ def dashboard(request):
             original_wallet = transaction.wallet
             original_type = transaction.type
             original_amount = Decimal(transaction.amount)
-
+            original_fat_amount = transaction.wallet.fat.amount
             transaction_form_submitted = TransactionForm(request.POST, user=request.user, instance=transaction)
 
             if transaction_form_submitted.is_valid():
@@ -87,14 +87,32 @@ def dashboard(request):
                     wallet = transaction.wallet
                     if transaction.type == 'Income':
                         wallet.balance -= Decimal(transaction.amount)
+
+                    
                     elif transaction.type == 'Expense':
                         wallet.balance += Decimal(transaction.amount)
+
+                    if transaction.type == 'Expense' and transaction.category == 'Balance Adjustment':
+                        # print('code block works')
+                        updated_fat_amount = transaction.amount
+                        transaction.wallet.fat.amount = transaction.wallet.fat.amount - updated_fat_amount
+                        transaction.wallet.fat.save()  
+                        # if transaction.category == 'Balance Adjustment':
+                        #     print(f'Current Fat: {wallet.fat.amount}')    
+                    if transaction.type == 'Income' and transaction.category == 'Balance Adjustment':
+                        updated_fat_amount = transaction.amount
+                        transaction.wallet.fat.amount = transaction.wallet.fat.amount + updated_fat_amount
+                        
+                        transaction.wallet.fat.save()  
+                        # print('code block works')
+
                     wallet.save()
                     transaction.delete()
                     messages.success(request, "Transaction deleted successfully!")
                     return redirect('dashboard')
 
                 updated_transaction = transaction_form_submitted.save(commit=False)
+                
                 if original_wallet != updated_transaction.wallet:
                     if original_type == 'Income':
                         original_wallet.balance -= Decimal(original_amount)
@@ -121,6 +139,24 @@ def dashboard(request):
 
                     original_wallet.save()
 
+                
+                if updated_transaction.category == 'Balance Adjustment':
+                    updated_fat_amount = updated_transaction.amount
+                    
+
+                    if updated_fat_amount > original_fat_amount:
+                        fat_amount_difference = updated_fat_amount - original_fat_amount
+                        updated_fat_amount = original_fat_amount + fat_amount_difference
+                        updated_transaction.wallet.fat.amount = updated_fat_amount
+                        updated_transaction.wallet.fat.save()
+                    
+                    elif updated_fat_amount < original_fat_amount:
+                        fat_amount_difference = original_fat_amount - updated_fat_amount
+                        updated_fat_amount = original_fat_amount - fat_amount_difference
+                        updated_transaction.wallet.fat.amount = updated_fat_amount
+                        updated_transaction.wallet.fat.save()
+
+                
                 total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
                 updated_transaction.total_balance = total_balance
                 updated_transaction.save()
@@ -145,28 +181,28 @@ def dashboard(request):
                 updated_balance = Decimal(wallet_form_submitted.cleaned_data.get('balance'))
                 fat_amount = Decimal(wallet.update_fat_balance(initial_balance))
                
-                print(f'Fat Amount: {fat_amount}')
+               
                 #expense transaction    
                 if updated_balance < initial_balance: 
-                    print('---------EXPENSE TRANSACTION---------')
+                   
                     previous_expense_sum = Decimal(Transaction.objects.filter(
                         wallet=wallet,
                         category='Balance Adjustment',
                         type='Expense'
                     ).aggregate(total_expenses=Sum('amount'))['total_expenses'] or Decimal('0.00'))
-                    print(f'Previous Expense: {previous_expense_sum}')
+                   
 
                     previous_income_sum = Decimal(Transaction.objects.filter(
                         wallet=wallet,
                         type='Income',
                         category='Balance Adjustment',
                     ).aggregate(total_income=Sum('amount'))['total_income'] or Decimal('0.00'))
-                    print(f'Previous Income Sum: {previous_income_sum}')
+               
                     
                     adjusted_amount = Decimal(abs(fat_amount)) - Decimal(abs(previous_expense_sum))
                     adjusted_amount = Decimal(fat_amount) + Decimal(abs(previous_income_sum)) - Decimal(abs(previous_expense_sum))
                     adjusted_amount = Decimal(abs(adjusted_amount))
-                    print(f'Adjusted Amount {adjusted_amount}')
+     
                     total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
 
                     Transaction.objects.create(
@@ -180,25 +216,25 @@ def dashboard(request):
                     
                 #income transaction         
                 elif updated_balance > initial_balance:
-                    print('---------EXPENSE TRANSACTION---------')
+                   
                     previous_income_sum = Decimal(Transaction.objects.filter(
                         wallet=wallet,
                         type='Income',
                         category='Balance Adjustment',
                     ).aggregate(total_income=Sum('amount'))['total_income'] or Decimal('0.00'))
-                    print(f'Previous Income Sum: {previous_income_sum}')
+            
 
                     previous_expense_sum = Decimal(Transaction.objects.filter(
                         wallet=wallet,
                         category='Balance Adjustment',
                         type='Expense'
                     ).aggregate(total_expenses=Sum('amount'))['total_expenses'] or Decimal('0.00'))
-                    print(f'Previous Expense Sum: {previous_expense_sum}')
+                
 
 
                     adjusted_amount = Decimal(fat_amount) + Decimal(abs(previous_income_sum)) - Decimal(abs(previous_expense_sum))
                     adjusted_amount = Decimal(abs(adjusted_amount))
-                    print(f'Adjusted Amount: {adjusted_amount}')
+                    
                     if adjusted_amount > 0:
                         total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
                         Transaction.objects.create(

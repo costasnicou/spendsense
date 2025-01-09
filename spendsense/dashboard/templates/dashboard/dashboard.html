@@ -27,12 +27,15 @@
                         <p>
                         <span class="wallet-header"><strong>{{ wallet.name }}</strong></span><br>
                         Balance: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>
-                        <!-- {% if wallet.fat %}
-                            Fat Amount: <span class="wallet-amount"> €{{ wallet.fat.amount }}</span>
+                        {% if wallet.fat %}
+                        Fat Amount: <span class="wallet-amount"> €{{ wallet.fat.amount }}</span>
                         {% else %}
                             No Fat data available.
-                        {% endif %} -->
+                        {% endif %}
                         </p>
+
+            
+                        
                        
                         <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }})" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
                             Edit
