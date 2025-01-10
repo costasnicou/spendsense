@@ -1,13 +1,8 @@
 .login-container{
     padding: 100px;
     text-align: center;
-    /* background-image: url(../images/testimonials.jpg);
-    background-size: cover; */
+
 }
-/* .login-container h1{
-    margin: 0;
-    padding: 0;
-} */
 
 form.login-form{
     width: 50%;
@@ -37,22 +32,10 @@ form.login-form p a{
 
 form.login-form p a:hover{
     color: rgba(0, 128, 111, 0.687);
+    font-size: 17px;
 }
 
-.form-group{
-    padding: 10px;
-    width: 50%;
-    margin: 0 auto;
-}
 
-.form-control {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
 
 .btn-login{
     margin-top: 20px;

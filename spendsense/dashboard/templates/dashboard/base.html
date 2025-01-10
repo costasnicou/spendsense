@@ -5,13 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+   
     {% block browser_title %}
-    <!-- <title>Finade - Home</title> -->
+    
     {% endblock %}
-    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/desktop/global.css' %}">
+    {% if user.is_authenticated %}
+        <link rel="stylesheet" href="{% static 'css/mobile/mobile-nav-loggedin.css' %}">
+
+    {% endif %}
+        
+
+    {% if request.path == '/' %}
+        <link rel="stylesheet" href="{% static 'css/desktop/homepage.css' %}">
+        <link rel="stylesheet" href="{% static 'css/mobile/mobile-homepage.css' %}">
+    {% elif request.path == '/login/' %}
+        <link rel="stylesheet" href="{% static 'css/desktop/login.css' %}">
+        <link rel="stylesheet" href="{% static 'css/mobile/mobile-login.css' %}">
+    {% elif request.path == '/signup/' %}
+        <link rel="stylesheet" href="{% static 'css/desktop/signup.css' %}">
+        <link rel="stylesheet" href="{% static 'css/mobile/mobile-signup.css' %}">
+    {% elif request.path == '/dashboard/' %}
+        <link rel="stylesheet" href="{% static 'css/desktop/dashboard.css' %}">
+        <link rel="stylesheet" href="{% static 'css/mobile/mobile-dashboard.css' %}">
+    {% endif %}
+   
+  
+   
+    
     <script src="https://kit.fontawesome.com/d495971c43.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +44,7 @@
     <header>
         <nav class="main-menu">  
         {% if user.is_authenticated %}
+            
             <a href="{% url 'homepage'%}">Home</a>
             <a href="{% url 'dashboard'%}">Dashboard</a>
             <form class="logout-form" action="{% url 'logout' %}" method="post">

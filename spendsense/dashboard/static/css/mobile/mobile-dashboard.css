@@ -1,0 +1,79 @@
+@media only screen and (min-width: 425px) and (max-width: 600px) {
+
+    .dashboard {
+        min-height: 600px;
+        padding: 20px 0;
+        margin: 80px auto;
+        border-radius: 20px;
+        background: linear-gradient(145deg, #f3f4f6, #e2e8f0);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-flex {
+        display: flex
+    ;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0px;
+    }
+
+    .dashboard.wrapper{
+        width: 100%;
+    }
+
+    .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 65%;
+        background: #ffffff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        border: 1px solid rgba(0, 0, 0, 0.976);
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        background-color: rgb(65, 156, 156);
+    }
+
+    .wallet-flex {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .wallet {
+        width: 250px;
+        padding: 20px;
+        text-align: center;
+        color: #ffffff;
+        background: linear-gradient(145deg, #5dc0bb, #285e61);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        font-size: 17px;
+        margin: 0 20px;
+        line-height: 25px;
+        margin: 20px auto;
+    }
+
+
+
+    table {
+        border-radius: 10px;
+        margin: 20px auto;
+        width: 1100px;
+        border-collapse: collapse;
+    }
+
+
+
+}
