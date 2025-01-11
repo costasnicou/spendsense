@@ -1,0 +1,20 @@
+@media only screen and (min-width: 425px) and (max-width: 600px) {
+
+    .signup-container {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0;
+        margin-top: 100px;
+        padding: 20px 0;
+    }
+
+    .signup-container form{
+        font-size: 18px;
+      
+    }
+
+    
+
+}
+

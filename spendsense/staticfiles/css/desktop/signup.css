@@ -1,0 +1,29 @@
+.signup-container{
+    margin-top: 100px;
+    width: 30%;
+    margin:0 auto ;
+    text-align: center;
+    padding: 100px;
+}
+
+.signup-container h1{
+    font-size: 40px;
+}
+.signup-container form{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.signup-container p a{
+    text-align: center;
+    color: black;
+    margin-top: 40px;
+    padding: 0;
+    margin: 0;
+    font-size: 17px;
+}
+
+.signup-container p a:hover{
+    color: rgba(0, 128, 111, 0.687);
+    
+}

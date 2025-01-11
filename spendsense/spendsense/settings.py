@@ -23,10 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%7=02abz6c@j)r0@2!)lhf5b*ouvkz%ssyu=w_*=+nyhai@h3t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['spend-sense.com', 'www.spend-sense.com']
 
 # Application definition
 
@@ -112,6 +111,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+
+import os
+
+# Define STATIC_ROOT for collected static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

@@ -1,0 +1,28 @@
+
+@media only screen and (min-width: 425px) and (max-width: 600px) {
+    .main-menu {
+        text-align: center;
+        /* background-color: rgb(7, 87, 71); */
+        background: rgb(65, 156, 156);
+        background: linear-gradient(90deg, rgba(65, 156, 156, 1) 0%, rgb(8, 69, 56) 100%);
+        padding: 20px;
+        height: 25px;
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+        top: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        /* position: relative; */
+    }
+
+    .logout-form {
+        position: absolute;
+        right: 50px;
+    }
+
+    
+
+
+}

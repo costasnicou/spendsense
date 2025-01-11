@@ -1,0 +1,141 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", serif;
+}
+section{
+  padding: 40px;
+}
+
+
+.main-menu{
+    text-align: center; 
+    /* background-color: rgb(7, 87, 71); */
+    background: rgb(65,156,156);
+    background: linear-gradient(90deg, rgba(65,156,156,1) 0%, rgb(8, 69, 56) 100%);
+    padding: 20px;
+    height: 25px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
+}
+
+.form-group{
+  padding: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.logout-form {
+  position: absolute;
+  right: 150px;
+}
+
+.logout-btn{
+  background-color: rgb(19, 134, 103);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin-right: 20px;
+  transition: all ease-in 0.5s;
+
+
+}
+
+.logout-btn:hover{
+  background-color: rgb(19, 130, 100);
+}
+.main-menu a{
+    color: white;
+    text-decoration: none;
+    margin: 20px;
+    transition: all ease-in 0.5;
+ 
+}
+
+
+.main-menu a:hover{
+    font-weight: bold;
+    text-decoration: none;
+ 
+}
+
+.btn{
+    padding: 10px 40px;
+    border: 1px solid rgba(0, 0, 0, 0.976);
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    transition:all 0.3s ease;
+    background-color: rgb(65,156,156);
+}
+
+.btn:hover{
+    background-color: rgb(52, 127, 127);
+    color: white;
+}
+
+
+
+.form-group{
+  padding: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+footer{
+    height: 250px;
+    background-color: rgb(42, 78, 71);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(239, 239, 239);
+}
+
+footer > * {
+  margin: 20px;
+  text-align: center;
+  width: 80%;
+}
+
+.social-link{
+  text-decoration: none;
+  margin: 15px;
+
+}
+
+.social-link i{
+  font-size: 30px;
+ color: rgb(239, 239, 239);
+
+}
+
+footer p a{
+  color: rgb(239, 239, 239);
+
+}
