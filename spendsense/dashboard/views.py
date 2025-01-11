@@ -21,6 +21,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from .forms import SignupForm
 from decimal import Decimal
+from .forms import WalletTransferForm
 
 class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
@@ -252,6 +253,51 @@ def dashboard(request):
                 messages.success(request, "Wallet updated successfully!")
                 return redirect('dashboard')                       
     
+        transferform = WalletTransferForm(request.POST)
+        transferform.fields['source_wallet'].queryset = Wallet.objects.filter(user=request.user)
+        transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
+
+        if transferform.is_valid():
+            source_wallet = transferform.cleaned_data['source_wallet']
+            destination_wallet = transferform.cleaned_data['destination_wallet']
+            amount = transferform.cleaned_data['amount']
+
+             # Deduct from source wallet
+            source_wallet.balance -= Decimal(amount)
+            source_wallet.save()
+
+            # Add to destination wallet
+            destination_wallet.balance += Decimal(amount)
+            destination_wallet.save()
+
+
+            # create a transaction
+            total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
+            # decrease
+            Transaction.objects.create(
+                    wallet=source_wallet,
+                    type='Transfer',
+                    category='Decreased',
+                    amount=amount,
+                    total_balance=total_balance,
+            )
+
+            Transaction.objects.create(
+                    wallet=destination_wallet,
+                    type='Transfer',
+                    category='Increased',
+                    amount=amount,
+                    total_balance=total_balance,
+            )
+
+
+            messages.success(request, f"Transferred {amount} successfully from {source_wallet} to {destination_wallet}.")
+            # return redirect('dashboard')  # Adjust to your desired redirect URL
+
+        
+            
+
+
     wallet_form = WalletForm()
     transaction_form = TransactionForm(user=request.user)
 
@@ -267,6 +313,12 @@ def dashboard(request):
     total_expenses = Decimal(Transaction.objects.filter(wallet__user=request.user, type='Expense').aggregate(total=Sum('amount'))['total'] or Decimal('0.00'))
     net_balance = Decimal(total_income) - Decimal(total_expenses)
     
+    # transfer form
+    transferform = WalletTransferForm()
+    transferform.fields['source_wallet'].queryset = Wallet.objects.filter(user=request.user)
+    transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
+
+
     return render(request, 'dashboard/dashboard.html', {
         'wallets': wallets,
         'wallet_forms': wallet_forms,
@@ -278,4 +330,5 @@ def dashboard(request):
         'total_expenses': total_expenses,
         'net_balance': net_balance,
         'total_fat': total_fat,
+        'transferform':transferform,
     })

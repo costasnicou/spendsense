@@ -47,6 +47,8 @@
     padding-bottom: 5px;
 }
 
+
+
 .article-about-us p {
     width: 50%;
     margin: 0 auto;
@@ -65,15 +67,14 @@
     position: relative;
 }
 
-.promotion img{
-    text-align: center;
-    width: 400;
-    height: 300px;
-    position: absolute;
-    top: -90px;
-    left: 45%;
+.promotion img {
+  text-align: center;
+  width: 400;
+  height: 300px;
+  position: absolute;
+  top: -90px;
+  left: 44%;
 }
-
 
 
 

@@ -1,4 +1,6 @@
-#!/var/www/html/spendsense/spendsense/venv/bin/python3
+#!/bin/sh
+'''exec' "/home/cnicou/Documents/Web Development/Django/Django_5.0/spendsense/spendsense/venv/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

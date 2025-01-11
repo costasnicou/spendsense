@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /var/www/html/spendsense/spendsense/venv
+set -gx VIRTUAL_ENV '/home/cnicou/Documents/Web Development/Django/Django_5.0/spendsense/spendsense/venv'
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

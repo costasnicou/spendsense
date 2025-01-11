@@ -102,6 +102,43 @@ class WalletForm(forms.ModelForm):
             'balance': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
+
+class WalletTransferForm(forms.Form):
+    source_wallet = forms.ModelChoiceField(
+        queryset=Wallet.objects.all(),
+        label="Source Wallet",
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    destination_wallet = forms.ModelChoiceField(
+        queryset=Wallet.objects.all(),
+        label="Destination Wallet",
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    amount = forms.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        label="Amount",
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        source_wallet = cleaned_data.get('source_wallet')
+        destination_wallet = cleaned_data.get('destination_wallet')
+        amount = cleaned_data.get('amount')
+
+        # Check that source and destination wallets are different
+        if source_wallet == destination_wallet:
+            raise forms.ValidationError("Source and destination wallets must be different.")
+
+        # Check if source wallet has sufficient balance
+        if source_wallet and amount and source_wallet.balance < amount:
+            raise forms.ValidationError("Insufficient balance in the source wallet.")
+
+        return cleaned_data
+
+
+
 # class TransactionForm(forms.ModelForm):
 #     class Meta:
 #         model = Transaction

@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath /var/www/html/spendsense/spendsense/venv)
+    export VIRTUAL_ENV=$(cygpath '/home/cnicou/Documents/Web Development/Django/Django_5.0/spendsense/spendsense/venv')
 else
     # use the path as-is
-    export VIRTUAL_ENV=/var/www/html/spendsense/spendsense/venv
+    export VIRTUAL_ENV='/home/cnicou/Documents/Web Development/Django/Django_5.0/spendsense/spendsense/venv'
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"

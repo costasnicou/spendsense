@@ -1,6 +1,6 @@
 .signup-container{
     margin-top: 100px;
-    width: 30%;
+    width: 70%;
     margin:0 auto ;
     text-align: center;
     padding: 100px;
@@ -12,6 +12,10 @@
 .signup-container form{
     width: 70%;
     margin: 0 auto;
+}
+
+.signup-container form .form-control{
+    width: 100%;
 }
 
 .signup-container p a{
@@ -26,4 +30,8 @@
 .signup-container p a:hover{
     color: rgba(0, 128, 111, 0.687);
     
+}
+
+.btn-signup{
+    margin: 20px 0;
 }
