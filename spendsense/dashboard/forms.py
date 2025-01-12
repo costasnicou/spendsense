@@ -52,7 +52,7 @@ class SignupForm(UserCreationForm):
     )   
 
     email = forms.EmailField(required=True,
-        widget=forms.PasswordInput(attrs={
+        widget=forms.EmailInput(attrs={
         'class': 'form-control',
         'placeholder': 'Enter your Email'
         }),               
@@ -137,9 +137,3 @@ class WalletTransferForm(forms.Form):
 
         return cleaned_data
 
-
-
-# class TransactionForm(forms.ModelForm):
-#     class Meta:
-#         model = Transaction
-#         fields = ['type', 'category', 'amount']
