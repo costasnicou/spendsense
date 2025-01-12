@@ -5,7 +5,7 @@ const transModal = document.querySelector('.trans-modal');
 const transferModal = document.querySelector('.transfer-modal');
 const overlay = document.querySelector('.overlay');
 const popupBtns = document.querySelectorAll('.toTop');
-
+const filterTransModal = document.querySelector('.filter-trans-modal');
 const transaction_type = document.querySelectorAll('.transaction-type');
 
 // ------------OPEN MODALS----------------------//
@@ -47,6 +47,14 @@ const openTransferModal = function(){
   overlay.classList.remove('hidden');
 }
 
+const openfilterTransModal = function(){
+  filterTransModal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+}
+
+
+
+
 
 // ------------OPEN MODALS----------------------//
 
@@ -56,6 +64,7 @@ const openTransferModal = function(){
 
 const closeModal = function (){
   walletModal.classList.add('hidden');
+  filterTransModal.classList.add('hidden');
   transferModal.classList.add('hidden');
   transModal.classList.add('hidden');
   overlay.classList.add('hidden');

@@ -19,7 +19,7 @@
 
 
     <section class="wallet-section dashboard-shadow">
-        <h3>Your Wallets:</h3>
+        <h3>Your Wallets</h3>
         <div class="wallets">
             <div class="wallet-flex">
                 {% for wallet in wallets %}
@@ -81,12 +81,9 @@
     </section>
 
     <section class="transactions-section dashboard-shadow">
-        <h3>Recent Transactions:</h3>
-        <div class="transaction-section-wrapper">
-
+        <h3>Recent Transactions</h3>
        
-
-            
+        <div class="transaction-section-wrapper">
             <table border="1">
                 <thead>
                     <tr>
@@ -145,6 +142,10 @@
         </div>
         <button class="dashboard-btn open-trans-modal show-form" onclick="openTransModal()">Add Transaction</button>
         <button class="dashboard-btn open-transfer-modal show-form" onclick="openTransferModal()">Transfer</button>
+        <div class="filter-transactions">
+            <h3>Filter Transactions</h3>
+            <button onclick="openfilterTransModal()" class="open-filter-form dashboard-btn" >Filter</button>
+        </div>
     </section>
 
 </div>
@@ -335,5 +336,14 @@
 <div class="overlay hidden"></div>
 {% endfor %}
 
-
+<form method="get" class="modal filter-trans-modal hidden">
+    <h1 class="modal-title">Filter Transactions</h1>
+    <button type="button" class="close-form" data-dismiss="modal" aria-label="Close"  onclick="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ filter_transactions_form.as_p }}
+    <button type="submit" class="btn">Filter</button>
+    <button type="submit" name="reset-btn" class="dashboard-btn">Reset</button>
+</form>
 {% endblock %}
+

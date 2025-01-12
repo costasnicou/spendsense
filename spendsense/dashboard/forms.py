@@ -137,3 +137,47 @@ class WalletTransferForm(forms.Form):
 
         return cleaned_data
 
+class TransactionFilterForm(forms.Form):
+    TRANSACTION_TYPES = [
+        ('', 'All Types'),  # Default option for no filter
+        ('Income', 'Income'),
+        ('Expense', 'Expense'),
+        ('Transfer', 'Transfer'),
+    ]
+
+    type = forms.ChoiceField(
+        choices=TRANSACTION_TYPES,
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label="Transaction Type"
+    )
+
+    category = forms.ChoiceField(
+        choices=[('', 'All Categories')] + [(cat, cat) for cat in Transaction.objects.values_list('category', flat=True).distinct()],
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label="Category"
+    )
+
+    wallet = forms.ModelChoiceField(
+        queryset=Wallet.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label="Wallet"
+    )
+
+    start_date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        input_formats=['%d-%m-%Y'], 
+        label="Start Date"
+    )
+
+    end_date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        input_formats=['%d-%m-%Y'],  # Accept both European and ISO formats,
+        label="End Date"
+    )
+   
+    

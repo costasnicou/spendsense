@@ -132,3 +132,9 @@ LOGIN_REDIRECT_URL = '/dashboard/'  # Replace with your dashboard URL
 LOGIN_URL = '/login/'  # Custom login URL
 LOGOUT_REDIRECT_URL = '/'  # Redirect to login page after logout
 STATIC_URL = "static/"
+
+
+# Date input format
+DATE_FORMAT = "d-m-Y"  # For displaying dates
+DATETIME_FORMAT = "d-m-Y H:i"  # For displaying datetime
+SHORT_DATE_FORMAT = "d/m/Y"  # Alternative short format

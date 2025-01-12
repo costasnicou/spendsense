@@ -16,12 +16,11 @@ from .forms import CustomLoginForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Transaction, Wallet, Fat
-from .forms import TransactionForm, SignupForm
+from .forms import TransactionForm, SignupForm,TransactionFilterForm,WalletTransferForm
 from django.contrib import messages
 from django.contrib.auth import login
-from .forms import SignupForm
 from decimal import Decimal
-from .forms import WalletTransferForm
+
 
 class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
@@ -318,7 +317,35 @@ def dashboard(request):
     transferform.fields['source_wallet'].queryset = Wallet.objects.filter(user=request.user)
     transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
 
+    # filtering transactions
+    filter_transactions_form = TransactionFilterForm(request.GET or None)
+    if filter_transactions_form.is_valid():
+        start_date = filter_transactions_form.cleaned_data.get('start_date')
+        end_date = filter_transactions_form.cleaned_data.get('end_date')
+        wallet = filter_transactions_form.cleaned_data.get('wallet')
+        category = filter_transactions_form.cleaned_data.get('category')
+        transaction_type = filter_transactions_form.cleaned_data.get('type')
+        # Filter by transaction type
+        if transaction_type:
+            transactions = transactions.filter(type=transaction_type)
 
+
+        # Filter by start and end date
+        if start_date:
+            transactions = transactions.filter(timestamp__gte=start_date)
+        if end_date:
+            transactions = transactions.filter(timestamp__lte=end_date)
+
+        # Filter by wallet
+        if wallet:
+            transactions = transactions.filter(wallet=wallet)
+
+        # Filter by category
+        if category:
+            transactions = transactions.filter(category=category)
+
+        if 'reset-btn' in request.GET:
+            return redirect('dashboard')
     return render(request, 'dashboard/dashboard.html', {
         'wallets': wallets,
         'wallet_forms': wallet_forms,
@@ -331,4 +358,5 @@ def dashboard(request):
         'net_balance': net_balance,
         'total_fat': total_fat,
         'transferform':transferform,
+        'filter_transactions_form':filter_transactions_form,
     })
