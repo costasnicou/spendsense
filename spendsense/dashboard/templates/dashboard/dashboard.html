@@ -341,7 +341,31 @@
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close"  onclick="closeModal()">
         <span aria-hidden="true">&times;</span>
     </button>
-    {{ filter_transactions_form.as_p }}
+    <div class="form-group">
+        {{  filter_transactions_form.type.label_tag }} <br>
+        {{ filter_transactions_form.type}}
+    </div>
+
+    <div class="form-group">
+        {{  filter_transactions_form.category.label_tag }} <br>
+        {{ filter_transactions_form.category}}
+    </div>
+
+    <div class="form-group">
+        {{  filter_transactions_form.wallet.label_tag }} <br>
+        {{ filter_transactions_form.wallet}}
+    </div>
+
+    <div class="form-group">
+        {{  filter_transactions_form.start_date.label_tag }} <br>
+        {{ filter_transactions_form.start_date}}
+    </div>
+
+    <div class="form-group">
+        {{  filter_transactions_form.end_date.label_tag }} <br>
+        {{ filter_transactions_form.end_date}}
+    </div>
+
     <button type="submit" class="btn">Filter</button>
     <button type="submit" name="reset-btn" class="dashboard-btn">Reset</button>
 </form>
