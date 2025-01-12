@@ -318,7 +318,7 @@ def dashboard(request):
     transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
 
     # filtering transactions
-    filter_transactions_form = TransactionFilterForm(request.GET or None)
+    filter_transactions_form = TransactionFilterForm(user=request.user)
     if filter_transactions_form.is_valid():
         start_date = filter_transactions_form.cleaned_data.get('start_date')
         end_date = filter_transactions_form.cleaned_data.get('end_date')

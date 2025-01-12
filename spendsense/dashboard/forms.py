@@ -160,7 +160,7 @@ class TransactionFilterForm(forms.Form):
     )
 
     wallet = forms.ModelChoiceField(
-        queryset=Wallet.objects.all(),
+        queryset=Wallet.objects.none(),  # Default queryset
         required=False,
         widget=forms.Select(attrs={'class': 'form-control'}),
         label="Wallet"
@@ -179,5 +179,11 @@ class TransactionFilterForm(forms.Form):
         input_formats=['%d-%m-%Y'],  # Accept both European and ISO formats,
         label="End Date"
     )
-   
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Extract the user from kwargs
+        super().__init__(*args, **kwargs)
+        if user:  # If the user is provided
+            self.fields['wallet'].queryset = Wallet.objects.filter(user=user)
+
     
