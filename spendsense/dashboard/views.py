@@ -20,7 +20,8 @@ from .forms import TransactionForm, SignupForm,TransactionFilterForm,WalletTrans
 from django.contrib import messages
 from django.contrib.auth import login
 from decimal import Decimal
-
+# from django.db.models import Q
+from datetime import datetime
 
 class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
@@ -318,7 +319,7 @@ def dashboard(request):
     transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
 
     # filtering transactions
-    filter_transactions_form = TransactionFilterForm(user=request.user)
+    filter_transactions_form = TransactionFilterForm(data=request.GET, user=request.user)
     if filter_transactions_form.is_valid():
         start_date = filter_transactions_form.cleaned_data.get('start_date')
         end_date = filter_transactions_form.cleaned_data.get('end_date')
@@ -330,10 +331,14 @@ def dashboard(request):
             transactions = transactions.filter(type=transaction_type)
 
 
-        # Filter by start and end date
+        # Filter by start date (ignore time)
         if start_date:
             transactions = transactions.filter(timestamp__gte=start_date)
+
+        # Filter by end date (set time to 23:59:59 if end date is provided)
         if end_date:
+            # Combine the end_date with time 23:59:59 to include the full day
+            end_date = datetime.combine(end_date, datetime.max.time())
             transactions = transactions.filter(timestamp__lte=end_date)
 
         # Filter by wallet

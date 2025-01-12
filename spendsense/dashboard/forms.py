@@ -3,7 +3,8 @@ from .models import Wallet, Transaction
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from django.core.exceptions import ValidationError
+from datetime import datetime
 
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -153,7 +154,7 @@ class TransactionFilterForm(forms.Form):
     )
 
     category = forms.ChoiceField(
-        choices=[('', 'All Categories')] + [(cat, cat) for cat in Transaction.objects.values_list('category', flat=True).distinct()],
+        choices=[('', 'All Categories')],  # Default empty choices
         required=False,
         widget=forms.Select(attrs={'class': 'form-control'}),
         label="Category"
@@ -169,21 +170,28 @@ class TransactionFilterForm(forms.Form):
     start_date = forms.DateField(
         required=False,
         widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-        input_formats=['%d-%m-%Y'], 
-        label="Start Date"
+        # input_formats=['%d-%m-%Y', '%m-%d-%Y'], 
+        label="Start Date",
     )
 
     end_date = forms.DateField(
         required=False,
         widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-        input_formats=['%d-%m-%Y'],  # Accept both European and ISO formats,
-        label="End Date"
+        # input_formats=['%d-%m-%Y', '%m-%d-%Y'],  # Accept both European and ISO formats,
+        label="End Date",
     )
 
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  # Extract the user from kwargs
-        super().__init__(*args, **kwargs)
-        if user:  # If the user is provided
-            self.fields['wallet'].queryset = Wallet.objects.filter(user=user)
 
-    
+    def __init__(self, *args, **kwargs):
+        # Extract the user from kwargs
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+        # Dynamically filter wallets for the user
+        if self.user:
+            self.fields['wallet'].queryset = Wallet.objects.filter(user=self.user)
+
+           # Dynamically filter categories for transactions belonging to the user's wallets
+            user_categories = Transaction.objects.filter(wallet__user=self.user).values_list('category', flat=True).distinct()
+            self.fields['category'].choices = [('', 'All Categories')] + [(cat, cat) for cat in user_categories]
+
