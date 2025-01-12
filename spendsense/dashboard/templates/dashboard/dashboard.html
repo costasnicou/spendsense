@@ -103,7 +103,7 @@
                
                     {% for transaction in transactions %}
                         <tr>
-                            <td>{{ transaction.type }}</td>
+                            <td class="transaction-type">{{ transaction.type }}</td>
                             <td>{{ transaction.category }}</td>
                             <td>
                                 {% if transaction.type == "Expense" or transaction.category == "Decreased" %}
@@ -122,9 +122,15 @@
                             <td>{{ transaction.timestamp|date:"Y-m-d H:i" }}</td>
                             <td>
                              <!-- Edit Button -->
-                                <button type="button" class="dashboard-btn" onclick="openEditTransModal({{ transaction.id }})" data-toggle="modal" data-target="#editTransactionModal{{ transaction.id }}">
-                                    Edit
-                                </button>
+                                {% if transaction.type == 'Transfer' %}
+                                    <button type="button" disabled class="dashboard-btn transfer-edit" onclick="openEditTransModal({{ transaction.id }})" data-toggle="modal" data-target="#editTransactionModal{{ transaction.id }}">
+                                        Edit
+                                    </button>
+                                {% else %}
+                                    <button type="button" class="dashboard-btn transfer-edit"  onclick="openEditTransModal({{ transaction.id }})" data-toggle="modal" data-target="#editTransactionModal{{ transaction.id }}">
+                                        Edit
+                                    </button>
+                                {% endif %}
                             </td>
                         </tr>
                         {% empty %}
@@ -139,8 +145,8 @@
           
 
         </div>
-        <button class="dashboard-btn open-trans-modal show-form" onclick="openTransModal()">Add Transaction</button>
-        <button class="dashboard-btn open-transfer-modal show-form" onclick="openTransferModal()">Transfer</button>
+        <button class="btn open-trans-modal show-form" onclick="openTransModal()">Add Transaction</button>
+        <button class="btn open-transfer-modal show-form" onclick="openTransferModal()">Transfer</button>
     </section>
 
 </div>
