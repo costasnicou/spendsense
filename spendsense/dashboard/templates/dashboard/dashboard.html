@@ -15,7 +15,7 @@
 {% block main %}
 <div class="dashboard wrapper  ">
     <h1>Welcome, {{ user.username }}</h1>
-    <h2>Total Balance:  <span class="total-balance">€{{ total_balance }}</span></h2>
+    <h2>Total Balance: <span class="total-balance">€{{ total_balance }}</span></h2>
 
 
     <section class="wallet-section dashboard-shadow">
@@ -106,7 +106,7 @@
                             <td class="transaction-type">{{ transaction.type }}</td>
                             <td>{{ transaction.category }}</td>
                             <td>
-                                {% if transaction.type == "Expense" or transaction.category == "Decreased" %}
+                                {% if transaction.type == "Expense" or transaction.category == "Balance Adjustment Decrease" %}
                                     €-{{ transaction.amount }}
                                 
                                 {% else %}
@@ -119,13 +119,11 @@
 
                             <td>€{{ transaction.total_balance }}</td>
                           
-                            <td>{{ transaction.timestamp|date:"Y-m-d H:i" }}</td>
+                            <td>{{ transaction.timestamp|date:"d-m-Y H:i" }}</td>
                             <td>
                              <!-- Edit Button -->
                                 {% if transaction.type == 'Transfer' %}
-                                    <button type="button" disabled class="dashboard-btn transfer-edit" onclick="openEditTransModal({{ transaction.id }})" data-toggle="modal" data-target="#editTransactionModal{{ transaction.id }}">
-                                        Edit
-                                    </button>
+                                    <p>No Action</p>
                                 {% else %}
                                     <button type="button" class="dashboard-btn transfer-edit"  onclick="openEditTransModal({{ transaction.id }})" data-toggle="modal" data-target="#editTransactionModal{{ transaction.id }}">
                                         Edit
@@ -145,8 +143,8 @@
           
 
         </div>
-        <button class="btn open-trans-modal show-form" onclick="openTransModal()">Add Transaction</button>
-        <button class="btn open-transfer-modal show-form" onclick="openTransferModal()">Transfer</button>
+        <button class="dashboard-btn open-trans-modal show-form" onclick="openTransModal()">Add Transaction</button>
+        <button class="dashboard-btn open-transfer-modal show-form" onclick="openTransferModal()">Transfer</button>
     </section>
 
 </div>

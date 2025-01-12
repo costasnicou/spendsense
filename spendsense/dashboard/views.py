@@ -277,7 +277,7 @@ def dashboard(request):
             Transaction.objects.create(
                     wallet=source_wallet,
                     type='Transfer',
-                    category='Decreased',
+                    category='Balance Adjustment Decrease',
                     amount=amount,
                     total_balance=total_balance,
             )
@@ -285,7 +285,7 @@ def dashboard(request):
             Transaction.objects.create(
                     wallet=destination_wallet,
                     type='Transfer',
-                    category='Increased',
+                    category='Balance Adjustment Increase',
                     amount=amount,
                     total_balance=total_balance,
             )

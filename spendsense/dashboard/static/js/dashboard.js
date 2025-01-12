@@ -90,6 +90,3 @@ const closeEditTransModal = function (transactionId) {
 
 
 // disable editing for transfer
-
-
-
