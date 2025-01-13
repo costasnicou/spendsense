@@ -51,9 +51,12 @@ def dashboard(request):
         if 'submit_wallet_form' in request.POST:
             wallet_form_submitted = WalletForm(request.POST)
             if wallet_form_submitted.is_valid():
+                
                 wallet = wallet_form_submitted.save(commit=False)
+               
                 wallet.user = request.user
                 wallet.save()
+                wallet.initialize_fat(Decimal(0.00))
                 return redirect('dashboard')
         elif 'submit_transaction_form' in request.POST:
             transaction_form_submitted = TransactionForm(request.POST, user=request.user)
@@ -80,7 +83,11 @@ def dashboard(request):
             original_wallet = transaction.wallet
             original_type = transaction.type
             original_amount = Decimal(transaction.amount)
-            original_fat_amount = transaction.wallet.fat.amount
+           
+            if transaction.wallet.fat and transaction.wallet.fat.amount is not None:
+                original_fat_amount = transaction.wallet.fat.amount
+            else:
+                original_fat_amount = Decimal(0.00)
             transaction_form_submitted = TransactionForm(request.POST, user=request.user, instance=transaction)
 
             if transaction_form_submitted.is_valid():

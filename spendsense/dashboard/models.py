@@ -18,6 +18,13 @@ class Wallet(models.Model):
     def __str__(self):
         return self.name
 
+    def initialize_fat(self, initial_balance):
+        # Get or create the 'Fat' instance
+        fat, created = Fat.objects.get_or_create(wallet=self)
+        if created:
+            fat.amount = initial_balance
+            fat.save()
+
     def update_fat_balance(self, initial_balance):
         """
         Updates the corresponding Fat instance's amount based on the wallet's balance.
@@ -29,14 +36,15 @@ class Wallet(models.Model):
         updated_balance_decimal = Decimal(str(self.balance))  # Ensure correct precision with strings
         initial_balance_decimal = Decimal(str(initial_balance))  # Convert wallet's balance to Decimal
        
-    
-
+        
         if created:
            
             # If the Fat instance was just created, initialize its amount
               # If the Fat instance was newly created, initialize its amount to 0.00
 
-            fat.amount = Decimal('0.00')
+            fat.amount = initial_balance
+        
+
              # Compare the balances
             # Compare the balances
             if initial_balance_decimal < updated_balance_decimal:
@@ -65,6 +73,7 @@ class Wallet(models.Model):
         fat.save()
 
         return fat.amount  # Return the calculated fat amount
+
 
 class Transaction(models.Model):
     TYPE_CHOICES = [
