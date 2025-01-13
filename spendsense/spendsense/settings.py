@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import secrets
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%7=02abz6c@j)r0@2!)lhf5b*ouvkz%ssyu=w_*=+nyhai@h3t'
+SECRET_KEY = secrets.token_urlsafe(50)
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
+# DEBUG = False
+
+
 ALLOWED_HOSTS = []
+
+# ALLOWED_HOSTS = ['spend-sense.com','www.spend-sense.com']
 
 # Application definition
 
@@ -105,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Athens'
 
 USE_I18N = True
 
@@ -139,4 +145,3 @@ DATE_FORMAT = "d-m-Y"  # For displaying dates
 DATETIME_FORMAT = "d-m-Y H:i"  # For displaying datetime
 SHORT_DATE_FORMAT = "d/m/Y"  # Alternative short format
 
-TIME_ZONE = 'Europe/Athens'

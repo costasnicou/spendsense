@@ -1,6 +1,4 @@
 
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
@@ -20,8 +18,8 @@ from .forms import TransactionForm, SignupForm,TransactionFilterForm,WalletTrans
 from django.contrib import messages
 from django.contrib.auth import login
 from decimal import Decimal
-# from django.db.models import Q
 from datetime import datetime
+from django.utils import timezone
 
 class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
@@ -340,12 +338,13 @@ def dashboard(request):
 
         # Filter by start date (ignore time)
         if start_date:
-            transactions = transactions.filter(timestamp__gte=start_date)
+            start_datetime = timezone.make_aware(datetime.combine(start_date, datetime.min.time()))
+            transactions = transactions.filter(timestamp__gte=start_datetime)
 
         # Filter by end date (set time to 23:59:59 if end date is provided)
         if end_date:
             # Combine the end_date with time 23:59:59 to include the full day
-            end_date = datetime.combine(end_date, datetime.max.time())
+            end_date = timezone.make_aware(datetime.combine(end_date, datetime.max.time()))
             transactions = transactions.filter(timestamp__lte=end_date)
 
         # Filter by wallet
