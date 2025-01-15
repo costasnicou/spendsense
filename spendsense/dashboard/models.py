@@ -182,7 +182,7 @@ class Transaction(models.Model):
 
     wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE, related_name='transactions')
     type = models.CharField(max_length=10, choices=TYPE_CHOICES)
-    category = models.CharField(max_length=100)  # Main category
+    category = models.CharField(max_length=100,choices=CATEGORY_CHOICES)  # Main category
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
     total_balance = models.DecimalField(max_digits=15, decimal_places=2, default=Decimal('0.00'))  # New field

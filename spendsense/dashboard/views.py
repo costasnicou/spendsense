@@ -67,7 +67,7 @@ def dashboard(request,user):
                 wallet.user = request.user
                 wallet.save()
                 wallet.initialize_fat(Decimal(0.00))
-                return redirect('dashboard')
+                return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
         elif 'submit_transaction_form' in request.POST:
             transaction_form_submitted = TransactionForm(request.POST, user=request.user)
             if transaction_form_submitted.is_valid():
@@ -85,7 +85,7 @@ def dashboard(request,user):
                     transaction.total_balance = total_balance - Decimal(transaction.amount)
                 transaction.save()
                 wallet.save()
-                return redirect('dashboard')
+                return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
         
         transaction_id = request.POST.get('transaction_id')
         if transaction_id:
@@ -127,7 +127,7 @@ def dashboard(request,user):
                     wallet.save()
                     transaction.delete()
                     messages.success(request, "Transaction deleted successfully!")
-                    return redirect('dashboard')
+                    return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
 
                 updated_transaction = transaction_form_submitted.save(commit=False)
                 
@@ -179,7 +179,7 @@ def dashboard(request,user):
                 updated_transaction.total_balance = total_balance
                 updated_transaction.save()
                 messages.success(request, "Transaction updated successfully!")
-                return redirect('dashboard')
+                return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
        
         wallet_id = request.POST.get('wallet_id')
 
@@ -189,7 +189,7 @@ def dashboard(request,user):
             if 'delete_wallet' in request.POST:
                 wallet.delete()
                 messages.success(request, "Wallet deleted successfully!")
-                return redirect('dashboard')
+                return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
 
             wallet_form_submitted = WalletForm(request.POST, instance=wallet)
             
@@ -268,7 +268,7 @@ def dashboard(request,user):
                                 
                 wallet.save()
                 messages.success(request, "Wallet updated successfully!")
-                return redirect('dashboard')                       
+                return redirect(reverse('dashboard', kwargs={'user': request.user.username}))                     
     
         transferform = WalletTransferForm(request.POST)
         transferform.fields['source_wallet'].queryset = Wallet.objects.filter(user=request.user)
@@ -310,7 +310,7 @@ def dashboard(request,user):
 
             messages.success(request, f"Transferred {amount} successfully from {source_wallet} to {destination_wallet}.")
             # return redirect('dashboard')  # Adjust to your desired redirect URL
-
+            return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
         
 
 
@@ -367,7 +367,7 @@ def dashboard(request,user):
             transactions = transactions.filter(category=category)
 
         if 'reset-btn' in request.GET:
-            return redirect('dashboard')
+            return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
     return render(request, 'dashboard/dashboard.html', {
         'wallets': wallets,
         'wallet_forms': wallet_forms,
