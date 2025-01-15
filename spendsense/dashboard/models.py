@@ -181,7 +181,9 @@ class Transaction(models.Model):
             
         
         ]),
-        ('Other','Other')
+        ('Balance Adjustment','Balance Adjustment'),
+        ('Other','Other'),
+
     ]
 
     wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE, related_name='transactions')
