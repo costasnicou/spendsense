@@ -42,14 +42,19 @@
     }
 
     /* about us */
+
+    .about-us{
+        padding: 5px;
+      }
     .article-about-us {
         text-align: center;
         width: 100%;
         margin: 0 auto;
     }
 
+
     .article-about-us p {
-        width: 90%;
+        width: 85%;
         margin: 0 auto;
         font-size: 17px;
         font-weight: 300;
@@ -62,7 +67,7 @@
         height: 300px;
         position: absolute;
         top: -90px;
-        left: 34%;
+        left: 29%;
     }
 
     /* reasons */
@@ -124,6 +129,8 @@
         padding: 0;
         width: 90%;
         margin: 0 auto;
+        position: relative;
+        right: 37px;
     }
 
     .why-list li {

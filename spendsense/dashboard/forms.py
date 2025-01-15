@@ -21,15 +21,20 @@ class CustomLoginForm(AuthenticationForm):
     )
 
 class TransactionForm(forms.ModelForm):
+    
+    
     class Meta:
         model = Transaction
         fields = ['wallet', 'type', 'category', 'amount']
         widgets = {
             'wallet': forms.Select(attrs={'class': 'form-control'}),
             'type': forms.Select(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control', }),
             'amount': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+
+
+
 
     def __init__(self, *args, **kwargs):
         # Extract 'user' from kwargs if present
@@ -41,6 +46,7 @@ class TransactionForm(forms.ModelForm):
         else:
             # Default to an empty queryset if no user is provided
             self.fields['wallet'].queryset = Wallet.objects.none()
+
 
 
 class SignupForm(UserCreationForm):

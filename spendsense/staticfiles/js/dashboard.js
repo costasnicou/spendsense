@@ -2,24 +2,16 @@
 const show_wallet_btn = document.querySelector('.show-wallet');
 const walletModal = document.querySelector('.wallet-modal');
 const transModal = document.querySelector('.trans-modal');
+const transferModal = document.querySelector('.transfer-modal');
 const overlay = document.querySelector('.overlay');
 const popupBtns = document.querySelectorAll('.toTop');
-
-
-
-
-
-
-
-
+const filterTransModal = document.querySelector('.filter-trans-modal');
+const transaction_type = document.querySelectorAll('.transaction-type');
 
 // ------------OPEN MODALS----------------------//
 // open wallet modal
 const openWalletModal = function () {
-  // window.scrollTo({
-  //   top: 0,
-  //   behavior: "smooth" // Smooth scrolling
-  // });
+  
   walletModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
 };
@@ -28,10 +20,6 @@ const openWalletModal = function () {
 const openTransModal = function () {
   transModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  // window.scrollTo({
-  //   top: 0,
-  //   behavior: "smooth" // Smooth scrolling
-  // });
 };
 
 
@@ -41,10 +29,6 @@ const openEditTransModal = function (transactionId) {
   if (editTransModal) {
     editTransModal.classList.remove('hidden');
     overlay.classList.remove('hidden');
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: "smooth" // Smooth scrolling
-    // });
   }
 };
 
@@ -55,25 +39,39 @@ const openEditWalletModal = function (walletId) {
   if (editWalletModal) {
     editWalletModal.classList.remove('hidden');
     overlay.classList.remove('hidden');
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: "smooth" // Smooth scrolling
-    // });
   }
 };
+
+const openTransferModal = function(){
+  transferModal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+}
+
+const openfilterTransModal = function(){
+  filterTransModal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+}
+
+
+
+
 
 // ------------OPEN MODALS----------------------//
 
 
 //-----------CLOSE MODALS---------------------///
 
+
 const closeModal = function (){
   walletModal.classList.add('hidden');
+  filterTransModal.classList.add('hidden');
+  transferModal.classList.add('hidden');
   transModal.classList.add('hidden');
   overlay.classList.add('hidden');
 }
 
-// Open edit transaction modal dynamically based on transaction ID
+
+// Close edit transaction modal dynamically based on transaction ID
 const closeEditWalletModal = function (walletId) {
   const editWalletModal = document.getElementById(`editWalletModal${walletId}`); // Find the correct modal by ID
   if (editWalletModal) {
@@ -86,7 +84,7 @@ const closeEditWalletModal = function (walletId) {
   
 };
 
-// Open edit transaction modal dynamically based on transaction ID
+// Close edit transaction modal dynamically based on transaction ID
 const closeEditTransModal = function (transactionId) {
   const editTransModal = document.getElementById(`editTransactionModal${transactionId}`); // Find the correct modal by ID
   if (editTransModal) {
@@ -96,28 +94,8 @@ const closeEditTransModal = function (transactionId) {
   }
 };
 
+
 //-----------CLOSE MODALS---------------------///
 
 
-
-
-
-
-// const closeModal = function () {
-//   modal.classList.add('hidden');
-//   overlay.classList.add('hidden');
-// };
-
-// for (let i = 0; i < btnsOpenModal.length; i++){
-//   btnsOpenModal[i].addEventListener('click', openModal);
-
-//   btnCloseModal.addEventListener('click', closeModal);
-//   overlay.addEventListener('click', closeModal);
-
-//   document.addEventListener('keydown', function (e) {
-//     // console.log(e.key);
-
-//   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-//     closeModal();
-//   }
-// });
+// disable editing for transfer

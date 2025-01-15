@@ -26,7 +26,7 @@
     {% elif request.path == '/signup/' %}
         <link rel="stylesheet" href="{% static 'css/desktop/signup.css' %}">
         <link rel="stylesheet" href="{% static 'css/mobile/mobile-signup.css' %}">
-    {% elif request.path == '/dashboard/' %}
+    {% elif is_dashboard %} 
         <link rel="stylesheet" href="{% static 'css/desktop/dashboard.css' %}">
         <link rel="stylesheet" href="{% static 'css/mobile/mobile-dashboard.css' %}">
     {% endif %}
@@ -46,7 +46,7 @@
         {% if user.is_authenticated %}
             
             <a href="{% url 'homepage'%}">Home</a>
-            <a href="{% url 'dashboard'%}">Dashboard</a>
+            <a href="{% url 'dashboard' user=request.user.username %}">Dashboard</a>
             <form class="logout-form" action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button class="logout-btn" type="submit">Log Out</button>

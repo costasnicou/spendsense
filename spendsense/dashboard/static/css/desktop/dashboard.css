@@ -412,8 +412,10 @@ th, td {
 }
 
 .filter-transactions{
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 8px rgba(42, 43, 43, 0.1);
     width: 300px;
     margin: 0 auto;
     border-radius: 10px;
+    padding: 10px;
+    background-color: whitesmoke;
 }

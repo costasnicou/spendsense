@@ -97,6 +97,10 @@ section{
   margin: 0 auto;
 }
 
+.modal .form-group{
+  width: 100%;
+}
+
 .form-control {
   width: 100%;
   padding: 10px;

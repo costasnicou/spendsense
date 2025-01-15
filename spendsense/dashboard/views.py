@@ -20,9 +20,17 @@ from django.contrib.auth import login
 from decimal import Decimal
 from datetime import datetime
 from django.utils import timezone
+from django.urls import reverse
+from django.http import JsonResponse
+
+
+
 
 class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
+    def get_success_url(self):
+        # Redirect to the dashboard with the logged-in user's username
+        return reverse('dashboard', kwargs={'user': self.request.user.username})
 
 
 def homepage(request):
@@ -42,7 +50,11 @@ def signup(request):
 
 
 @login_required
-def dashboard(request):
+def dashboard(request,user):
+
+    # Ensure the logged-in user matches the user in the URL
+    if request.user.username != user:
+        return render(request, "403.html", status=403)
 
     if request.method == 'POST':
         
@@ -300,12 +312,11 @@ def dashboard(request):
             # return redirect('dashboard')  # Adjust to your desired redirect URL
 
         
-            
 
 
     wallet_form = WalletForm()
     transaction_form = TransactionForm(user=request.user)
-
+    is_dashboard = True
     wallets = Wallet.objects.filter(user=request.user)
     wallet_forms = {wallet.id: WalletForm(instance=wallet) for wallet in wallets}
     transactions = Transaction.objects.filter(wallet__user=request.user).order_by('-timestamp')
@@ -370,4 +381,6 @@ def dashboard(request):
         'total_fat': total_fat,
         'transferform':transferform,
         'filter_transactions_form':filter_transactions_form,
+        'user': request.user,
+        'is_dashboard':is_dashboard,
     })
