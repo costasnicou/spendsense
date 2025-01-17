@@ -366,8 +366,34 @@ def dashboard(request,user):
         if category:
             transactions = transactions.filter(category=category)
 
+        # Calculate totals for the filtered transactions
+        total_income = transactions.filter(type='Income').aggregate(total=Sum('amount'))['total'] or 0
+        total_expenses = transactions.filter(type='Expense').aggregate(total=Sum('amount'))['total'] or 0
+        net_balance = total_income - total_expenses
+
+        for transaction in transactions:
+            transaction.edit_form = TransactionForm(instance=transaction, user=request.user)
+
         if 'reset-btn' in request.GET:
             return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
+        # Pass the totals to the template
+        context = {
+            'transactions': transactions,
+            'total_income': total_income,
+            'total_expenses': total_expenses,
+            'net_balance': net_balance,
+            'is_dashboard':True,
+            'wallets': wallets,
+            'wallet_forms': wallet_forms,
+            'wallet_form': wallet_form,
+            'total_balance': total_balance,
+            'total_fat': total_fat,
+            'transferform':transferform,
+            'filter_transactions_form':filter_transactions_form,
+            'user': request.user,
+            'transaction_form': transaction_form,
+        }
+        return render(request, 'dashboard/dashboard.html', context)
     return render(request, 'dashboard/dashboard.html', {
         'wallets': wallets,
         'wallet_forms': wallet_forms,
