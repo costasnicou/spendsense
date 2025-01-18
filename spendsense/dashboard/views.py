@@ -104,7 +104,10 @@ def dashboard(request,user):
             transaction_form_submitted = TransactionForm(request.POST, user=request.user, instance=transaction)
 
             if transaction_form_submitted.is_valid():
+              
                 if 'delete_transaction' in request.POST:
+                    print("Delete transaction condition triggered")
+                    # print("POST data:", request.POST)
                     wallet = transaction.wallet
                     if transaction.type == 'Income':
                         wallet.balance -= Decimal(transaction.amount)
@@ -112,14 +115,14 @@ def dashboard(request,user):
                     
                     elif transaction.type == 'Expense':
                         wallet.balance += Decimal(transaction.amount)
+                        print("Form is valid:")
 
                     if transaction.type == 'Expense' and transaction.category == 'Balance Adjustment':
                         # print('code block works')
                         updated_fat_amount = transaction.amount
                         transaction.wallet.fat.amount = transaction.wallet.fat.amount - updated_fat_amount
                         transaction.wallet.fat.save()  
-                        # if transaction.category == 'Balance Adjustment':
-                        #     print(f'Current Fat: {wallet.fat.amount}')    
+                      
                     if transaction.type == 'Income' and transaction.category == 'Balance Adjustment':
                         updated_fat_amount = transaction.amount
                         transaction.wallet.fat.amount = transaction.wallet.fat.amount + updated_fat_amount
@@ -127,6 +130,7 @@ def dashboard(request,user):
                         transaction.wallet.fat.save()  
                         # print('code block works')
 
+                   
                     wallet.save()
                     transaction.delete()
                     messages.success(request, "Transaction deleted successfully!")
@@ -183,7 +187,8 @@ def dashboard(request,user):
                 updated_transaction.save()
                 messages.success(request, "Transaction updated successfully!")
                 return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
-       
+        
+            
         wallet_id = request.POST.get('wallet_id')
 
         if wallet_id:

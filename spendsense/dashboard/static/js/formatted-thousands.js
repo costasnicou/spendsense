@@ -76,19 +76,20 @@ document.querySelector('.trans-modal').addEventListener('submit', function (even
 });
 
 // edit transaction form
-document.addEventListener('submit', function (event) {
-    const form = event.target; // Get the form that triggered the event
-    if (form.closest('.edit-trans-modal')) { // Check if the form is inside the modal
-        event.preventDefault(); // Prevent the default form submission for custom handling
+// document.addEventListener('submit', function (event) {
+   
+//     const form = event.target; // Get the form that triggered the event
+//     if (form.closest('.edit-trans-modal')) { // Check if the form is inside the modal
+//         // event.preventDefault(); // Prevent the default form submission for custom handling
 
-        const numberFields = form.querySelectorAll('.form-number');
-        numberFields.forEach(function (field) {
-            field.value = reverseFormattedNumber(field.value); // Reverse formatting
-        });
+//         const numberFields = form.querySelectorAll('.form-number');
+//         numberFields.forEach(function (field) {
+//             field.value = reverseFormattedNumber(field.value); // Reverse formatting
+//         });
 
-        // Submit the form programmatically or handle it as needed
-        console.log('Form processed for edit-trans-modal:', form);
-        form.submit(); // Uncomment this if you want the form to be submitted after processing
-    }
-});
+//         // Submit the form programmatically or handle it as needed
+//         // console.log('Form processed for edit-trans-modal:', form);
+//         // form.submit(); // Uncomment this if you want the form to be submitted after processing
+//     }
+// });
 
