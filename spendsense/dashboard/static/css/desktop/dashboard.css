@@ -557,3 +557,7 @@ tr:hover {
 .filter-transactions h3{
     margin-bottom: 0;
 }
+
+.d-none{
+    display: none;
+}

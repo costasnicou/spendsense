@@ -1,6 +1,16 @@
 .login-container{
     padding: 100px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 650px;
+    /* background:linear-gradient(0deg, rgba(40, 40, 40, 0.3), rgba(62, 62, 62, 0.3)), url(../../images/login.jpg);
+ 
+    background-size: cover;
+    background-repeat: no-repeat; */
+    
 
 }
 
@@ -14,11 +24,12 @@ form.login-form{
     align-items: center;
     flex-direction: column;
     /* color: white; */
-    font-size: 19px;
+    /* font-size: 19px; */
     border-radius: 20px;
     min-height: 400px;
     /* color: white; */
-    /* background-color: rgb(38, 62, 13); */
+    /* background-color: rgba(0, 0, 0, 0.691); */
+    /* background-color: rgb(232, 232, 232); */
 }
 
 form.login-form p a{
@@ -32,7 +43,7 @@ form.login-form p a{
 
 form.login-form p a:hover{
     color: rgba(0, 128, 111, 0.687);
-    font-size: 17px;
+    /* font-size: 17px; */
 }
 
 

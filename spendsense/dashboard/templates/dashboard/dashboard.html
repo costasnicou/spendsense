@@ -206,7 +206,6 @@
 
 
 <!-- transfer money to another wallet form -->
-
 <form method="post" class="transfer-modal modal hidden">
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
         <span aria-hidden="true">&times;</span>
@@ -222,6 +221,21 @@
         {{  transferform.destination_wallet.label_tag }} <br>
         {{ transferform.destination_wallet }}
     </div>
+
+    <div class="form-group">
+        {{ transferform.use_fat_amount.label_tag }}
+        {{ transferform.use_fat_amount }}
+      
+    </div>
+    
+    <div class="form-group form-check-group d-none">
+        <label for="id_use_fat_amount" class="form-check-label d-none">
+            {{ transferform.fat_wallet.label }}
+        </label>
+       
+        {{ transferform.fat_wallet }}
+    </div>
+
 
     <div class="form-group">
         {{  transferform.amount.label_tag }} <br>
@@ -332,7 +346,7 @@
 <div class="overlay hidden"></div>
 {% endfor %}
 
-<!-- transfer form -->
+
 <form method="GET" class="modal filter-trans-modal hidden">
     <h1 class="modal-title">Filter Transactions</h1>
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close"  onclick="closeModal()">

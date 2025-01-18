@@ -101,8 +101,14 @@
         const dynYear = document.querySelector('.dynYear');
         dynYear.innerHTML = (new Date().getFullYear());
     </script>
-    <script src="{% static 'js/dashboard.js'%}"></script>
-    <script src="{% static 'js/slider.js'%}"></script>
-    <script src="{% static 'js/formatted-thousands.js'%}"></script>
+
+
+    {% if request.path == '/' %}
+        <script src="{% static 'js/slider.js'%}"></script>
+    {% elif is_dashboard %} 
+        <script src="{% static 'js/dashboard.js'%}"></script>
+        <script src="{% static 'js/formatted-thousands.js'%}"></script>
+    {% endif %}
+   
 </body>
 </html>

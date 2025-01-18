@@ -286,7 +286,8 @@ def dashboard(request,user):
             source_wallet = transferform.cleaned_data['source_wallet']
             destination_wallet = transferform.cleaned_data['destination_wallet']
             amount = transferform.cleaned_data['amount']
-
+            use_fat_amount = transferform.cleaned_data.get('use_fat_amount')
+            fat_wallet = transferform.cleaned_data.get('fat_wallet')
              # Deduct from source wallet
             source_wallet.balance -= Decimal(amount)
             source_wallet.save()
@@ -294,6 +295,12 @@ def dashboard(request,user):
             # Add to destination wallet
             destination_wallet.balance += Decimal(amount)
             destination_wallet.save()
+
+
+            # handle fat decreasing
+            if use_fat_amount and fat_wallet:
+                fat_wallet.fat.amount -= amount
+                fat_wallet.fat.save()
 
 
             # create a transaction

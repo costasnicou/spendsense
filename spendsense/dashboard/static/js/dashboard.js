@@ -99,3 +99,26 @@ const closeEditTransModal = function (transactionId) {
 
 
 // disable editing for transfer
+
+
+// recover fat amount
+document.addEventListener('DOMContentLoaded', function () {
+  const useFatCheckbox = document.querySelector('.form-check-input');
+  const fatWalletField = document.querySelector('.field-fat_wallet');
+  const fatWalletLabel = document.querySelector('.form-check-label');
+  const checkBoxFormGroup = document.querySelector('.form-check-group')
+
+  if (useFatCheckbox) {
+      useFatCheckbox.addEventListener('change', function () {
+          if (useFatCheckbox.checked) {
+              fatWalletField.classList.remove('d-none');
+              fatWalletLabel.classList.remove('d-none');
+              checkBoxFormGroup.classList.remove('d-none');
+          } else {
+              fatWalletField.classList.add('d-none');
+              fatWalletLabel.classList.add('d-none')
+              checkBoxFormGroup.classList.add('d-none');
+          }
+      });
+  }
+});

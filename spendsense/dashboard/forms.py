@@ -144,6 +144,7 @@ class WalletTransferForm(forms.Form):
         label="Destination Wallet",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
+
     amount = forms.DecimalField(
         max_digits=10,
         decimal_places=2,
@@ -158,11 +159,26 @@ class WalletTransferForm(forms.Form):
             }),
     )
 
+    use_fat_amount = forms.BooleanField(
+        required=False,
+        label="Recover Fat Amount",
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input','id':'id_use_fat_amount'}),
+    )
+
+    fat_wallet = forms.ModelChoiceField(
+        queryset=Wallet.objects.filter(fat__amount__gt=Decimal('0.00')),
+        label="Fat Wallet",
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control field-fat_wallet d-none'}),  # Initially hidden
+    )
+
     def clean(self):
         cleaned_data = super().clean()
         source_wallet = cleaned_data.get('source_wallet')
         destination_wallet = cleaned_data.get('destination_wallet')
         amount = cleaned_data.get('amount')
+        use_fat_amount = cleaned_data.get('use_fat_amount')
+        fat_wallet = cleaned_data.get('fat_wallet')
 
         # Check that source and destination wallets are different
         if source_wallet == destination_wallet:
@@ -172,7 +188,38 @@ class WalletTransferForm(forms.Form):
         if source_wallet and amount and source_wallet.balance < amount:
             raise forms.ValidationError("Insufficient balance in the source wallet.")
 
+         # If "Use Fat Amount" is checked, validate the fat wallet
+        if use_fat_amount:
+            if not fat_wallet:
+                raise forms.ValidationError("Please select a wallet with a fat amount.")
+            if fat_wallet.fat.amount < amount:
+                raise forms.ValidationError("The selected fat wallet does not have enough fat amount.")
+
         return cleaned_data
+    
+    # def process_transfer(self):
+    #     """
+    #     Handles the transfer logic, including reducing the fat amount if applicable.
+    #     """
+    #     cleaned_data = self.cleaned_data
+    #     source_wallet = cleaned_data['source_wallet']
+    #     destination_wallet = cleaned_data['destination_wallet']
+    #     amount = cleaned_data['amount']
+    #     use_fat_amount = cleaned_data.get('use_fat_amount')
+    #     fat_wallet = cleaned_data.get('fat_wallet')
+
+    #     # Deduct amount from source wallet
+    #     source_wallet.balance -= amount
+    #     source_wallet.save()
+
+    #     # Add amount to destination wallet
+    #     destination_wallet.balance += amount
+    #     destination_wallet.save()
+
+    #     # If using fat amount, reduce the fat amount
+    #     if use_fat_amount and fat_wallet:
+    #         fat_wallet.fat.amount -= amount
+    #         fat_wallet.fat.save()
 
 class TransactionFilterForm(forms.Form):
     TRANSACTION_TYPES = [
