@@ -47,7 +47,6 @@ function reverseFormattedNumber(formattedValue) {
 // wallet form
 document.querySelector('.wallet_form').addEventListener('submit', function (event) {
     const numberFields = document.querySelectorAll('.form-number');
-    console.log(numberFields);
     numberFields.forEach(function (field) {
         field.value = reverseFormattedNumber(field.value); // Reverse formatting
         console.log(field.value);
@@ -75,21 +74,23 @@ document.querySelector('.trans-modal').addEventListener('submit', function (even
     });
 });
 
-// edit transaction form
-// document.addEventListener('submit', function (event) {
-   
-//     const form = event.target; // Get the form that triggered the event
-//     if (form.closest('.edit-trans-modal')) { // Check if the form is inside the modal
-//         // event.preventDefault(); // Prevent the default form submission for custom handling
 
-//         const numberFields = form.querySelectorAll('.form-number');
-//         numberFields.forEach(function (field) {
-//             field.value = reverseFormattedNumber(field.value); // Reverse formatting
-//         });
+// edit transaction form reverce formating
+document.addEventListener('submit', function (event) {
+    if (event.target && event.target.matches('.edit-trans-modal')) {
+        console.log('edit-trans-modal submit triggered');
+        const numberFields = event.target.querySelectorAll('.form-number');
+        numberFields.forEach(function (field) {
+            field.value = reverseFormattedNumber(field.value); // Reverse formatting
+        });
+    }
+});
 
-//         // Submit the form programmatically or handle it as needed
-//         // console.log('Form processed for edit-trans-modal:', form);
-//         // form.submit(); // Uncomment this if you want the form to be submitted after processing
-//     }
-// });
-
+// transfer form reverce formatting
+document.querySelector('.transfer-modal').addEventListener('submit', function (event) {
+    const numberFields = document.querySelectorAll('.form-number');
+    numberFields.forEach(function (field) {
+        field.value = reverseFormattedNumber(field.value); // Reverse formatting
+        console.log(field.value);
+    });
+});

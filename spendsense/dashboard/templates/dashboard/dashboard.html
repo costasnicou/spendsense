@@ -273,7 +273,7 @@
     <div class="modal-footer">
         <button type="submit" name="transaction_form_submitted" class="btn btn-primary">Save changes</button>
         <!-- Delete Button -->
-        <button type="submit" name="delete_transaction" class="dashboard-btn" value="true" onclick="return confirm('Are you sure you want to delete this transaction?')">
+        <button type="submit" name="delete_transaction" class="dashboard-btn"  onclick="return confirm('Are you sure you want to delete this transaction?')">
             Delete
         </button>
     </div>
@@ -332,6 +332,7 @@
 <div class="overlay hidden"></div>
 {% endfor %}
 
+<!-- transfer form -->
 <form method="GET" class="modal filter-trans-modal hidden">
     <h1 class="modal-title">Filter Transactions</h1>
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close"  onclick="closeModal()">

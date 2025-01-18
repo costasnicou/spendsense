@@ -148,7 +148,14 @@ class WalletTransferForm(forms.Form):
         max_digits=10,
         decimal_places=2,
         label="Amount",
-        widget=forms.NumberInput(attrs={'class': 'form-control'})
+        widget=NumberInputWithCommas(attrs={
+                'class': 'form-control form-number',
+                'min': '0.00',  # Optional: Enforce minimum value
+                'max': '9999999999999.99',  # Allow large numbers
+                'step': '0.01',  # Allow decimal inputs
+                
+                
+            }),
     )
 
     def clean(self):
