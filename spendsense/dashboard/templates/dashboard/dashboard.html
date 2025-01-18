@@ -37,7 +37,7 @@
             
                         
                        
-                        <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }})" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
+                        <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }}); reverseEditWalletForm();" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
                             Edit
                         </button>
                     </div>
@@ -290,10 +290,10 @@
 {% for wallet in wallets %}
 
 <!-- Edit Wallet Modal -->
-<div class="modal edit-wallet-modal hidden" id="editWalletModal{{ wallet.id }}" tabindex="-1" role="dialog" aria-labelledby="editWalletModalLabel{{ wallet.id }}" aria-hidden="true">
+<div class="modal hidden" id="editWalletModal{{ wallet.id }}" tabindex="-1" role="dialog" aria-labelledby="editWalletModalLabel{{ wallet.id }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST">
+            <form  method="POST" class="edit_wallet_form">
                 {% csrf_token %}
                 <div class="modal-header">
                     <h1 class="modal-title" id="editWalletModalLabel{{ wallet.id }}">Edit Wallet</h1>
@@ -323,7 +323,7 @@
                     {% endwith %}
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn">Save Changes</button>
+                    <button type="submit"  class="btn">Save Changes</button>
                    <!-- Delete Button -->
                    <button type="submit"  name="delete_wallet" class="dashboard-btn" onclick="return confirm('Are you sure you want to delete this wallet?');">
                         Delete

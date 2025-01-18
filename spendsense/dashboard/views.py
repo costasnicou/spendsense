@@ -68,6 +68,9 @@ def dashboard(request,user):
                 wallet.save()
                 wallet.initialize_fat(Decimal(0.00))
                 return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
+        
+            else:
+                print("Form is invalid:", wallet_form_submitted.errors)
         elif 'submit_transaction_form' in request.POST:
             transaction_form_submitted = TransactionForm(request.POST, user=request.user)
             if transaction_form_submitted.is_valid():

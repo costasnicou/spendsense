@@ -145,3 +145,4 @@ DATE_FORMAT = "d-m-Y"  # For displaying dates
 DATETIME_FORMAT = "d-m-Y H:i"  # For displaying datetime
 SHORT_DATE_FORMAT = "d/m/Y"  # Alternative short format
 
+USE_THOUSAND_SEPARATOR = True

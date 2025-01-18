@@ -5,6 +5,17 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from datetime import datetime
+from decimal import Decimal
+
+class NumberInputWithCommas(forms.TextInput):
+    def format_value(self, value):
+        if value is not None:
+            try:
+                return "{:,}".format(Decimal(value))  # Format with commas
+            except ValueError:
+                return value
+        return ''
+
 
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -30,7 +41,12 @@ class TransactionForm(forms.ModelForm):
             'wallet': forms.Select(attrs={'class': 'form-control'}),
             'type': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control', }),
-            'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'amount': NumberInputWithCommas(attrs={
+                'class': 'form-control form-number',
+                'min': '0.00',  # Optional: Enforce minimum value
+                'max': '9999999999999.99',  # Allow large numbers
+                'step': '0.01',  # Allow decimal inputs                
+            }),
         }
 
 
@@ -106,9 +122,16 @@ class WalletForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
-            'balance': forms.NumberInput(attrs={'class': 'form-control'}),
+            'balance': NumberInputWithCommas(attrs={
+                'class': 'form-control form-number',
+                'min': '0.00',  # Optional: Enforce minimum value
+                'max': '9999999999999.99',  # Allow large numbers
+                'step': '0.01',  # Allow decimal inputs
+                
+                
+            }),
         }
-
+    
 
 class WalletTransferForm(forms.Form):
     source_wallet = forms.ModelChoiceField(
