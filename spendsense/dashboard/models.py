@@ -50,24 +50,24 @@ class Wallet(models.Model):
             if initial_balance_decimal < updated_balance_decimal:
                 # If the updated balance is greater, decrease fat amount
                 # fat.amount -= 800
-                fat.amount -= updated_balance_decimal - initial_balance_decimal
+                fat.amount += updated_balance_decimal - initial_balance_decimal
 
             elif  initial_balance_decimal > updated_balance_decimal:
                 # If the updated balance is smaller, increase fat amount
                 # fat.amount +=  800
-                fat.amount +=  initial_balance_decimal - updated_balance_decimal
+                fat.amount -=  initial_balance_decimal - updated_balance_decimal
            
         else:
             # Compare the balances
             if updated_balance_decimal > initial_balance_decimal:
                 # If the updated balance is greater, decrease fat amount
                 # fat.amount -= 800
-                fat.amount -= updated_balance_decimal - initial_balance_decimal
+                fat.amount += updated_balance_decimal - initial_balance_decimal
 
             else:
                 # If the updated balance is smaller, increase fat amount
                 # fat.amount +=  800
-                fat.amount +=  initial_balance_decimal - updated_balance_decimal
+                fat.amount -=  initial_balance_decimal - updated_balance_decimal
             
         # Save the updated fat instance
         fat.save()
@@ -175,7 +175,6 @@ class Transaction(models.Model):
             
         
         ]),
-        ('Balance Adjustment','Balance Adjustment'),
         ('Other','Other'),
 
     ]

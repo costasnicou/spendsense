@@ -27,11 +27,16 @@
                         <p>
                         <span class="wallet-header"><strong>{{ wallet.name }}</strong></span><br>
                         Balance: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>
-                        {% if wallet.fat %}
-                        Fat Amount: <span class="wallet-amount"> €{{ wallet.fat.amount }}</span>
-                        {% else %}
-                            No Fat data available.
-                        {% endif %}
+                        Balance Correction: <span class="wallet-amount">
+                            {% if wallet.fat.amount > 0 %}
+                                 €+{{ wallet.fat.amount }}
+                            {% else %}
+                            €{{ wallet.fat.amount }}
+                            {% endif %}
+                                </span>
+                            
+                      
+                      
                         </p>
 
             
@@ -119,7 +124,7 @@
                             <td>{{ transaction.timestamp|date:"d-m-Y H:i" }}</td>
                             <td>
                              <!-- Edit Button -->
-                                {% if transaction.type == 'Transfer' %}
+                                {% if transaction.type == 'Transfer'  or transaction.category == 'Balance Adjustment' %}
                                     <p>No Action</p>
                                 {% else %}
                                     <button type="button" class="dashboard-btn transfer-edit"  onclick="openEditTransModal({{ transaction.id }})" data-toggle="modal" data-target="#editTransactionModal{{ transaction.id }}">

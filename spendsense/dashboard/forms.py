@@ -135,12 +135,12 @@ class WalletForm(forms.ModelForm):
 
 class WalletTransferForm(forms.Form):
     source_wallet = forms.ModelChoiceField(
-        queryset=Wallet.objects.all(),
+        queryset=Wallet.objects.none(),
         label="Source Wallet",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     destination_wallet = forms.ModelChoiceField(
-        queryset=Wallet.objects.all(),
+        queryset=Wallet.objects.none(),
         label="Destination Wallet",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
@@ -161,12 +161,12 @@ class WalletTransferForm(forms.Form):
 
     use_fat_amount = forms.BooleanField(
         required=False,
-        label="Recover Fat Amount",
+        label="Recover Balance Correction",
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input','id':'id_use_fat_amount'}),
     )
 
     fat_wallet = forms.ModelChoiceField(
-        queryset=Wallet.objects.filter(fat__amount__gt=Decimal('0.00')),
+        queryset= Wallet.objects.none(),
         label="Fat Wallet",
         required=False,
         widget=forms.Select(attrs={'class': 'form-control field-fat_wallet d-none'}),  # Initially hidden
@@ -192,35 +192,25 @@ class WalletTransferForm(forms.Form):
         if use_fat_amount:
             if not fat_wallet:
                 raise forms.ValidationError("Please select a wallet with a fat amount.")
-            if fat_wallet.fat.amount < amount:
+            if fat_wallet.fat.amount > amount:
                 raise forms.ValidationError("The selected fat wallet does not have enough fat amount.")
 
         return cleaned_data
     
-    # def process_transfer(self):
-    #     """
-    #     Handles the transfer logic, including reducing the fat amount if applicable.
-    #     """
-    #     cleaned_data = self.cleaned_data
-    #     source_wallet = cleaned_data['source_wallet']
-    #     destination_wallet = cleaned_data['destination_wallet']
-    #     amount = cleaned_data['amount']
-    #     use_fat_amount = cleaned_data.get('use_fat_amount')
-    #     fat_wallet = cleaned_data.get('fat_wallet')
 
-    #     # Deduct amount from source wallet
-    #     source_wallet.balance -= amount
-    #     source_wallet.save()
-
-    #     # Add amount to destination wallet
-    #     destination_wallet.balance += amount
-    #     destination_wallet.save()
-
-    #     # If using fat amount, reduce the fat amount
-    #     if use_fat_amount and fat_wallet:
-    #         fat_wallet.fat.amount -= amount
-    #         fat_wallet.fat.save()
-
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Extract the user from the kwargs
+        super().__init__(*args, **kwargs)
+        if user:
+            # Filter wallets based on the current user
+            self.fields['source_wallet'].queryset = Wallet.objects.filter(user=user)
+            self.fields['destination_wallet'].queryset = Wallet.objects.filter(user=user)
+            # Filter `fat_wallet` for the current user with the specified condition
+            self.fields['fat_wallet'].queryset = Wallet.objects.filter(
+                user=user,  # Adjust `owner` to your actual field linking Wallet to User
+                fat__amount__lt=Decimal('0.00')  # Additional condition
+            )
+    
 class TransactionFilterForm(forms.Form):
     TRANSACTION_TYPES = [
         ('', 'All Types'),  # Default option for no filter

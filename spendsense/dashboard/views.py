@@ -90,6 +90,7 @@ def dashboard(request,user):
                 wallet.save()
                 return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
         
+        # edit transaction form
         transaction_id = request.POST.get('transaction_id')
         if transaction_id:
             transaction = get_object_or_404(Transaction, id=transaction_id)
@@ -116,20 +117,6 @@ def dashboard(request,user):
                     elif transaction.type == 'Expense':
                         wallet.balance += Decimal(transaction.amount)
                         print("Form is valid:")
-
-                    if transaction.type == 'Expense' and transaction.category == 'Balance Adjustment':
-                        # print('code block works')
-                        updated_fat_amount = transaction.amount
-                        transaction.wallet.fat.amount = transaction.wallet.fat.amount - updated_fat_amount
-                        transaction.wallet.fat.save()  
-                      
-                    if transaction.type == 'Income' and transaction.category == 'Balance Adjustment':
-                        updated_fat_amount = transaction.amount
-                        transaction.wallet.fat.amount = transaction.wallet.fat.amount + updated_fat_amount
-                        
-                        transaction.wallet.fat.save()  
-                        # print('code block works')
-
                    
                     wallet.save()
                     transaction.delete()
@@ -163,25 +150,7 @@ def dashboard(request,user):
                         original_wallet.balance -= Decimal(updated_transaction.amount)
 
                     original_wallet.save()
-
-                
-                if updated_transaction.category == 'Balance Adjustment':
-                    updated_fat_amount = updated_transaction.amount
-                    
-
-                    if updated_fat_amount > original_fat_amount:
-                        fat_amount_difference = updated_fat_amount - original_fat_amount
-                        updated_fat_amount = original_fat_amount + fat_amount_difference
-                        updated_transaction.wallet.fat.amount = updated_fat_amount
-                        updated_transaction.wallet.fat.save()
-                    
-                    elif updated_fat_amount < original_fat_amount:
-                        fat_amount_difference = original_fat_amount - updated_fat_amount
-                        updated_fat_amount = original_fat_amount - fat_amount_difference
-                        updated_transaction.wallet.fat.amount = updated_fat_amount
-                        updated_transaction.wallet.fat.save()
-
-                
+               
                 total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
                 updated_transaction.total_balance = total_balance
                 updated_transaction.save()
@@ -226,7 +195,7 @@ def dashboard(request,user):
                
                     
                     adjusted_amount = Decimal(abs(fat_amount)) - Decimal(abs(previous_expense_sum))
-                    adjusted_amount = Decimal(fat_amount) + Decimal(abs(previous_income_sum)) - Decimal(abs(previous_expense_sum))
+                    adjusted_amount = Decimal(fat_amount) - Decimal(abs(previous_income_sum)) + Decimal(abs(previous_expense_sum))
                     adjusted_amount = Decimal(abs(adjusted_amount))
      
                     total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
@@ -258,7 +227,7 @@ def dashboard(request,user):
                 
 
 
-                    adjusted_amount = Decimal(fat_amount) + Decimal(abs(previous_income_sum)) - Decimal(abs(previous_expense_sum))
+                    adjusted_amount = Decimal(fat_amount) - Decimal(abs(previous_income_sum)) + Decimal(abs(previous_expense_sum))
                     adjusted_amount = Decimal(abs(adjusted_amount))
                     
                     if adjusted_amount > 0:
@@ -278,9 +247,9 @@ def dashboard(request,user):
                 messages.success(request, "Wallet updated successfully!")
                 return redirect(reverse('dashboard', kwargs={'user': request.user.username}))                     
     
-        transferform = WalletTransferForm(request.POST)
-        transferform.fields['source_wallet'].queryset = Wallet.objects.filter(user=request.user)
-        transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
+        # transfer form
+        transferform = WalletTransferForm(request.POST, user=request.user)
+       
 
         if transferform.is_valid():
             source_wallet = transferform.cleaned_data['source_wallet']
@@ -299,7 +268,7 @@ def dashboard(request,user):
 
             # handle fat decreasing
             if use_fat_amount and fat_wallet:
-                fat_wallet.fat.amount -= amount
+                fat_wallet.fat.amount += amount
                 fat_wallet.fat.save()
 
 
@@ -338,16 +307,16 @@ def dashboard(request,user):
     for transaction in transactions:
         transaction.edit_form = TransactionForm(instance=transaction, user=request.user)
     
-    total_fat = Decimal(Fat.objects.aggregate(total=Sum('amount'))['total'] or Decimal('0.00'))
+    total_fat = Decimal(Fat.objects.filter(wallet__user=request.user).aggregate(total=Sum('amount'))['total'] or Decimal('0.00'))
     total_balance = Decimal(sum(Decimal(wallet.balance) for wallet in wallets))
     total_income = Decimal(Transaction.objects.filter(wallet__user=request.user, type='Income').aggregate(total=Sum('amount'))['total'] or Decimal('0.00'))
     total_expenses = Decimal(Transaction.objects.filter(wallet__user=request.user, type='Expense').aggregate(total=Sum('amount'))['total'] or Decimal('0.00'))
     net_balance = Decimal(total_income) - Decimal(total_expenses)
     
     # transfer form
-    transferform = WalletTransferForm()
-    transferform.fields['source_wallet'].queryset = Wallet.objects.filter(user=request.user)
-    transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
+    transferform = WalletTransferForm(user=request.user)
+    # transferform.fields['source_wallet'].queryset = Wallet.objects.filter(user=request.user)
+    # transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
 
     # filtering transactions
     filter_transactions_form = TransactionFilterForm(data=request.GET, user=request.user)
@@ -424,4 +393,5 @@ def dashboard(request,user):
         'filter_transactions_form':filter_transactions_form,
         'user': request.user,
         'is_dashboard':is_dashboard,
+         
     })
