@@ -10,8 +10,7 @@
     }
 
     .dashboard-flex {
-        display: flex
-    ;
+        display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 0px;
@@ -19,6 +18,18 @@
 
     .dashboard.wrapper{
         width: 100%;
+    }
+
+    .transactions-section{
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .transaction-section-wrapper {
+        width: 100%;
+        margin: 0 auto;
+        max-height: 400px;
+        overflow-x: scroll;
     }
 
     .modal {

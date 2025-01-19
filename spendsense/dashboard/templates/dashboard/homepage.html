@@ -3,9 +3,31 @@
 {% load static %}
 
 {% block browser_title %}
- <title>Home - Spendsense</title>
+<title>SpendSense - Smart Expense and Income Tracker</title>
 {% endblock %}
 
+{% block seo_metadata %}
+<!-- Primary Meta Tags -->
+ 
+    <meta name="description" content="Take control of your finances with SpendSense, the ultimate expense and income tracker. Manage budgets, track spending, and achieve financial goals effortlessly.">
+    <meta name="keywords" content="expense tracker, income tracker, financial tracking, SpendSense">
+    <meta name="author" content="Costas Nicou">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="SpendSense - Smart Expense and Income Tracker">
+    <meta property="og:description" content="Track your expenses and income effortlessly with SpendSense. Achieve your financial goals with our user-friendly tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://spendsense.com/">
+    <meta property="og:image" content="https://spendsense.com/static/images/facebook.webp">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SpendSense - Smart Expense and Income Tracker">
+    <meta name="twitter:description" content="Simplify financial tracking with SpendSense. Track expenses, manage budgets, and achieve financial clarity.">
+    <meta name="twitter:image" content="https://spendsense.com/static/images/facebook.webp">
+
+{% endblock %}
 
 {%block cover%}
 

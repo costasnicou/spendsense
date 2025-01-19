@@ -31,7 +31,9 @@ form.login-form{
     /* background-color: rgba(0, 0, 0, 0.691); */
     /* background-color: rgb(232, 232, 232); */
 }
-
+form h1{
+    font-size: 40px;
+}
 form.login-form p a{
     text-align: center;
     color: black;

@@ -19,11 +19,32 @@ section{
     width: 100%;
     z-index: 10;
     top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   
     /* position: relative; */
 }
+
+
+.menu-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: aqua; */
+  width: 20%;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  
+  
+}
+
+.menu-wrapper a{
+  color: white;
+  text-decoration: none;
+  /* margin: 20px; */
+  transition: all ease-in 0.5;
+  margin: 4px 0 4px 0;
+
+}
+
 
 .form-group{
   padding: 10px;
@@ -58,13 +79,6 @@ section{
 
 .logout-btn:hover{
   background-color: rgb(19, 130, 100);
-}
-.main-menu a{
-    color: white;
-    text-decoration: none;
-    margin: 20px;
-    transition: all ease-in 0.5;
- 
 }
 
 

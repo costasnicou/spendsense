@@ -11,11 +11,30 @@
         width: 100%;
         z-index: 10;
         top: 0;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        /* position: relative; */
     }
+
+    .menu-wrapper {
+        display: flex
+;
+        justify-content: center;
+        align-items: center;
+        /* background-color: aqua; */
+        width: 100%;
+        /* margin: 0 auto; */
+        justify-content: flex-start;
+        position: relative;
+        left: 15px;
+    }
+      
+      .menu-wrapper a{
+        color: white;
+        text-decoration: none;
+        /* margin: 20px; */
+        transition: all ease-in 0.5;
+        margin: 0 15px;
+      
+      }
+      
 
     .logout-form {
         position: absolute;

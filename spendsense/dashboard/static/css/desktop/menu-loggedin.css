@@ -1,0 +1,9 @@
+.menu-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aqua; */
+    width: 10%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+}

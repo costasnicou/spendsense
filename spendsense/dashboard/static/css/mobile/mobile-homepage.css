@@ -5,6 +5,32 @@
         overflow-x: hidden;
     }
 
+    .main-menu {
+        text-align: center;
+        /* background-color: rgb(7, 87, 71); */
+        background: rgb(65, 156, 156);
+        background: linear-gradient(90deg, rgba(65, 156, 156, 1) 0%, rgb(8, 69, 56) 100%);
+        padding: 20px;
+        height: 25px;
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+        top: 0;
+        /* display: flex;
+        justify-content: space-evenly;
+        align-items: center; */
+        /* position: relative; */
+    }
+
+    .menu-wrapper {
+        display: flex;
+        align-items: center;
+        /* background-color: aqua; */
+        width: 64%;
+        margin: 0 auto;
+        justify-content: space-evenly;
+    }
+
     .cover-photo {
         height: 500px;
         /* background-color: azure; */
