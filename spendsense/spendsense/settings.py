@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Add this middleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -109,15 +110,31 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Europe/Athens'
 
-USE_I18N = True
-
 USE_TZ = True
 
+# Enable internationalization
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
+# OFFER GREEK TRANSLATION
+LANGUAGE_CODE = 'en'
+# LANGUAGE_CODE = 'el'
+# Supported languages
+LANGUAGES = [
+    ('en', 'English'),
+    ('el', 'Greek'),
+]
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
+# Django stores the user's language preference in a session. Ensure sessions are enabled in
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 import os
 

@@ -23,7 +23,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.http import JsonResponse
 
-
+from django.conf import settings
 
 
 class CustomLoginView(LoginView):
@@ -34,7 +34,10 @@ class CustomLoginView(LoginView):
 
 
 def homepage(request):
-    return render(request, 'dashboard/homepage.html')
+    context = {
+        'LANGUAGES': settings.LANGUAGES,  # Pass LANGUAGES explicitly
+    }
+    return render(request, 'dashboard/homepage.html', context)
 
 
 def signup(request):

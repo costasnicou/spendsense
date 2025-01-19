@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from dashboard import views
 from dashboard.views import CustomLoginView
-
+from django.conf.urls.i18n import i18n_patterns
 # from tracker import views.CustomLoginView
 
 
@@ -32,3 +32,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('signup/', views.signup, name='signup'),
 ]
+
+# Add i18n patterns for language handling
+urlpatterns += i18n_patterns(
+    path('set_language/', include('django.conf.urls.i18n')),
+)

@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +17,14 @@
 
     <link rel="stylesheet" href="{% static 'css/desktop/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile/mobile-global.css' %}">
+
+    <!-- {% if request.LANGUAGE_CODE == "el" %}
+        <link rel="stylesheet" href="{% static 'css/greek-styles.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'css/default-styles.css' %}">
+    {% endif %} -->
+
+
     {% if user.is_authenticated %}
         <!-- <link rel="stylesheet" href="{% static 'css/mobile/mobile-nav-loggedin.css' %}"> -->
         <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin.css' %}">
@@ -49,28 +58,58 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
+
+
 </head>
 <body>
     <header>
         <nav class="main-menu">  
-        {% if user.is_authenticated %}
-            <div class="menu-wrapper">
-                <a href="{% url 'homepage'%}">Home</a>
-                <a href="{% url 'dashboard' user=request.user.username %}">Dashboard</a>
-                
-            </div>
-            <form class="logout-form" action="{% url 'logout' %}" method="post">
+            {% if user.is_authenticated %}
+                <div class="menu-wrapper">
+                    <a href="{% url 'homepage'%}">Home</a>
+                    <a href="{% url 'dashboard' user=request.user.username %}">Dashboard</a>
+                    
+                </div>
+                <form class="logout-form" action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="logout-btn" type="submit">Log Out</button>
+                </form>
+            
+            {% else %}
+                <div class="menu-wrapper">
+                    <a href="{% url 'homepage'%}">Home</a>
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Sign Up</a>
+                </div>
+            {% endif %}
+            
+            <form action="{% url 'set_language' %}" method="post">
                 {% csrf_token %}
-                <button class="logout-btn" type="submit">Log Out</button>
+                <select name="language" onchange="this.form.submit()">
+                    {% for lang_code, lang_name in LANGUAGES %}
+                    <option value="{{ lang_code }}"{% if lang_code == request.LANGUAGE_CODE %}selected{% endif %}>
+                        {{ lang_name }}
+                    </option>
+                    {% endfor %}
+                </select>
             </form>
-        {% else %}
-            <div class="menu-wrapper">
-                <a href="{% url 'homepage'%}">Home</a>
-                <a href="{% url 'login' %}">Login</a>
-                <a href="{% url 'signup' %}">Sign Up</a>
-            </div>
-        {% endif %}
 
+
+            <!-- {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+
+            <div class="btn-header">
+                <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                    {% for language in languages %}
+                        {% if language.code != LANGUAGE_CODE %}
+                            <button type="submit" name="language" value="{{ language.code }}">{{ language.name }}</button>
+                        {% endif %}
+                    {% endfor %}
+                </form> -->
+            </div>
         </nav>
 
         {% block cover%}

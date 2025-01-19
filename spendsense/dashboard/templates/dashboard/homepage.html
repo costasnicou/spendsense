@@ -5,7 +5,7 @@
 {% block browser_title %}
 <title>SpendSense - Smart Expense and Income Tracker</title>
 {% endblock %}
-
+{% load i18n %}
 {% block seo_metadata %}
 <!-- Primary Meta Tags -->
  
@@ -40,9 +40,9 @@
 {%block cover%}
 
     <div class="cover-photo">
-        <h1>Welcome to Spendsense Income/Expense Tracker</h1>
-        <h2>Manage your finances easily with our tool. Sign up or log in to get started!</h2>
-        <a href="" class="btn">Learn More</a>
+        <h1>{% trans "Welcome to Spendsense Income/Expense Tracker" %}</h1>
+        <h2>{% trans "Manage your finances easily with our tool. Sign up or log in to get started!" %}</h2>
+        <a href="" class="btn">{% trans "Learn More" %}</a>
     </div>
 {%endblock cover%}
     
