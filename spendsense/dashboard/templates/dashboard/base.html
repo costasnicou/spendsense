@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/desktop/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile/mobile-global.css' %}">
     {% if user.is_authenticated %}
-        <link rel="stylesheet" href="{% static 'css/mobile/mobile-nav-loggedin.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'css/mobile/mobile-nav-loggedin.css' %}"> -->
         <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin.css' %}">
 
     {% endif %}
@@ -26,6 +26,9 @@
     {% if request.path == '/' %}
         <link rel="stylesheet" href="{% static 'css/desktop/homepage.css' %}">
         <link rel="stylesheet" href="{% static 'css/mobile/mobile-homepage.css' %}">
+        {% if user.is_authenticated %}
+            <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin.css' %}">
+        {% endif %}
     {% elif request.path == '/login/' %}
         <link rel="stylesheet" href="{% static 'css/desktop/login.css' %}">
         <link rel="stylesheet" href="{% static 'css/mobile/mobile-login.css' %}">
