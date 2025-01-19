@@ -89,8 +89,47 @@ def dashboard(request,user):
                 transaction.save()
                 wallet.save()
                 return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
+        elif 'delete_balance_adjustment' in request.POST:
+            transaction_id = request.POST.get('transaction_id')
+            transaction = get_object_or_404(Transaction, id=transaction_id)
+            # print(f"POST request received for transaction ID: {transaction_id}")
         
-        # edit transaction form
+            wallet = transaction.wallet
+            if transaction.type == 'Income':
+                wallet.balance -= Decimal(transaction.amount)
+
+            
+            elif transaction.type == 'Expense':
+                wallet.balance += Decimal(transaction.amount)
+                print("Form is valid:")
+
+            if transaction.type == 'Expense' and transaction.category == 'Balance Adjustment':
+                # print('code block works')
+                updated_fat_amount = transaction.amount
+                transaction.wallet.fat.amount = transaction.wallet.fat.amount + updated_fat_amount
+                transaction.wallet.fat.save()  
+                
+            if transaction.type == 'Income' and transaction.category == 'Balance Adjustment':
+                updated_fat_amount = transaction.amount
+                transaction.wallet.fat.amount = transaction.wallet.fat.amount - updated_fat_amount
+                
+                transaction.wallet.fat.save()  
+                # print('code block works')
+
+            
+            wallet.save()
+            transaction.delete()
+            messages.success(request, "Transaction deleted successfully!")
+            return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
+
+
+
+
+
+
+
+        
+        # edit or delete transaction form
         transaction_id = request.POST.get('transaction_id')
         if transaction_id:
             transaction = get_object_or_404(Transaction, id=transaction_id)
@@ -103,6 +142,9 @@ def dashboard(request,user):
             else:
                 original_fat_amount = Decimal(0.00)
             transaction_form_submitted = TransactionForm(request.POST, user=request.user, instance=transaction)
+
+            # transaction_form_balance_adjustment_submitted = TransactionForm(request.POST, user=request.user, instance=transaction)
+             
 
             if transaction_form_submitted.is_valid():
               
