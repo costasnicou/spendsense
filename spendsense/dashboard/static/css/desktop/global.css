@@ -20,9 +20,15 @@ section{
     z-index: 10;
     top: 0;
    
+   
     /* position: relative; */
 }
 
+.logout-form {
+  position: absolute;
+  right: 150px;
+  top: 12px;
+}
 
 .menu-wrapper{
   display: flex;

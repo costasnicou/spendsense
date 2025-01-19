@@ -7,3 +7,51 @@
     margin: 0 auto;
     justify-content: space-evenly;
 }
+
+@media only screen and (min-width:320px) and (max-width: 600px) {
+    .main-menu {
+        text-align: center;
+        /* background-color: rgb(7, 87, 71); */
+        background: rgb(65, 156, 156);
+        background: linear-gradient(90deg, rgba(65, 156, 156, 1) 0%, rgb(8, 69, 56) 100%);
+        padding: 20px;
+        height: 25px;
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+        top: 0;
+       
+    }
+
+    .menu-wrapper {
+        display: flex
+;
+        justify-content: center;
+        align-items: center;
+        /* background-color: aqua; */
+        width: 100%;
+        /* margin: 0 auto; */
+        justify-content: flex-start;
+        position: relative;
+        left: 15px;
+    }
+      
+      .menu-wrapper a{
+        color: white;
+        text-decoration: none;
+        /* margin: 20px; */
+        transition: all ease-in 0.5;
+        margin: 0 15px;
+      
+      }
+      
+
+    .logout-form {
+        position: absolute;
+        right: 50px;
+    }
+
+    
+
+
+}

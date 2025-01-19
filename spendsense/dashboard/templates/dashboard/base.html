@@ -54,11 +54,12 @@
             <div class="menu-wrapper">
                 <a href="{% url 'homepage'%}">Home</a>
                 <a href="{% url 'dashboard' user=request.user.username %}">Dashboard</a>
-                <form class="logout-form" action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button class="logout-btn" type="submit">Log Out</button>
-                </form>
+                
             </div>
+            <form class="logout-form" action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button class="logout-btn" type="submit">Log Out</button>
+            </form>
         {% else %}
             <div class="menu-wrapper">
                 <a href="{% url 'homepage'%}">Home</a>
