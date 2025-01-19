@@ -72,7 +72,13 @@
             </div>
 
             <div class="dashboard-view fat">
-                <p>Total Fat: <span class="dashboard-amount">€{{ total_fat|default:0.00|floatformat:2  }}</span></p>
+                <p>Total Balance Correction: <span class="dashboard-amount">
+                    {% if total_fat > 0 %}
+                        €+{{ total_fat|default:0.00|floatformat:2  }}
+                    {% else %}
+                        €{{ total_fat|default:0.00|floatformat:2  }}
+                    {% endif  %}
+                </span></p>
             </div>
 
             <div class="dashboard-view net">
