@@ -49,14 +49,14 @@
 {%block main%}
     <section class="about-us">
         <article class="article-about-us ">
-            <h3 class="section-title">About Us</h3>
-            <p>Welcome to Spendsense, your <strong>trusted partner</strong> in achieving financial clarity and control. Our mission is to empower individuals and
+            <h3 class="section-title">{% trans "About Us" %}</h3>
+            <p>{% blocktrans %}Welcome to Spendsense, your <strong>trusted partner</strong> in achieving financial clarity and control. Our mission is to empower individuals and
                 businesses to manage their finances effortlessly with our intuitive income and expense tracker. 
                 Designed for simplicity and efficiency, our web application helps you monitor your spending, track income, 
                 set budgets, and achieve your financial goals—all in one place. Whether you’re saving for a dream,
                 managing day-to-day expenses, or striving for <strong>financial freedom</strong>, Spendsense provides the tools 
                 you need to take charge of your finances. Join us on this journey to financial wellness, and let’s 
-                build a brighter future together!
+                build a brighter future together!{% endblocktrans %}
             </p>
         </article>
     
@@ -67,24 +67,30 @@
     </section>
 
     <section class="reasons-section">
-        <h3 class="section-title reasons-title" >Why Us</h3>
+        <h3 class="section-title reasons-title" >{% trans "Why Us" %}</h3>
     
         <div class="reasons">
             <div class="reason">
-                <h4>Better Financial Management</h4>
-            <p>An income/expense tracker allows users to monitor their financial activities in real-time, providing a clear picture of their income and spending patterns. This helps in maintaining control over their finances.
-
+                <h4>{% trans "Better Financial Management" %}</h4>
+            <p>
+                {% blocktrans %}
+                An income/expense tracker allows users to monitor their financial activities in real-time, 
+                providing a clear picture of their income and spending patterns. This helps in maintaining 
+                control over their finances.{% endblocktrans %}
             </p>
             </div>
 
             <div class="reason">
-                <h4>Budgeting Made Simple</h4>
-                <p>Users can set budgets for different categories (e.g., groceries, entertainment, bills) and track their adherence to these budgets. This makes budgeting more organized and less overwhelming.</p>
+                <h4>{% trans "Budgeting Made Simple" %}</h4>
+                <p>{% blocktrans %}Users can set budgets for different categories 
+                    (e.g., groceries, entertainment, bills) and track their adherence 
+                    to these budgets. This makes budgeting more organized and less overwhelming.{% endblocktrans %}</p>
         
                 </div>
             <div class="reason">
-                <h4>Identify Spending Habits</h4>
-                <p>By categorizing transactions, users can identify areas where they are overspending or areas where they can cut back, enabling more informed decision-making.</p>
+                <h4>{% trans "Identify Spending Habits"  %}</h4>
+                <p>{% blocktrans %}By categorizing transactions, users can identify areas where they 
+                    are overspending or areas where they can cut back, enabling more informed decision-making.{% endblocktrans %}</p>
             </div>
         </div>
 
@@ -102,35 +108,37 @@
             </div>
         
             <article class="why-article">
-                <h3 class="section-title" >Features</h3>
+                <h3 class="section-title" >{% trans "Features" %}</h3>
                 <ul class="why-list">
-                    <li>User Authentication and Security</li>
-                    <li>Dashboard Overview</li>
-                    <li>Multi-Wallet Management</li>
-                    <li>Transaction Management</li>
-                    <li>Balance Adjustment Management</li>
+                    <li>{% trans "User Authentication and Security" %}</li>
+                    <li>{% trans "Dashboard Overview" %}</li>
+                    <li>{% trans "Multi-Wallet Management" %}</li>
+                    <li>{% trans "Transaction Management" %}</li>
+                    <li>{% trans "Balance Adjustment Management" %}</li>
                 </ul>
 
-                <a href="{% url 'signup' %}" class="btn signup-btn">Sign Up Now</a>
+                <a href="{% url 'signup' %}" class="btn signup-btn">{% trans "Sign Up Now" %}</a>
 
             </article>
         </div>
     </section>
 
     <section class="testimonials">
-        <h2 class="section-title testimonials-title">What they are saying about us</h2>
+        <h2 class="section-title testimonials-title">{% trans "What they are saying about us" %} </h2>
 
         <div class="slider">
             <div class="slide">
             <div class="testimonial">
-                <h5 class="testimonial__header">Game-Changer for My Finances</h5>
+                <h5 class="testimonial__header">{% trans "Game-Changer for My Finances" %}</h5>
                 <blockquote class="testimonial__text">
+                    {% blocktrans %}
                     This app has completely transformed the way I manage my money. Before, I would 
                     constantly wonder where my paycheck disappeared by the end of the month. 
                     Now, with the income and expense tracker, I can see every transaction in real-time. 
                     It’s so easy to categorize my spending and identify areas where I can cut back. 
                     I feel more in control of my financial future than ever before. 
                     If you’ve been struggling to manage your money, this app is a must-have!
+                    {% endblocktrans %}
                 </blockquote>
                 <address class="testimonial__author">
                 <img src="img/user-1.jpg" alt="" class="testimonial__photo" />
@@ -143,16 +151,17 @@
             <div class="slide">
             <div class="testimonial">
                 <h5 class="testimonial__header">
-                    Incredible Insights into Spending Habits
+                    {% trans "Incredible Insights into Spending Habits" %}
                 </h5>
                 <blockquote class="testimonial__text">
+                    {% blocktrans %}
                     This app was a real eye-opener for me. I thought I was managing my money well until 
                     I started using the tracker. It turns out, I was spending way more on 
                     eating out and subscriptions than I realized. The app’s insights and 
                     reports showed me exactly where I was overspending, and I’ve made changes 
                     that are already paying off. I’m saving hundreds of dollars every month now, 
                     and it feels great to know I’m making smarter financial decisions.
-                    
+                    {% endblocktrans %}
                 </blockquote>
                 <address class="testimonial__author">
                 <img src="img/user-2.jpg" alt="" class="testimonial__photo" />
@@ -165,10 +174,10 @@
             <div class="slide">
             <div class="testimonial">
                 <h5 class="testimonial__header">
-                A Must-Have for Couples
+                {% trans "A Must-Have for Couples" %}
                 </h5>
                 <blockquote class="testimonial__text">
-                    My partner and I always struggled to track our shared expenses. 
+                    {% blocktrans %}My partner and I always struggled to track our shared expenses. 
                     We’d forget who paid for what, and it led to so many arguments. 
                     This app has been a total game-changer for us. We now have a joint 
                     account on the app where we can track shared expenses like groceries, 
@@ -176,6 +185,7 @@
                     can divide expenses between us and see exactly who owes what. 
                     It’s made managing our finances so much easier, and it’s brought 
                     us closer as a couple!"
+                    {% endblocktrans %}
                 </blockquote>
                 <address class="testimonial__author">
                 <img src="img/user-3.jpg" alt="" class="testimonial__photo" />
@@ -195,9 +205,11 @@
 
     <section class="call-to-action">
         <article class="call-to-action-article">
-            <h4>Don't let your finances control you</h4>
-            <p>Sign up now and experience the power of effortless budgeting, real-time tracking, and insightful analytics. Start your journey toward financial freedom today—because your money deserves to work for you!</p>
-            <a href="{% url 'signup' %}" class="btn signup-btn">Sign Up Now</a>
+            <h4>{% trans "Don't let your finances control you" %}</h4>
+            <p> {% blocktrans %}Sign up now and experience the power of effortless budgeting, 
+                real-time tracking, and insightful analytics. 
+                Start your journey toward financial freedom today—because your money deserves to work for you! {% endblocktrans %}</p>
+            <a href="{% url 'signup' %}" class="btn signup-btn">{% trans "Sign Up Now" %}</a>
         </article>
     
     </section>

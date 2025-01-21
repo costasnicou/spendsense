@@ -1,13 +1,15 @@
 .menu-wrapper {
-    display: flex;
+    display: flex
+;
     justify-content: center;
     align-items: center;
     /* background-color: aqua; */
-    width: 10%;
+    width: 21%;
     margin: 0 auto;
     justify-content: space-evenly;
+    position: relative;
+    bottom: 4px;
 }
-
 @media only screen and (min-width:320px) and (max-width: 600px) {
     .main-menu {
         text-align: center;

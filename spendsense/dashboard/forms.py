@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from datetime import datetime
 from decimal import Decimal
+from django.utils.translation import gettext_lazy as _
 
 class NumberInputWithCommas(forms.TextInput):
     def format_value(self, value):
@@ -16,21 +17,24 @@ class NumberInputWithCommas(forms.TextInput):
                 return value
         return ''
 
-
+# done translation
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(
+        label=_("Username"),
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Enter your username'
+            'placeholder': _('Enter your username')
         })
     )
     password = forms.CharField(
+        label =_("Password"),
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Enter your password'
+            'placeholder': _('Enter your password')
         })
     )
 
+# done translation
 class TransactionForm(forms.ModelForm):
     
     
@@ -49,6 +53,14 @@ class TransactionForm(forms.ModelForm):
             }),
         }
 
+        # Add custom labels
+        labels = {
+            'wallet': _('Select Wallet'),
+            'type': _('Transaction Type'),
+            'category': _('Category'),
+            'amount': _('Transaction Amount'),
+        }
+
 
 
 
@@ -64,36 +76,38 @@ class TransactionForm(forms.ModelForm):
             self.fields['wallet'].queryset = Wallet.objects.none()
 
 
-
+# done translation
 class SignupForm(UserCreationForm):
 
     username = forms.CharField(
+        label=_("Username:"),
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Enter your username'
+            'placeholder': _('Enter your username')
         })
     )   
 
     email = forms.EmailField(required=True,
+        label=_("Email:"),
         widget=forms.EmailInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Enter your Email'
+        'placeholder': _('Enter your Email')
         }),               
     )
     password1 = forms.CharField(
-        label="Password",
+        label=_("Password:"),
         widget=forms.PasswordInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Enter Password'
+        'placeholder': _('Enter Password')
         }),
         
     )
     password2 = forms.CharField(
-        label="Confirm Password",
+        label=_("Confirm Password:"),
        
         widget=forms.PasswordInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Confirm Password'
+        'placeholder': _('Confirm Password')
         }),
        
     )
@@ -115,6 +129,7 @@ class SignupForm(UserCreationForm):
             raise forms.ValidationError("Passwords do not match.")
         return password2
 
+# done translation
 class WalletForm(forms.ModelForm):
     class Meta:
         model = Wallet
@@ -131,24 +146,32 @@ class WalletForm(forms.ModelForm):
                 
             }),
         }
-    
 
+        # Add custom labels
+        labels = {
+            'name': _('Wallet Name'),
+            'category': _('Category'),
+            'balance': _('Balance'),
+        }
+
+    
+# done translation
 class WalletTransferForm(forms.Form):
     source_wallet = forms.ModelChoiceField(
         queryset=Wallet.objects.none(),
-        label="Source Wallet",
+        label=_("Source Wallet"),
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     destination_wallet = forms.ModelChoiceField(
         queryset=Wallet.objects.none(),
-        label="Destination Wallet",
+        label=_("Destination Wallet"),
         widget=forms.Select(attrs={'class': 'form-control'})
     )
 
     amount = forms.DecimalField(
         max_digits=10,
         decimal_places=2,
-        label="Amount",
+        label=_("Amount"),
         widget=NumberInputWithCommas(attrs={
                 'class': 'form-control form-number',
                 'min': '0.00',  # Optional: Enforce minimum value
@@ -161,13 +184,13 @@ class WalletTransferForm(forms.Form):
 
     use_fat_amount = forms.BooleanField(
         required=False,
-        label="Recover Balance Correction",
+        label=_("Recover Negative Balance Correction"),
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input','id':'id_use_fat_amount'}),
     )
 
     fat_wallet = forms.ModelChoiceField(
         queryset= Wallet.objects.none(),
-        label="Fat Wallet",
+        label=_("Choose Wallet"),
         required=False,
         widget=forms.Select(attrs={'class': 'form-control field-fat_wallet d-none'}),  # Initially hidden
     )
@@ -210,48 +233,49 @@ class WalletTransferForm(forms.Form):
                 user=user,  # Adjust `owner` to your actual field linking Wallet to User
                 fat__amount__lt=Decimal('0.00')  # Additional condition
             )
-    
+
+# done translation 
 class TransactionFilterForm(forms.Form):
     TRANSACTION_TYPES = [
-        ('', 'All Types'),  # Default option for no filter
-        ('Income', 'Income'),
-        ('Expense', 'Expense'),
-        ('Transfer', 'Transfer'),
+        ('', _('All Types')),  # Default option for no filter
+        ('Income', _('Income')),
+        ('Expense', _('Expense')),
+        ('Transfer', _('Transfer')),
     ]
 
     type = forms.ChoiceField(
         choices=TRANSACTION_TYPES,
         required=False,
         widget=forms.Select(attrs={'class': 'form-control'}),
-        label="Transaction Type"
+        label=_("Transaction Type")
     )
 
     category = forms.ChoiceField(
-        choices=[('', 'All Categories')],  # Default empty choices
+        choices=[('', _('All Categories'))],  # Default empty choices
         required=False,
         widget=forms.Select(attrs={'class': 'form-control'}),
-        label="Category"
+        label=_("Category")
     )
 
     wallet = forms.ModelChoiceField(
         queryset=Wallet.objects.none(),  # Default queryset
         required=False,
         widget=forms.Select(attrs={'class': 'form-control'}),
-        label="Wallet"
+        label=_("Wallet")
     )
 
     start_date = forms.DateField(
         required=False,
         widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
         # input_formats=['%d-%m-%Y', '%m-%d-%Y'], 
-        label="Start Date",
+        label=_("Start Date"),
     )
 
     end_date = forms.DateField(
         required=False,
         widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
         # input_formats=['%d-%m-%Y', '%m-%d-%Y'],  # Accept both European and ISO formats,
-        label="End Date",
+        label=_("End Date"),
     )
 
 

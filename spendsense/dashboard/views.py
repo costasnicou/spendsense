@@ -22,9 +22,8 @@ from datetime import datetime
 from django.utils import timezone
 from django.urls import reverse
 from django.http import JsonResponse
-
 from django.conf import settings
-
+from django.utils.translation import gettext_lazy as _
 
 class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
@@ -227,7 +226,7 @@ def dashboard(request,user):
                    
                     previous_expense_sum = Decimal(Transaction.objects.filter(
                         wallet=wallet,
-                        category='Balance Adjustment',
+                        category=_('Balance Adjustment'),
                         type='Expense'
                     ).aggregate(total_expenses=Sum('amount'))['total_expenses'] or Decimal('0.00'))
                    
@@ -323,7 +322,7 @@ def dashboard(request,user):
             Transaction.objects.create(
                     wallet=source_wallet,
                     type='Transfer',
-                    category='Balance Adjustment Decrease',
+                    category=_('Balance Adjustment Decrease'),
                     amount=amount,
                     total_balance=total_balance,
             )

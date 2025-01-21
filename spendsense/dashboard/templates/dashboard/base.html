@@ -66,33 +66,101 @@
         <nav class="main-menu">  
             {% if user.is_authenticated %}
                 <div class="menu-wrapper">
-                    <a href="{% url 'homepage'%}">Home</a>
-                    <a href="{% url 'dashboard' user=request.user.username %}">Dashboard</a>
+                    <a href="{% url 'homepage'%}">{% trans "Home" %}</a>
+                    <a href="{% url 'dashboard' user=request.user.username %}">{% trans "Dashboard" %}</a>
+                    <div class="custom-dropdown">
+                        <button class="dropdown-btn">
+                            {% if request.LANGUAGE_CODE == 'el' %}
+                            <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
+                            Ελληνικά
+                            {% else %}
+                            <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
+                            English
+                            {% endif %}
+                            <span class="arrow">&#9660;</span> <!-- Downward arrow -->
+                        </button>
+                        <ul class="dropdown-menu">
+                            <form action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <li>
+                                    <button type="submit" name="language" value="en">
+                                        <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
+                                        English
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="submit" name="language" value="el">
+                                        <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
+                                        Ελληνικά
+                                    </button>
+                                </li>
+                            </form>
+                        </ul>
+                    </div>
                     
                 </div>
                 <form class="logout-form" action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
-                    <button class="logout-btn" type="submit">Log Out</button>
+                    <button class="logout-btn" type="submit">{% trans "Log Out" %}</button>
                 </form>
             
             {% else %}
                 <div class="menu-wrapper">
-                    <a href="{% url 'homepage'%}">Home</a>
-                    <a href="{% url 'login' %}">Login</a>
-                    <a href="{% url 'signup' %}">Sign Up</a>
+                    <a href="{% url 'homepage'%}">{% trans "Home" %}</a>
+                    <a href="{% url 'login' %}">{% trans "Login" %}</a>
+                    <a href="{% url 'signup' %}">{% trans "Sign Up" %}</a>
+
+                    <div class="custom-dropdown">
+                        <button class="dropdown-btn">
+                            {% if request.LANGUAGE_CODE == 'el' %}
+                            <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
+                            Ελληνικά
+                            {% else %}
+                            <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
+                            English
+                            {% endif %}
+                            <span class="arrow">&#9660;</span> <!-- Downward arrow -->
+                        </button>
+                        <ul class="dropdown-menu">
+                            <form action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <li>
+                                    <button type="submit" name="language" value="en">
+                                        <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
+                                        English
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="submit" name="language" value="el">
+                                        <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
+                                        Ελληνικά
+                                    </button>
+                                </li>
+                            </form>
+                        </ul>
+                    </div>
+                    
                 </div>
             {% endif %}
+
+
             
-            <form action="{% url 'set_language' %}" method="post">
+            <!-- <form action="{% url 'set_language' %}" method="post">
                 {% csrf_token %}
                 <select name="language" onchange="this.form.submit()">
+                   
                     {% for lang_code, lang_name in LANGUAGES %}
                     <option value="{{ lang_code }}"{% if lang_code == request.LANGUAGE_CODE %}selected{% endif %}>
+                        {% if request.LANGUAGE_CODE == 'el' %}
+                        <img src="{% static 'images/el-lang.png'}" width="20px" height="20px" alt="">
+                       {% else %}
+                           <img src="{% static 'images/uk-lang.png'}" width="20px" height="20px" alt="">
+                       {% endif %}
                         {{ lang_name }}
                     </option>
                     {% endfor %}
                 </select>
-            </form>
+            </form> -->
 
 
             <!-- {% get_current_language as LANGUAGE_CODE %}
@@ -144,7 +212,7 @@
        
         </div>
 
-        <p> &copy; Copyright <span class="dynYear"></span> - Designed and Developed by <a target="_blank" href="https://costasnicou.com">Costas Nicou</a></p>
+        <p> &copy; {% trans "Copyright" %} <span class="dynYear"></span> - {% trans "Designed and Developed by" %} <a target="_blank" href="https://costasnicou.com">{% trans "Costas Nicou" %}</a></p>
     </footer>
 
     <script>
@@ -161,5 +229,22 @@
         <script src="{% static 'js/formatted-thousands.js'%}"></script>
     {% endif %}
    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.querySelector('.custom-dropdown');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            const dropdownBtn = document.querySelector('.dropdown-btn');
+
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('show');
+            });
+
+            document.addEventListener('click', () => {
+                dropdownMenu.classList.remove('show');
+            });
+        });
+    </script>
 </body>
 </html>

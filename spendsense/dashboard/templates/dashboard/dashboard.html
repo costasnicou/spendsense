@@ -7,27 +7,27 @@
  <title>Dashboard - Spendsense</title>
 {% endblock %}
 
-
+{% load i18n %}
 
 {% block cover %}
 
 {% endblock %}
 {% block main %}
 <div class="dashboard wrapper  ">
-    <h1>Welcome, {{ user.username }}</h1>
-    <h2>Total Balance: <span class="total-balance">€{{ total_balance }}</span></h2>
+    <h1>{% trans "Welcome" %}, {{ user.username }}</h1>
+    <h2>{% trans "Total Balance" %}: <span class="total-balance">€{{ total_balance }}</span></h2>
 
 
     <section class="wallet-section dashboard-shadow">
-        <h3>Your Wallets</h3>
+        <h3>{% trans "Your Wallets" %}</h3>
         <div class="wallets">
             <div class="wallet-flex">
                 {% for wallet in wallets %}
                     <div class="wallet">
                         <p>
                         <span class="wallet-header"><strong>{{ wallet.name }}</strong></span><br>
-                        Balance: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>
-                        Balance Correction: <span class="wallet-amount">
+                        {% trans "Balance" %}: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>
+                        {% trans "Balance Correction" %}: <span class="wallet-amount">
                             {% if wallet.fat.amount > 0 %}
                                  €+{{ wallet.fat.amount }}
                             {% else %}
@@ -43,36 +43,36 @@
                         
                        
                         <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }}); reverseEditWalletForm();" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
-                            Edit
+                            {% trans "Edit" %}
                         </button>
                     </div>
                        
                     {% empty %}
-                      <p>No Wallets available</p>
+                      <p>{% trans "No Wallets available" %}</p>
                         
                     
                 {% endfor %}
             </div>
-            <button class="dashboard-btn open-wallet-modal show-form" onclick="openWalletModal()">Add Wallet</button>
+            <button class="dashboard-btn open-wallet-modal show-form" onclick="openWalletModal()">{% trans "Add Wallet" %}</button>
         </div>
     </section>
 
 
     <section class="sum dashboard-shadow">
-        <h3>Financial Information</h3>
+        <h3>{% trans "Financial Information" %}</h3>
         <div class="dashboard-flex">
             <div class="dashboard-view income">
             
-                <p>Total Income: <span class="dashboard-amount">€{{ total_income|default:0.00|floatformat:2 }}</span></p>
+                <p>{% trans "Total Income" %}: <span class="dashboard-amount">€{{ total_income|default:0.00|floatformat:2 }}</span></p>
             </div>
     
 
             <div class="dashboard-view expenses">
-                <p>Total Expenses:  <span class="dashboard-amount">€{{ total_expenses|default:0.00|floatformat:2 }}</span></p>
+                <p>{% trans "Total Expenses" %}:  <span class="dashboard-amount">€{{ total_expenses|default:0.00|floatformat:2 }}</span></p>
             </div>
 
             <div class="dashboard-view fat">
-                <p>Total Balance Correction: <span class="dashboard-amount">
+                <p>{% trans "Total Balance Correction" %}: <span class="dashboard-amount">
                     {% if total_fat > 0 %}
                         €+{{ total_fat|default:0.00|floatformat:2  }}
                     {% else %}
@@ -82,7 +82,7 @@
             </div>
 
             <div class="dashboard-view net">
-                <p>Net Balance: <span class="dashboard-amount">€{{ net_balance|default:0.00|floatformat:2  }}</span></p>
+                <p>{% trans "Net Balance" %}: <span class="dashboard-amount">€{{ net_balance|default:0.00|floatformat:2  }}</span></p>
             </div>
 
            
@@ -92,26 +92,26 @@
     </section>
 
     <section class="transactions-section dashboard-shadow">
-        <h3>Recent Transactions</h3>
+        <h3>{% trans "Recent Transactions" %}</h3>
        
         <div class="transaction-section-wrapper">
             <table border="1">
                 <thead>
                     <tr>
-                        <th width="100">Type</th>
-                        <th width="100">Category</th>
-                        <th width="100">Amount</th>
-                        <th width="100">Wallet</th>
-                        <th width="100">Current Balance</th>
-                        <th width="150">Date</th>
-                        <th width="100">Action</th>
+                        <th width="100">{% trans "Type" %}</th>
+                        <th width="100">{% trans "Category" %}</th>
+                        <th width="100">{% trans "Amount" %}</th>
+                        <th width="100">{% trans "Wallet" %}</th>
+                        <th width="100">{% trans "Current Balance" %}</th>
+                        <th width="150">{% trans "Date" %}</th>
+                        <th width="100">{% trans "Action" %}</th>
                     </tr>
                 </thead>
                 <tbody>
                
                     {% for transaction in transactions %}
                         <tr>
-                            <td class="transaction-type">{{ transaction.type }}</td>
+                            <td class="transaction-type">{{ transaction.type|translate }}</td>
                             <td>{{ transaction.category }}</td>
                             <td>
                                 {% if transaction.type == "Expense" or transaction.category == "Balance Adjustment Decrease" %}
@@ -131,26 +131,26 @@
                             <td>
                              <!-- Edit Button -->
                                 {% if transaction.type == 'Transfer'  %}
-                                    <p>No Action</p>
+                                    <p>{% trans "No Action" %}</p>
 
                                 {% elif transaction.category == 'Balance Adjustment' %}
                                     <form method="POST" class="delete-balance-adjustment">
                                         {% csrf_token %}
                                         <input type="hidden" name="transaction_id" value="{{ transaction.id }}">
                                         <button class="dashboard-btn" name="delete_balance_adjustment" onclick="return confirm('Are you sure you want to delete this transaction?')" type="submit">
-                                            Delete
+                                            {% trans "Delete" %}
                                         </button>
                                     </form>
                                 {% else %}
                                     <button type="button" class="dashboard-btn transfer-edit"  onclick="openEditTransModal({{ transaction.id }})" data-toggle="modal" data-target="#editTransactionModal{{ transaction.id }}">
-                                        Edit
+                                        {% trans "Edit" %}
                                     </button>
                                 {% endif %}
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="7">No transactions available.</td>
+                            <td colspan="7">{% trans "No transactions available." %}</td>
                         </tr>
              
                     
@@ -160,11 +160,11 @@
           
 
         </div>
-        <button class="dashboard-btn open-trans-modal show-form" onclick="openTransModal()">Add Transaction</button>
-        <button class="dashboard-btn open-transfer-modal show-form" onclick="openTransferModal()">Transfer</button>
+        <button class="dashboard-btn open-trans-modal show-form" onclick="openTransModal()">{% trans "Add Transaction" %}</button>
+        <button class="dashboard-btn open-transfer-modal show-form" onclick="openTransferModal()">{% trans "Transfer" %}</button>
         <div class="filter-transactions">
-            <h3>Filter Transactions</h3>
-            <button onclick="openfilterTransModal()" class="open-filter-form dashboard-btn" >Filter</button>
+            <h3>{% trans "Filter Transactions" %}</h3>
+            <button onclick="openfilterTransModal()" class="open-filter-form dashboard-btn" >{% trans "Filter" %}</button>
         </div>
     </section>
 
@@ -176,7 +176,7 @@
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
         <span aria-hidden="true">&times;</span>
     </button>
-    <h1>Add Wallet</h1>
+    <h1>{% trans "Add Wallet" %}</h1>
     <div class="form-group">
         {{  wallet_form.name.label_tag }} <br>
         {{ wallet_form.name }}
@@ -192,7 +192,7 @@
         {{ wallet_form.balance }}
     </div>
  
-    <button type="submit" name="submit_wallet_form" class="btn" onclick="hide_wallet()">Add Wallet</button>
+    <button type="submit" name="submit_wallet_form" class="btn" onclick="hide_wallet()">{% trans "Add Wallet" %}</button>
 </form>        
 <div class="overlay hidden"></div>
 
@@ -202,7 +202,7 @@
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
         <span aria-hidden="true">&times;</span>
     </button>
-    <h1>Add Transaction</h1>
+    <h1>{% trans "Add Transaction"  %}</h1>
     <div class="form-group">
         {{  transaction_form.wallet.label_tag }} <br>
         {{ transaction_form.wallet }}
@@ -220,7 +220,7 @@
         {{  transaction_form.amount.label_tag }} <br>
         {{ transaction_form.amount }}
     </div>
-    <button type="submit" name="submit_transaction_form" class="btn">Add Transaction</button>
+    <button type="submit" name="submit_transaction_form" class="btn">{% trans "Add Transaction" %}</button>
 </form>
 <div class="overlay hidden"></div>
 
@@ -230,7 +230,7 @@
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
         <span aria-hidden="true">&times;</span>
     </button>
-    <h1>Transfer Money Between Wallets</h1>
+    <h1>{% trans "Transfer Money Between Wallets" %}</h1>
     {% csrf_token %}
     <div class="form-group">
         {{  transferform.source_wallet.label_tag }} <br>
@@ -262,7 +262,7 @@
         {{ transferform.amount }}
     </div>
     
-    <button type="submit" class="btn btn-primary">Transfer</button>
+    <button type="submit" class="btn btn-primary">{% trans "Transfer" %}</button>
 </form>
 
 
@@ -273,7 +273,7 @@
 <form class="modal edit-trans-modal hidden" id="editTransactionModal{{ transaction.id }}" method="POST">
     {% csrf_token %}
     <div class="modal-header">
-        <h1 class="modal-title" id="editTransactionModalLabel{{ transaction.id }}">Edit Transaction</h1>
+        <h1 class="modal-title" id="editTransactionModalLabel{{ transaction.id }}">{% trans "Edit Transaction" %}</h1>
         <button type="button" class="close-form" data-dismiss="modal" aria-label="Close" onclick="closeEditTransModal({{ transaction.id }})">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -305,10 +305,10 @@
 
     </div>
     <div class="modal-footer">
-        <button type="submit" name="transaction_form_submitted" class="btn btn-primary">Save changes</button>
+        <button type="submit" name="transaction_form_submitted" class="btn btn-primary">{% trans "Save changes" %}</button>
         <!-- Delete Button -->
         <button type="submit" name="delete_transaction" class="dashboard-btn"  onclick="return confirm('Are you sure you want to delete this transaction?')">
-            Delete
+            {% trans "Delete" %}
         </button>
     </div>
 </form>
@@ -326,7 +326,7 @@
             <form  method="POST" class="edit_wallet_form">
                 {% csrf_token %}
                 <div class="modal-header">
-                    <h1 class="modal-title" id="editWalletModalLabel{{ wallet.id }}">Edit Wallet</h1>
+                    <h1 class="modal-title" id="editWalletModalLabel{{ wallet.id }}">{% trans "Edit Wallet" %}</h1>
                     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close"  onclick="closeEditWalletModal({{ wallet.id }})">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -353,10 +353,10 @@
                     {% endwith %}
                 </div>
                 <div class="modal-footer">
-                    <button type="submit"  class="btn">Save Changes</button>
+                    <button type="submit"  class="btn">{% trans "Save Changes" %}</button>
                    <!-- Delete Button -->
                    <button type="submit"  name="delete_wallet" class="dashboard-btn" onclick="return confirm('Are you sure you want to delete this wallet?');">
-                        Delete
+                    {% trans "Delete" %}
                     </button>
                 </div>
             </form>
@@ -368,7 +368,7 @@
 
 
 <form method="GET" class="modal filter-trans-modal hidden">
-    <h1 class="modal-title">Filter Transactions</h1>
+    <h1 class="modal-title">{% trans "Filter Transactions" %}</h1>
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close"  onclick="closeModal()">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -397,8 +397,8 @@
         {{ filter_transactions_form.end_date}}
     </div>
 
-    <button type="submit" class="btn">Filter</button>
-    <button type="submit" name="reset-btn" class="dashboard-btn">Reset</button>
+    <button type="submit" class="btn">{% trans "Filter" %}</button>
+    <button type="submit" name="reset-btn" class="dashboard-btn">{% trans "Reset" %}</button>
 </form>
 {% endblock %}
 

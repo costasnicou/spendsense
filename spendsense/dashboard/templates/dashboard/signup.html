@@ -11,9 +11,11 @@
 {% block cover %}
 
 {% endblock %}
+
+{% load i18n %}
 {% block main %}
 <div class="signup-container">
-    <h1>Sign Up</h1>
+    <h1>{% trans "Sign Up" %}</h1>
     <form method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -39,11 +41,11 @@
         
        
         <div>
-            <button class="btn btn-signup" type="submit">Sign Up</button>
+            <button class="btn btn-signup" type="submit">{% trans "Sign Up" %}</button>
         </div>
     </form>
     <p>
-        Already have an account? <a href="{% url 'login' %}">Log in here</a>.
+        {% trans "Already have an account? " %}<a href="{% url 'login' %}">{% trans "Log in here" %}</a>.
     </p>
 </div>
 

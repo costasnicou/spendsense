@@ -1,14 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
-
+from django.utils.translation import gettext_lazy as _
 # Create your models here.
+
+# done translation
 class Wallet(models.Model):
     CATEGORY_CHOICES = [
-        ('Cash', 'Cash'),
-        ('Debit Card', 'Debit Card'),
-        ('Credit Card', 'Credit Card'),
-        ('Bank Account', 'Bank Account'),
+        ('Cash', _('Cash')),
+        ('Debit Card', _('Debit Card')),
+        ('Credit Card', _('Credit Card')),
+        ('Bank Account', _('Bank Account')),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wallets')
     name = models.CharField(max_length=100)
@@ -74,108 +76,108 @@ class Wallet(models.Model):
 
         return fat.amount  # Return the calculated fat amount
 
-
+# done translation
 class Transaction(models.Model):
     TYPE_CHOICES = [
-        ('Income', 'Income'),
-        ('Expense', 'Expense'),
+        (_('Income'), _('Income')),
+        (_('Expense'), _('Expense')),
     ]
 
     CATEGORY_CHOICES = [
-        ('Food & Drinks', [
-            ('Bar, cafe','Bar, cafe'),
-            ('Groceries','Groceries'),
-            ('Restaurant, fast-food','Restaurant, fast-food'),
+        (_('Food & Drinks'), [
+            ('Bar, cafe',_('Bar, cafe')),
+            ('Groceries',_('Groceries')),
+            ('Restaurant, fast-food',_('Restaurant, fast-food')),
         ]),
-        ('Shopping', [
-            ('Clothes & Shoes','Clothes & Shoes'),
-            ('Drug-store, chemist','Drug-store, chemist'),
-            ('Restaurant, fast-food','Restaurant, fast-food'),
-            ('Electronics, accessories','Electronics, accessories'),
-            ('Free time','Free time'),
-            ('Gifts, joy','Gifts, joy'),
-            ('Stationary, tools','Stationary, tools'),            
+        (_('Shopping'), [
+            ('Clothes & Shoes',_('Clothes & Shoes')),
+            ('Drug-store, chemist',_('Drug-store, chemist')),
+            ('Restaurant, fast-food',_('Restaurant, fast-food')),
+            ('Electronics, accessories',_('Electronics, accessories')),
+            ('Free time',_('Free time')),
+            ('Gifts, joy',_('Gifts, joy')),
+            ('Stationary, tools',_('Stationary, tools')),            
         ]),
-        ('Housing', [
-            ('Energy, utilities','Energy, utilities'),
-            ('Maintenance, repairs','Maintenance, repairs'),
-            ('Property insurance','Property insurance'),
-            ('Rent','Rent'),
-            ('Services','Services'),
+        (_('Housing'), [
+            ('Energy, utilities',_('Energy, utilities')),
+            ('Maintenance, repairs',_('Maintenance, repairs')),
+            ('Property insurance',_('Property insurance')),
+            ('Rent',_('Rent')),
+            ('Services',_('Services')),
         ]),
-        ('Transportation', [
-            ('Business trips','Business trips'),
-            ('Long Distance','Long Distance'),
-            ('Public transport','Public transport'),
-            ('Taxi','Taxi'),
+        (_('Transportation'), [
+            ('Business trips',_('Business trips')),
+            ('Long Distance',_('Long Distance')),
+            ('Public transport',_('Public transport')),
+            ('Taxi',_('Taxi')),
         ]),
-        ('Vehicle', [
-            ('Fuel', 'Fuel'),
-            ('Leasing', 'Leasing'),
-            ('Parking', 'Parking'),
-            ('Rentals', 'Rentals'),
-            ('Vehicle insurance', 'Vehicle insurance'),
-            ('Vehicle maintenance', 'Vehicle maintenance'),
-            ('Rentals', 'Rentals'),
+        (_('Vehicle'), [
+            ('Fuel', _('Fuel')),
+            ('Leasing', _('Leasing')),
+            ('Parking', _('Parking')),
+            ('Rentals', _('Rentals')),
+            ('Vehicle insurance', _('Vehicle insurance')),
+            ('Vehicle maintenance', _('Vehicle maintenance')),
+            ('Rentals', _('Rentals')),
         ]),
-        ('Life & Entertainment', [
-            ('Active sport, fitness', 'Active sport, fitness'),
-            ('Alcohol, tobacco', 'Alcohol, tobacco'),
-            ('Books, audio, subscriptions', 'Books, audio, subscriptions'),
-            ('Charity, gifts', 'Charity, gifts'),
-            ('Culture, sport events', 'Culture, sport events'),
-            ('Education, development', 'Education, development'),
-            ('Health care, doctor', 'Health care, doctor'),
-            ('Hobbies', 'Hobbies'),
-            ('Life Events', 'Life Events'),
-            ('Lottery, gambling', 'Lottery, gambling'),
-            ('TV, steaming', 'TV, steaming'),
-            ('Wellness, beauty', 'Wellness, beauty'),
+        (_('Life & Entertainment'), [
+            ('Active sport, fitness', _('Active sport, fitness')),
+            ('Alcohol, tobacco', _('Alcohol, tobacco')),
+            ('Books, audio, subscriptions', _('Books, audio, subscriptions')),
+            ('Charity, gifts', _('Charity, gifts')),
+            ('Culture, sport events', _('Culture, sport events')),
+            ('Education, development', _('Education, development')),
+            ('Health care, doctor', _('Health care, doctor')),
+            ('Hobbies', _('Hobbies')),
+            ('Life Events', _('Life Events')),
+            ('Lottery, gambling', _('Lottery, gambling')),
+            ('TV, steaming', _('TV, steaming')),
+            ('Wellness, beauty', _('Wellness, beauty')),
         ]),
-        ('Communication, PC', [
-            ('Internet', 'Internet'),
-            ('Phone, cell phone', 'Phone, cell phone'),
-            ('Postal services', 'Postal services'),
-            ('Software, apps, games', 'Software, apps, games'),
+        (_('Communication, PC'), [
+            ('Internet', _('Internet')),
+            ('Phone, cell phone', _('Phone, cell phone')),
+            ('Postal services', _('Postal services')),
+            ('Software, apps, games', _('Software, apps, games')),
            
         ]),
-        ('Financial expenses', [
-            ('Advisory', 'Advisory'),
-            ('Charges, fees', 'Charges, fees'),
-            ('Postal services', 'Postal services'),
-            ('Child Support', 'Child Support'),
-            ('Fines', 'Fines'),
-            ('Insurances', 'Insurances'),
-            ('Loan, interests', 'Loan, interests'),
-            ('Taxes', 'Taxes'),
+        (_('Financial expenses'), [
+            ('Advisory', _('Advisory')),
+            ('Charges, fees', _('Charges, fees')),
+            ('Postal services', _('Postal services')),
+            ('Child Support', _('Child Support')),
+            ('Fines', _('Fines')),
+            ('Insurances', _('Insurances')),
+            ('Loan, interests', _('Loan, interests')),
+            ('Taxes', _('Taxes')),
         ]),
 
-        ('Investments', [
-            ('Collections', 'Collections'),
-            ('Financial Investments', 'Financial Investments'),
-            ('Realty', 'Realty'),
-            ('Savings', 'Savings'),
-            ('Vehicles, chattels', 'Vehicles, chattels'),
+        (_('Investments'), [
+            ('Collections', _('Collections')),
+            ('Financial Investments', _('Financial Investments')),
+            ('Realty', _('Realty')),
+            ('Savings', _('Savings')),
+            ('Vehicles, chattels', _('Vehicles, chattels')),
         
         ]),
 
-         ('Income', [
-            ('Wage, invoices', 'Wage, invoices'),
-            ('Sale', 'Sale'),
-            ('Checks, coupons', 'Checks, coupons'),
-            ('Child Support', 'Child Support'),
-            ('Dues & grants', 'Dues & grants'),
-            ('Gifts', 'Gifts'),
-            ('Interest, dividents', 'Interest, dividents'),
-            ('Lending, renting', 'Lending, renting'),
-            ('Lottery, gambling', 'Lottery, gambling'),
-            ('Refunds (tax,purchase)', 'Refunds (tax,purchase)'),
-            ('Rental Income', 'Rental Income'),
+         (_('Income'), [
+            ('Wage, invoices', _('Wage, invoices')),
+            ('Sale', _('Sale')),
+            ('Checks, coupons', _('Checks, coupons')),
+            ('Child Support', _('Child Support')),
+            ('Dues & grants', _('Dues & grants')),
+            ('Gifts', _('Gifts')),
+            ('Interest, dividents', _('Interest, dividents')),
+            ('Lending, renting', _('Lending, renting')),
+            ('Lottery, gambling', _('Lottery, gambling')),
+            ('Refunds (tax,purchase)', _('Refunds (tax,purchase)')),
+            ('Rental Income', _('Rental Income')),
             
             
         
         ]),
-        ('Other','Other'),
+        ('Other',_('Other')),
 
     ]
 
