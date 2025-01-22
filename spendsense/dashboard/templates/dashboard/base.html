@@ -18,25 +18,36 @@
     <link rel="stylesheet" href="{% static 'css/desktop/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile/mobile-global.css' %}">
 
-    <!-- {% if request.LANGUAGE_CODE == "el" %}
-        <link rel="stylesheet" href="{% static 'css/greek-styles.css' %}">
-    {% else %}
-        <link rel="stylesheet" href="{% static 'css/default-styles.css' %}">
-    {% endif %} -->
+    <!--  -->
 
 
     {% if user.is_authenticated %}
-        <!-- <link rel="stylesheet" href="{% static 'css/mobile/mobile-nav-loggedin.css' %}"> -->
         <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin.css' %}">
+        {% if request.LANGUAGE_CODE == "el" %}
+            <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin-greek.css' %}">
+        {% endif %}
 
     {% endif %}
         
 
+    <!-- <link rel="stylesheet" href="{% static 'css/greek-styles.css' %}"> -->
+
     {% if request.path == '/' %}
         <link rel="stylesheet" href="{% static 'css/desktop/homepage.css' %}">
         <link rel="stylesheet" href="{% static 'css/mobile/mobile-homepage.css' %}">
+
+        {% if request.LANGUAGE_CODE == "el" %}
+
+            <link rel="stylesheet" href="{% static 'css/desktop/homepage-greek-styles.css' %}">
+            <link rel="stylesheet" href="{% static 'css/mobile/homepage-mobile-greek-styles.css' %}">
+        {% endif %}
+
+
         {% if user.is_authenticated %}
             <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin.css' %}">
+            {% if request.LANGUAGE_CODE == "el" %}
+                <link rel="stylesheet" href="{% static 'css/desktop/homepage-menu-loggedin-greek-styles.css' %}">
+            {% endif %}
         {% endif %}
     {% elif request.path == '/login/' %}
         <link rel="stylesheet" href="{% static 'css/desktop/login.css' %}">
@@ -66,8 +77,12 @@
         <nav class="main-menu">  
             {% if user.is_authenticated %}
                 <div class="menu-wrapper">
-                    <a href="{% url 'homepage'%}">{% trans "Home" %}</a>
-                    <a href="{% url 'dashboard' user=request.user.username %}">{% trans "Dashboard" %}</a>
+                    <ul class="menu">
+                        <li><a href="{% url 'homepage'%}">{% trans "Home" %}</a></li>
+                        <li><a href="{% url 'dashboard' user=request.user.username %}">{% trans "Dashboard" %}</a></li>
+                    </ul>
+                    
+                  
                     <div class="custom-dropdown">
                         <button class="dropdown-btn">
                             {% if request.LANGUAGE_CODE == 'el' %}
@@ -99,6 +114,8 @@
                     </div>
                     
                 </div>
+
+                <!-- logout btn -->
                 <form class="logout-form" action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <button class="logout-btn" type="submit">{% trans "Log Out" %}</button>
@@ -106,9 +123,14 @@
             
             {% else %}
                 <div class="menu-wrapper">
-                    <a href="{% url 'homepage'%}">{% trans "Home" %}</a>
-                    <a href="{% url 'login' %}">{% trans "Login" %}</a>
-                    <a href="{% url 'signup' %}">{% trans "Sign Up" %}</a>
+                    <ul class="menu">
+                        <li><a href="{% url 'homepage'%}">{% trans "Home" %}</a></li>
+                        <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+                        <li><a href="{% url 'signup' %}">{% trans "Sign Up" %}</a></li>
+                    </ul>
+                 
+                   
+                   
 
                     <div class="custom-dropdown">
                         <button class="dropdown-btn">

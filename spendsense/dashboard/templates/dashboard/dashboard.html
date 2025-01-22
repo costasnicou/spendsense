@@ -112,7 +112,7 @@
                     {% for transaction in transactions %}
                         <tr>
                             <td class="transaction-type">{{ transaction.type|translate }}</td>
-                            <td>{{ transaction.category }}</td>
+                            <td>{{ transaction.category|translate }}</td>
                             <td>
                                 {% if transaction.type == "Expense" or transaction.category == "Balance Adjustment Decrease" %}
                                     €-{{ transaction.amount }}

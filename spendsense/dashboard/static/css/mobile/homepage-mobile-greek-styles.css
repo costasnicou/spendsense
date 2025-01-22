@@ -1,0 +1,75 @@
+@media only screen and (min-width: 320px) and (max-width: 600px){
+
+    .cover-photo h1 {
+        margin: 0;
+        font-size: 30px;
+        text-shadow: 2px 2px 2px #000;
+        text-align: center;
+        width: 85%;
+        margin-top: 0px;
+    }
+
+
+
+    .cover-photo h2 {
+        font-size: 20px;
+        text-shadow: 2px 2px 2px #000;
+        width: 94%;
+        text-align: center;
+        line-height: 30px;
+    }
+
+
+    .article-about-us p {
+        width: 90%;
+        margin: 0 auto;
+        font-size: 17px;
+        font-weight: 300;
+    }
+
+    .reasons {
+        display: flex;
+        /* justify-content: center; */
+        padding: 0px;
+        width: 100%;
+        margin: 0 auto;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .why-list {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        right: 19px;
+        bottom: 4px;
+    }
+
+    .why-list li {
+        padding: 8px;
+        font-size: 15px;
+        /* width: 90%; */
+        color: #616161;
+    }
+
+    .call-to-action {
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: aliceblue;
+        /* padding: 40px 0; */
+        padding: 0 0 20px 0;
+    }
+
+    .call-to-action-article p {
+        font-size: 17px;
+        font-weight: 300;
+        width: 90%;
+        margin: 30px auto 15px auto;
+    }
+
+}

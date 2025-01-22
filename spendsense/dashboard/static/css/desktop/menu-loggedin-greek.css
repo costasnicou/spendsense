@@ -4,26 +4,25 @@
     align-items: center;
     margin: 0 auto;
     text-align: center;
-    width: 76%;
+    width: 73%;
 }
 
 .menu {
-list-style: none;
-display: flex;
-width: 13%;
-margin: 0 auto;
-justify-content: space-evenly;
+    list-style: none;
+    display: flex;
+    width: 20%;
+    margin: 0 auto;
+    justify-content: space-evenly;
 }
-
 
 
 
 .menu li a{
-color: white;
-text-decoration: none;
-/* margin: 20px; */
-transition: all ease-in 0.5;
-margin: 4px 0 4px 0;
+    color: white;
+    text-decoration: none;
+    /* margin: 20px; */
+    transition: all ease-in 0.5;
+    margin: 4px 0 4px 0;
 
 }
 
