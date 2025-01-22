@@ -57,8 +57,11 @@
         <link rel="stylesheet" href="{% static 'css/mobile/mobile-signup.css' %}">
     {% elif is_dashboard %} 
         <link rel="stylesheet" href="{% static 'css/desktop/dashboard.css' %}">
-        
         <link rel="stylesheet" href="{% static 'css/mobile/mobile-dashboard.css' %}">
+        {% if request.LANGUAGE_CODE == "el" %}
+            <link rel="stylesheet" href="{% static 'css/desktop/greek-dashboard.css' %}">
+        {% endif %}
+
     {% endif %}
    
   
@@ -77,41 +80,14 @@
         <nav class="main-menu">  
             {% if user.is_authenticated %}
                 <div class="menu-wrapper">
+                    <label class="hamburger" for="toggle">&#9776;</label>
+                    <input type="checkbox" name="checkbox" id="toggle">
                     <ul class="menu">
                         <li><a href="{% url 'homepage'%}">{% trans "Home" %}</a></li>
                         <li><a href="{% url 'dashboard' user=request.user.username %}">{% trans "Dashboard" %}</a></li>
                     </ul>
                     
                   
-                    <div class="custom-dropdown">
-                        <button class="dropdown-btn">
-                            {% if request.LANGUAGE_CODE == 'el' %}
-                            <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
-                            Ελληνικά
-                            {% else %}
-                            <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
-                            English
-                            {% endif %}
-                            <span class="arrow">&#9660;</span> <!-- Downward arrow -->
-                        </button>
-                        <ul class="dropdown-menu">
-                            <form action="{% url 'set_language' %}" method="post">
-                                {% csrf_token %}
-                                <li>
-                                    <button type="submit" name="language" value="en">
-                                        <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
-                                        English
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="submit" name="language" value="el">
-                                        <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
-                                        Ελληνικά
-                                    </button>
-                                </li>
-                            </form>
-                        </ul>
-                    </div>
                     
                 </div>
 
@@ -123,6 +99,8 @@
             
             {% else %}
                 <div class="menu-wrapper">
+                    <label class="hamburger" for="toggle">&#9776;</label>
+                    <input type="checkbox" name="checkbox" id="toggle">
                     <ul class="menu">
                         <li><a href="{% url 'homepage'%}">{% trans "Home" %}</a></li>
                         <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
@@ -131,75 +109,43 @@
                  
                    
                    
-
-                    <div class="custom-dropdown">
-                        <button class="dropdown-btn">
-                            {% if request.LANGUAGE_CODE == 'el' %}
-                            <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
-                            Ελληνικά
-                            {% else %}
-                            <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
-                            English
-                            {% endif %}
-                            <span class="arrow">&#9660;</span> <!-- Downward arrow -->
-                        </button>
-                        <ul class="dropdown-menu">
-                            <form action="{% url 'set_language' %}" method="post">
-                                {% csrf_token %}
-                                <li>
-                                    <button type="submit" name="language" value="en">
-                                        <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
-                                        English
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="submit" name="language" value="el">
-                                        <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
-                                        Ελληνικά
-                                    </button>
-                                </li>
-                            </form>
-                        </ul>
-                    </div>
                     
+                   
+                  
                 </div>
             {% endif %}
 
-
-            
-            <!-- <form action="{% url 'set_language' %}" method="post">
-                {% csrf_token %}
-                <select name="language" onchange="this.form.submit()">
-                   
-                    {% for lang_code, lang_name in LANGUAGES %}
-                    <option value="{{ lang_code }}"{% if lang_code == request.LANGUAGE_CODE %}selected{% endif %}>
-                        {% if request.LANGUAGE_CODE == 'el' %}
-                        <img src="{% static 'images/el-lang.png'}" width="20px" height="20px" alt="">
-                       {% else %}
-                           <img src="{% static 'images/uk-lang.png'}" width="20px" height="20px" alt="">
-                       {% endif %}
-                        {{ lang_name }}
-                    </option>
-                    {% endfor %}
-                </select>
-            </form> -->
-
-
-            <!-- {% get_current_language as LANGUAGE_CODE %}
-            {% get_available_languages as LANGUAGES %}
-            {% get_language_info_list for LANGUAGES as languages %}
-
-            <div class="btn-header">
-                <form action="{% url 'set_language' %}" method="post">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ redirect_to }}" />
-                    {% for language in languages %}
-                        {% if language.code != LANGUAGE_CODE %}
-                            <button type="submit" name="language" value="{{ language.code }}">{{ language.name }}</button>
-                        {% endif %}
-                    {% endfor %}
-                </form> -->
+                       
+            <div class="custom-dropdown">
+                <button class="dropdown-btn">
+                    {% if request.LANGUAGE_CODE == 'el' %}
+                    <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
+                    Ελληνικά
+                    {% else %}
+                    <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
+                    English
+                    {% endif %}
+                    <span class="arrow">&#9660;</span> <!-- Downward arrow -->
+                </button>
+                <ul class="dropdown-menu">
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <li>
+                            <button type="submit" name="language" value="en">
+                                <img src="{% static 'images/uk-lang.png' %}" alt="English" width="20" height="20">
+                                English
+                            </button>
+                        </li>
+                        <li>
+                            <button type="submit" name="language" value="el">
+                                <img src="{% static 'images/el-lang.png' %}" alt="Greek" width="20" height="20">
+                                Ελληνικά
+                            </button>
+                        </li>
+                    </form>
+                </ul>
             </div>
+     
         </nav>
 
         {% block cover%}

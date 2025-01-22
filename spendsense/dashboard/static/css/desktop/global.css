@@ -3,6 +3,9 @@ html,body{
     margin: 0;
     font-family: "Roboto", serif;
 }
+html{
+  scroll-behavior: smooth;
+}
 section{
   padding: 40px;
 }
@@ -41,12 +44,15 @@ section{
   bottom: 2.5px;
 }
 
+
 .menu {
   list-style: none;
   display: flex;
   width: 20%;
   margin: 0 auto;
   justify-content: space-evenly;
+  position: relative;
+  top: 5px;
 }
 
 .dropdown-btn {
@@ -64,8 +70,12 @@ section{
 }
 
 
-
-
+#toggle{
+  display: none;
+}
+.hamburger{
+  display: none;
+}
 .menu li a{
   color: white;
   text-decoration: none;
@@ -74,6 +84,8 @@ section{
   margin: 4px 0 4px 0;
 
 }
+
+
 
 
 
@@ -192,9 +204,11 @@ footer p a{
 /* language chooser */
  /* General dropdown styling */
  .custom-dropdown {
-  position: relative;
+  position: absolute;
   display: inline-block;
   font-family: Arial, sans-serif;
+  top: 0;
+  right: 18%;
 }
 
 .dropdown-btn {
@@ -208,6 +222,7 @@ footer p a{
   font-size: 14px;
   color: #333;
 }
+
 
 .dropdown-btn img {
   margin-right: 10px;
