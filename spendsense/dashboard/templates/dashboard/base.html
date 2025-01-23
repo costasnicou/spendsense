@@ -22,9 +22,12 @@
 
 
     {% if user.is_authenticated %}
-        <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin.css' %}">
+        
         {% if request.LANGUAGE_CODE == "el" %}
             <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin-greek.css' %}">
+        
+        {% else %}
+            <link rel="stylesheet" href="{% static 'css/desktop/menu-loggedin.css' %}">
         {% endif %}
 
     {% endif %}
