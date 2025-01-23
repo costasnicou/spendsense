@@ -295,6 +295,8 @@ msgstr "Φιλανθρωπία, δώρα"
 msgid "Culture, sport events"
 msgstr "Πολιτισμός, αθλητικές εκδηλώσεις"
 
+
+
 #: models.py:129
 msgid "Education, development"
 msgstr "Εκπαίδευση, ανάπτυξη"
@@ -858,3 +860,8 @@ msgstr "Προσαρμογή Υπολοίπου"
 #: views.py:325
 msgid "Balance Adjustment Decrease"
 msgstr "Αρνητική Προσαρμογή Υπολοίπου"
+
+
+#: views.py:332
+msgid "Balance Adjustment Increase"
+msgstr "Θετική Προσαρμογή Υπολοίπου"

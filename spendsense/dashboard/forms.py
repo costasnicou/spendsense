@@ -290,5 +290,5 @@ class TransactionFilterForm(forms.Form):
 
            # Dynamically filter categories for transactions belonging to the user's wallets
             user_categories = Transaction.objects.filter(wallet__user=self.user).values_list('category', flat=True).distinct()
-            self.fields['category'].choices = [('', _('All Categories'))] + [(_(cat), _(cat)) for cat in user_categories]
+            self.fields['category'].choices = [('', _('All Categories'))] + [(cat, _(cat)) for cat in user_categories]
 

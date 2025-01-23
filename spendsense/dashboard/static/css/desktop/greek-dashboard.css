@@ -8,3 +8,15 @@
     font-weight: bold;
     width: 195px;
 }
+
+.dashboard-view {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    /* background: linear-gradient(90deg, #319795, #285e61); */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 60px;
+}

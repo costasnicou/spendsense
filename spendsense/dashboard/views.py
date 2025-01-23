@@ -160,8 +160,7 @@ def dashboard(request,user):
                     
                     elif transaction.type == 'Expense':
                         wallet.balance += Decimal(transaction.amount)
-                        print("Form is valid:")
-                   
+                        
                     wallet.save()
                     transaction.delete()
                     messages.success(request, "Transaction deleted successfully!")
@@ -322,7 +321,7 @@ def dashboard(request,user):
             Transaction.objects.create(
                     wallet=source_wallet,
                     type='Transfer',
-                    category=_('Balance Adjustment Decrease'),
+                    category='Balance Adjustment Decrease',
                     amount=amount,
                     total_balance=total_balance,
             )

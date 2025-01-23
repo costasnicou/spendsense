@@ -79,8 +79,8 @@ class Wallet(models.Model):
 # done translation
 class Transaction(models.Model):
     TYPE_CHOICES = [
-        (_('Income'), _('Income')),
-        (_('Expense'), _('Expense')),
+        ('Income', _('Income')),
+        ('Expense', _('Expense')),
     ]
 
     CATEGORY_CHOICES = [
