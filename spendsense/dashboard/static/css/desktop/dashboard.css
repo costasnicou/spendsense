@@ -63,7 +63,7 @@ section h3{
     text-align: center;
     color: white;
     background: rgb(65,156,156);
-    background: linear-gradient(90deg, rgba(65,156,156,1) 0%, rgba(8,69,56,0.6278886554621849) 100%);
+  
     margin: 20px;
     border-radius: 40px;
     display: flex;
@@ -276,7 +276,8 @@ section h3 {
     padding: 20px;
     text-align: center;
     color: #ffffff;
-    background: linear-gradient(145deg, #5dc0bb, #285e61);
+    background: linear-gradient(145deg, #83ab8c,#2c5938);
+   
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition:all 0.3s ease;
@@ -287,18 +288,18 @@ section h3 {
 
 .wallet-btn{
     padding: 10px 40px;
-    border: 1px solid rgba(27, 158, 123, 0.976);
     color: white;
     border-radius: 10px;
+    border: none;
     text-decoration: none;
     transition:all 0.3s ease;
-    background-color: rgb(26, 98, 84);
+    background-color: #5aa46b;
    
 }
 
 
 .wallet-btn:hover{
-    background-color: rgb(43, 164, 140);
+    background-color: #4d8d5c;
 }
 
 .dashboard-view {
@@ -307,7 +308,7 @@ section h3 {
     text-align: center;
     color: #ffffff;
     /* background: linear-gradient(135deg, #38b2ac, #285e61); */
-    background: linear-gradient(90deg, #5dc0bb, #285e61);
+    background: linear-gradient(45deg, #83ab8c,#2c5938);
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -362,7 +363,7 @@ table {
 }
 
 thead {
-    background: linear-gradient(90deg, #38b2ac, #285e61);
+    background: linear-gradient(145deg, #83ab8c,#32623d);
     
     color: white;
 }
@@ -438,7 +439,7 @@ th, td {
 }
 
 .total-balance {
-    color: #2b6cb0;
+    color: #58a46a;
     font-size: 2rem;
     font-weight: bold;
 }
@@ -451,7 +452,7 @@ th, td {
     border-radius: 10px;
     margin: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 5px solid #bebc36;
+    border-left: 5px solid #58be36;
 }
 
 .wallet:hover {
@@ -466,12 +467,12 @@ table {
 }
 
 thead {
-    background: linear-gradient(90deg, #319795, #285e61);
+    background: linear-gradient(145deg, #83ab8c,#32623d);
     color: white;
 }
 
 thead tr:hover{
-    background: linear-gradient(90deg, #319795, #285e61);
+    background: linear-gradient(145deg, #83ab8c,#32623d);
     color: white;
 }
 

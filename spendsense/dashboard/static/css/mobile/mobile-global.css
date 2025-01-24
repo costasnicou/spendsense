@@ -3,8 +3,7 @@
     .main-menu {
         text-align: center;
         /* background-color: rgb(7, 87, 71); */
-        background: rgb(65, 156, 156);
-        background: linear-gradient(90deg, rgba(65, 156, 156, 1) 0%, rgb(8, 69, 56) 100%);
+      
         padding: 20px;
         height: 25px;
         position: fixed;
@@ -81,7 +80,7 @@
         opacity: 1;
         height: 208px;
         transition: height 0.5s ease-out;
-        background: linear-gradient(90deg, rgb(57, 154, 154) 0%, rgb(54, 107, 96) 100%);
+        background: #83ab8c;
         position: relative;
         right: 25px;
         width: 100%;

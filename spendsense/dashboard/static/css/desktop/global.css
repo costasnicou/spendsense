@@ -13,18 +13,13 @@ section{
 
 .main-menu{
     text-align: center; 
-    /* background-color: rgb(7, 87, 71); */
-    background: rgb(65,156,156);
-    background: linear-gradient(90deg, rgba(65,156,156,1) 0%, rgb(8, 69, 56) 100%);
+    background: linear-gradient(145deg, #83ab8c,#32623d);
     padding: 20px;
     height: 25px;
     position: fixed;
     width: 100%;
     z-index: 10;
     top: 0;
-   
-   
-    /* position: relative; */
 }
 
 .logout-form {
@@ -116,12 +111,17 @@ section{
   border-radius: 10px;
   margin-right: 20px;
   transition: all ease-in 0.5s;
+  background-color: #34d05800;
+  border: 1px solid white;
 
 
 }
 
 .logout-btn:hover{
-  background-color: rgb(19, 130, 100);
+  
+  /* background-color: #19692c; */
+  background-color: white;
+  color:rgb(19, 134, 103) ;
 }
 
 
@@ -139,10 +139,14 @@ section{
     text-decoration: none;
     transition:all 0.3s ease;
     background-color: rgb(65,156,156);
+    /* background-color: ; */
+
+    background-color:#83ab8c;
 }
 
 .btn:hover{
-    background-color: rgb(52, 127, 127);
+    /* background-color: rgb(52, 127, 127); */
+    background-color: #32623d;
     color: white;
 }
 
@@ -170,7 +174,7 @@ section{
 
 footer{
     height: 250px;
-    background-color: rgb(42, 78, 71);
+    background-color: #32623d;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -281,3 +285,4 @@ footer p a{
 .dropdown-menu.show {
   display: block;
 }
+

@@ -60,15 +60,20 @@
         font-weight: 300;
     }
 
-    /* promotion */
-    .promotion img {
+    .promotion .center-image {
+        width: 70%;
+        margin: 0 auto;
         text-align: center;
+    }
+
+    .promotion img {
+        /* text-align: center; */
         width: 400;
         height: 300px;
-        position: absolute;
-        top: -90px;
-        left: 29%;
+        position: relative;
+        top: -120px;
     }
+   
 
     /* reasons */
     .reasons {
