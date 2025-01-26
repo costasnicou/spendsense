@@ -104,6 +104,7 @@
                         <th width="100">{% trans "Wallet" %}</th>
                         <th width="100">{% trans "Current Balance" %}</th>
                         <th width="150">{% trans "Date" %}</th>
+                        <th width="150">{% trans "Description" %}</th>
                         <th width="100">{% trans "Action" %}</th>
                     </tr>
                 </thead>
@@ -128,6 +129,7 @@
                             <td>€{{ transaction.total_balance }}</td>
                           
                             <td>{{ transaction.timestamp|date:"d-m-Y H:i" }}</td>
+                            <td> {{ transaction.description }}</td>
                             <td>
                              <!-- Edit Button -->
                                 {% if transaction.type == 'Transfer'  %}
@@ -217,9 +219,15 @@
     </div>
 
     <div class="form-group">
+        {{  transaction_form.description.label_tag }} <br>
+        {{ transaction_form.description }}
+    </div>
+
+    <div class="form-group">
         {{  transaction_form.amount.label_tag }} <br>
         {{ transaction_form.amount }}
     </div>
+
     <button type="submit" name="submit_transaction_form" class="btn">{% trans "Add Transaction" %}</button>
 </form>
 <div class="overlay hidden"></div>
@@ -298,9 +306,15 @@
         </div>
 
         <div class="form-group">
+            {{  transaction.edit_form.description.label_tag }} <br>
+            {{ transaction.edit_form.description }}
+        </div>
+
+        <div class="form-group">
             {{ transaction.edit_form.amount.label_tag }} <br>
             {{ transaction.edit_form.amount }}
         </div>
+
 
 
     </div>
@@ -366,7 +380,7 @@
 <div class="overlay hidden"></div>
 {% endfor %}
 
-
+<!-- filter transactions -->
 <form method="GET" class="modal filter-trans-modal hidden">
     <h1 class="modal-title">{% trans "Filter Transactions" %}</h1>
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close"  onclick="closeModal()">

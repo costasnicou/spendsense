@@ -62,7 +62,7 @@ section h3{
     /* padding: 20px; */
     text-align: center;
     color: white;
-    background: rgb(65,156,156);
+  
   
     margin: 20px;
     border-radius: 40px;
@@ -151,7 +151,7 @@ td{
     padding: 10px;
     /* height: 100px; */
     margin-bottom: 20px;
-    background-color: tomato;
+    background-color: rgb(92, 71, 255);
     border:1px solid white;
     border-radius: 10px;
     color:white;
@@ -276,7 +276,8 @@ section h3 {
     padding: 20px;
     text-align: center;
     color: #ffffff;
-    background: linear-gradient(145deg, #83ab8c,#2c5938);
+    background: linear-gradient(145deg, #b3d5eb,#8ea7b8);
+    background: linear-gradient(145deg, #9bc8e6,#8ea7b8);
    
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -293,13 +294,13 @@ section h3 {
     border: none;
     text-decoration: none;
     transition:all 0.3s ease;
-    background-color: #5aa46b;
+    background-color: #4398d5;
    
 }
 
 
 .wallet-btn:hover{
-    background-color: #4d8d5c;
+    background-color: #3578a8;
 }
 
 .dashboard-view {
@@ -308,7 +309,10 @@ section h3 {
     text-align: center;
     color: #ffffff;
     /* background: linear-gradient(135deg, #38b2ac, #285e61); */
-    background: linear-gradient(45deg, #83ab8c,#2c5938);
+    /* background: linear-gradient(45deg, #83ab8c,#2c5938); */
+    /* background: linear-gradient(45deg, #839bab,#2c3f59);
+    background: linear-gradient(145deg, #b3d5eb,#6c88ae); */
+    background: linear-gradient(145deg, #9bc8e6,#8ea7b8);
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -342,7 +346,7 @@ section h3 {
     width: 150px;
     padding: 10px;
     margin: 20px;
-    background-color: #e53e3e;
+    background-color: #1f5275;
     color: #ffffff;
     border: none;
     border-radius: 10px;
@@ -352,7 +356,7 @@ section h3 {
 }
 
 .dashboard-btn:hover {
-    background-color: #c53030;
+    background-color: #2c456b;
 }
 
 table {
@@ -364,7 +368,7 @@ table {
 
 thead {
     background: linear-gradient(145deg, #83ab8c,#32623d);
-    
+    background: linear-gradient(45deg, #839bab,#2c3f59);
     color: white;
 }
 
@@ -439,7 +443,7 @@ th, td {
 }
 
 .total-balance {
-    color: #58a46a;
+    color: #508db7;
     font-size: 2rem;
     font-weight: bold;
 }
@@ -452,7 +456,7 @@ th, td {
     border-radius: 10px;
     margin: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 5px solid #58be36;
+    border-left: 5px solid #3697be;
 }
 
 .wallet:hover {
@@ -467,12 +471,12 @@ table {
 }
 
 thead {
-    background: linear-gradient(145deg, #83ab8c,#32623d);
+    background: linear-gradient(145deg, #9bc8e6,#8ea7b8);
     color: white;
 }
 
 thead tr:hover{
-    background: linear-gradient(145deg, #83ab8c,#32623d);
+    background: linear-gradient(145deg, #9bc8e6,#8ea7b8);
     color: white;
 }
 
@@ -491,7 +495,9 @@ tr:hover {
 }
 
 .dashboard-btn {
-    background: #e53e3e;
+    background-color: #2e5773;
+    background-color: #4398d5;
+    
     color: white;
     padding: 10px 20px;
     border-radius: 10px;
@@ -501,7 +507,7 @@ tr:hover {
 }
 
 .dashboard-btn:hover {
-    background: #c53030;
+    background-color: #1f5275;
 }
 
 .dashboard-shadow {

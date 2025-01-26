@@ -46,8 +46,7 @@
 
 
     .menu-wrapper {
-        display: flex
-;
+        display: flex;
         width: 100%;
         justify-content: center;
         align-items: center;
@@ -97,6 +96,7 @@
         height: 208px;
         transition: height 0.5s ease-out;
         background: #83ab8c;
+        background: linear-gradient(145deg, #4c6b80,#8ea7b8);
         position: relative;
         right: 25px;
         width: 100%;

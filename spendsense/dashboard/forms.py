@@ -40,7 +40,7 @@ class TransactionForm(forms.ModelForm):
     
     class Meta:
         model = Transaction
-        fields = ['wallet', 'type', 'category', 'amount']
+        fields = ['wallet', 'type', 'category', 'amount', 'description']
         widgets = {
             'wallet': forms.Select(attrs={'class': 'form-control'}),
             'type': forms.Select(attrs={'class': 'form-control'}),
@@ -51,6 +51,11 @@ class TransactionForm(forms.ModelForm):
                 'max': '9999999999999.99',  # Allow large numbers
                 'step': '0.01',  # Allow decimal inputs                
             }),
+            'description': forms.Textarea(attrs={  # Added widget for description
+                'class': 'form-control',
+                'rows': 4,  # Adjust the height of the text box
+                'placeholder': _('Add a description (optional)...'),
+            }),
         }
 
         # Add custom labels
@@ -59,6 +64,7 @@ class TransactionForm(forms.ModelForm):
             'type': _('Transaction Type'),
             'category': _('Category'),
             'amount': _('Transaction Amount'),
+            'description': _('Description'),  # Added label for description
         }
 
 

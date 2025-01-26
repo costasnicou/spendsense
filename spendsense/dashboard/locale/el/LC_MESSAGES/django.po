@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-21 02:21+0200\n"
+"POT-Creation-Date: 2025-01-26 18:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,7 +123,7 @@ msgstr "Έξοδα"
 msgid "Transfer"
 msgstr "Μεταφορά"
 
-#: forms.py:254
+#: forms.py:254 forms.py:293
 msgid "All Categories"
 msgstr "Όλες οι Κατηγορίες"
 
@@ -295,8 +295,6 @@ msgstr "Φιλανθρωπία, δώρα"
 msgid "Culture, sport events"
 msgstr "Πολιτισμός, αθλητικές εκδηλώσεις"
 
-
-
 #: models.py:129
 msgid "Education, development"
 msgstr "Εκπαίδευση, ανάπτυξη"
@@ -441,36 +439,36 @@ msgstr "Έσοδα από ενοίκια"
 msgid "Other"
 msgstr "Άλλο"
 
-#: templates/dashboard/base.html:69 templates/dashboard/base.html:109
+#: templates/dashboard/base.html:89 templates/dashboard/base.html:108
 msgid "Home"
 msgstr "Αρχική"
 
-#: templates/dashboard/base.html:70
+#: templates/dashboard/base.html:90
 msgid "Dashboard"
 msgstr "Πίνακας Διαχείρησης"
 
-#: templates/dashboard/base.html:104
+#: templates/dashboard/base.html:100
 msgid "Log Out"
 msgstr "Αποσύνδεση"
 
-#: templates/dashboard/base.html:110 templates/dashboard/login.html:19
+#: templates/dashboard/base.html:109 templates/dashboard/login.html:19
 msgid "Login"
 msgstr "Σύνδεση"
 
-#: templates/dashboard/base.html:111 templates/dashboard/signup.html:18
+#: templates/dashboard/base.html:110 templates/dashboard/signup.html:18
 #: templates/dashboard/signup.html:44
 msgid "Sign Up"
 msgstr "Εγγραφή"
 
-#: templates/dashboard/base.html:215
+#: templates/dashboard/base.html:186
 msgid "Copyright"
 msgstr "Πνευματικά δικαιώματα"
 
-#: templates/dashboard/base.html:215
+#: templates/dashboard/base.html:186
 msgid "Designed and Developed by"
 msgstr "Σχεδιάστηκε και κατασκευάστηκε από"
 
-#: templates/dashboard/base.html:215
+#: templates/dashboard/base.html:186
 msgid "Costas Nicou"
 msgstr "Κώστας Νίκου "
 
@@ -645,15 +643,15 @@ msgstr ""
 "των οικονομικών σας. Συμμετάσχετε σε αυτό το ταξίδι προς την οικονομική "
 "ευεξία και ας δημιουργήσουμε μαζί ένα φωτεινότερο μέλλον!"
 
-#: templates/dashboard/homepage.html:70
+#: templates/dashboard/homepage.html:73
 msgid "Why Us"
 msgstr "Γιατί Εμάς"
 
-#: templates/dashboard/homepage.html:74
+#: templates/dashboard/homepage.html:77
 msgid "Better Financial Management"
 msgstr "Καλύτερη Διαχείριση Οικονομικών"
 
-#: templates/dashboard/homepage.html:76
+#: templates/dashboard/homepage.html:79
 msgid ""
 "\n"
 "                An income/expense tracker allows users to monitor their "
@@ -668,11 +666,11 @@ msgstr ""
 "εικόνα των εισοδημάτων και των δαπανών τους. Αυτό βοηθά στη διατήρηση του "
 "ελέγχου των οικονομικών τους."
 
-#: templates/dashboard/homepage.html:84
+#: templates/dashboard/homepage.html:87
 msgid "Budgeting Made Simple"
 msgstr "Απλή Διαχείριση Προϋπολογισμού"
 
-#: templates/dashboard/homepage.html:85
+#: templates/dashboard/homepage.html:88
 msgid ""
 "Users can set budgets for different categories \n"
 "                    (e.g., groceries, entertainment, bills) and track their "
@@ -684,11 +682,11 @@ msgstr ""
 "χ., τρόφιμα, ψυχαγωγία, λογαριασμοί) και να παρακολουθούν την τήρησή τους. "
 "Αυτό κάνει τη διαχείριση προϋπολογισμού πιο οργανωμένη και λιγότερο αγχωτική."
 
-#: templates/dashboard/homepage.html:91
+#: templates/dashboard/homepage.html:94
 msgid "Identify Spending Habits"
 msgstr "Εντοπισμός Συνηθειών Δαπανών"
 
-#: templates/dashboard/homepage.html:92
+#: templates/dashboard/homepage.html:95
 msgid ""
 "By categorizing transactions, users can identify areas where they \n"
 "                    are overspending or areas where they can cut back, "
@@ -698,43 +696,47 @@ msgstr ""
 "περιοχές όπου ξοδεύουν υπερβολικά ή περιοχές όπου μπορούν να μειώσουν, "
 "διευκολύνοντας πιο ενημερωμένες αποφάσεις."
 
-#: templates/dashboard/homepage.html:111
+#: templates/dashboard/homepage.html:114
 msgid "Features"
 msgstr "Χαρακτηριστικά"
 
-#: templates/dashboard/homepage.html:113
+#: templates/dashboard/homepage.html:116
 msgid "User Authentication and Security"
 msgstr "Ταυτοποίηση Χρήστη και Ασφάλεια"
 
-#: templates/dashboard/homepage.html:114
+#: templates/dashboard/homepage.html:117
 msgid "Dashboard Overview"
 msgstr "Επισκόπηση Πίνακα Ελέγχου"
 
-#: templates/dashboard/homepage.html:115
+#: templates/dashboard/homepage.html:118
 msgid "Multi-Wallet Management"
 msgstr "Διαχείριση Πολλαπλών Πορτοφολιών"
 
-#: templates/dashboard/homepage.html:116
+#: templates/dashboard/homepage.html:119
 msgid "Transaction Management"
 msgstr "Διαχείριση Συναλλαγών"
 
-#: templates/dashboard/homepage.html:117
+#: templates/dashboard/homepage.html:120
 msgid "Balance Adjustment Management"
 msgstr "Διαχείριση Προσαρμογών Υπολοίπου"
 
-#: templates/dashboard/homepage.html:120 templates/dashboard/homepage.html:212
+#: templates/dashboard/homepage.html:123 templates/dashboard/homepage.html:219
+msgid "Go to Dashboard"
+msgstr "Πίνακας Διαχείρησης"
+
+#: templates/dashboard/homepage.html:125 templates/dashboard/homepage.html:221
 msgid "Sign Up Now"
 msgstr "Εγγραφείτε Τώρα"
 
-#: templates/dashboard/homepage.html:127
+#: templates/dashboard/homepage.html:132
 msgid "What they are saying about us"
 msgstr "Τι λένε για εμάς"
 
-#: templates/dashboard/homepage.html:132
+#: templates/dashboard/homepage.html:137
 msgid "Game-Changer for My Finances"
 msgstr "Καταλυτικό για τα Οικονομικά μου"
 
-#: templates/dashboard/homepage.html:134
+#: templates/dashboard/homepage.html:139
 msgid ""
 "\n"
 "                    This app has completely transformed the way I manage my "
@@ -760,11 +762,11 @@ msgstr ""
 "για το οικονομικό μου μέλλον από ποτέ. Αν δυσκολεύεστε να διαχειριστείτε τα "
 "χρήματά σας, αυτή η εφαρμογή είναι απαραίτητη!"
 
-#: templates/dashboard/homepage.html:154
+#: templates/dashboard/homepage.html:159
 msgid "Incredible Insights into Spending Habits"
 msgstr "Απίστευτες Γνώσεις για τις Συνήθειες Δαπανών"
 
-#: templates/dashboard/homepage.html:157
+#: templates/dashboard/homepage.html:162
 msgid ""
 "\n"
 "                    This app was a real eye-opener for me. I thought I was "
@@ -790,11 +792,11 @@ msgstr ""
 "κάνει αλλαγές που αποδίδουν. Εξοικονομώ εκατοντάδες ευρώ κάθε μήνα τώρα, και "
 "νιώθω υπέροχα που παίρνω πιο έξυπνες οικονομικές αποφάσεις."
 
-#: templates/dashboard/homepage.html:177
+#: templates/dashboard/homepage.html:182
 msgid "A Must-Have for Couples"
 msgstr "Απαραίτητο για Ζευγάρια"
 
-#: templates/dashboard/homepage.html:180
+#: templates/dashboard/homepage.html:185
 msgid ""
 "My partner and I always struggled to track our shared expenses. \n"
 "                    We’d forget who paid for what, and it led to so many "
@@ -821,11 +823,11 @@ msgstr ""
 "κάνει τη διαχείριση των οικονομικών μας τόσο πιο εύκολη, και μας έχει φέρει "
 "πιο κοντά ως ζευγάρι!"
 
-#: templates/dashboard/homepage.html:208
+#: templates/dashboard/homepage.html:213
 msgid "Don't let your finances control you"
 msgstr "Μην αφήνετε τα οικονομικά σας να σας ελέγχουν"
 
-#: templates/dashboard/homepage.html:209
+#: templates/dashboard/homepage.html:214
 msgid ""
 "Sign up now and experience the power of effortless budgeting, \n"
 "                real-time tracking, and insightful analytics. \n"
@@ -853,15 +855,12 @@ msgstr "Έχετε ήδη λογαριασμό;"
 msgid "Log in here"
 msgstr "Συνδεθείτε εδώ"
 
-#: views.py:229
+#: views.py:228
 msgid "Balance Adjustment"
 msgstr "Προσαρμογή Υπολοίπου"
 
-#: views.py:325
-msgid "Balance Adjustment Decrease"
-msgstr "Αρνητική Προσαρμογή Υπολοίπου"
+#~ msgid "Balance Adjustment Decrease"
+#~ msgstr "Αρνητική Προσαρμογή Υπολοίπου"
 
-
-#: views.py:332
-msgid "Balance Adjustment Increase"
-msgstr "Θετική Προσαρμογή Υπολοίπου"
+#~ msgid "Balance Adjustment Increase"
+#~ msgstr "Θετική Προσαρμογή Υπολοίπου"

@@ -119,9 +119,11 @@
                     <li>{% trans "Transaction Management" %}</li>
                     <li>{% trans "Balance Adjustment Management" %}</li>
                 </ul>
-
-                <a href="{% url 'signup' %}" class="btn signup-btn">{% trans "Sign Up Now" %}</a>
-
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' user=request.user.username %}" class="btn signup-btn">{% trans "Go to Dashboard" %}</a>
+                {% else %}
+                    <a href="{% url 'signup' %}" class="btn signup-btn">{% trans "Sign Up Now" %}</a>
+                {% endif %}
             </article>
         </div>
     </section>
@@ -212,7 +214,12 @@
             <p> {% blocktrans %}Sign up now and experience the power of effortless budgeting, 
                 real-time tracking, and insightful analytics. 
                 Start your journey toward financial freedom today—because your money deserves to work for you! {% endblocktrans %}</p>
-            <a href="{% url 'signup' %}" class="btn signup-btn">{% trans "Sign Up Now" %}</a>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' user=request.user.username %}" class="btn signup-btn">{% trans "Go to Dashboard" %}</a>
+            {% else %}
+                <a href="{% url 'signup' %}" class="btn signup-btn">{% trans "Sign Up Now" %}</a>
+            {% endif %}
         </article>
     
     </section>

@@ -187,7 +187,7 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
     total_balance = models.DecimalField(max_digits=15, decimal_places=2, default=Decimal('0.00'))  # New field
-
+    description = models.TextField(blank=True, null=True)  # New field for text input
     def __str__(self):
         return f"{self.type} - {self.category} - {self.amount}"
 
