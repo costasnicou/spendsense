@@ -859,8 +859,23 @@ msgstr "Συνδεθείτε εδώ"
 msgid "Balance Adjustment"
 msgstr "Προσαρμογή Υπολοίπου"
 
-#~ msgid "Balance Adjustment Decrease"
-#~ msgstr "Αρνητική Προσαρμογή Υπολοίπου"
+msgid "Balance Adjustment Decrease"
+msgstr "Αρνητική Προσαρμογή Υπολοίπου"
 
-#~ msgid "Balance Adjustment Increase"
-#~ msgstr "Θετική Προσαρμογή Υπολοίπου"
+msgid "Balance Adjustment Increase"
+msgstr "Θετική Προσαρμογή Υπολοίπου"
+
+msgid "Investment"
+msgstr "Επενδύσεις"
+
+msgid "General"
+msgstr "Γενικό"
+
+msgid "Charity"
+msgstr "Φιλανθρωπία"
+
+msgid "Created by You"
+msgstr "Δημιουργημένα από σενα"
+
+msgid "Predefined"
+msgstr "Προκαθορισμένα"

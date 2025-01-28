@@ -107,6 +107,8 @@ box-shadow: 2px 8px 31px -13px rgba(0,0,0,0.75);
 .wallet-flex{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 .wallet-section{
     padding-top: 20px;
@@ -271,14 +273,46 @@ section h3 {
     gap: 20px;
 }
 
+
+
+.dashboard-view {
+    width: 245px;
+    padding: 30px;
+    text-align: center;
+    color: #ffffff;
+    /* background: linear-gradient(135deg, #38b2ac, #285e61); */
+    /* background: linear-gradient(45deg, #83ab8c,#2c5938); */
+    /* background: linear-gradient(45deg, #839bab,#2c3f59);
+    background: linear-gradient(145deg, #b3d5eb,#6c88ae); */
+    background: linear-gradient(145deg, #8c9fab,#4b617ed3);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 17px;
+}
+
+.dashboard-amount{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dashboard-view:hover,.wallet:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+/* WALLET CSS */
+
 .wallet {
     width: 250px;
     padding: 20px;
     text-align: center;
     color: #ffffff;
-    background: linear-gradient(145deg, #b3d5eb,#8ea7b8);
-    background: linear-gradient(145deg, #9bc8e6,#8ea7b8);
-   
+    background: linear-gradient(145deg, #8c9fab,#4b617ed3);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition:all 0.3s ease;
@@ -303,34 +337,6 @@ section h3 {
     background-color: #3578a8;
 }
 
-.dashboard-view {
-    width: 245px;
-    padding: 30px;
-    text-align: center;
-    color: #ffffff;
-    /* background: linear-gradient(135deg, #38b2ac, #285e61); */
-    /* background: linear-gradient(45deg, #83ab8c,#2c5938); */
-    /* background: linear-gradient(45deg, #839bab,#2c3f59);
-    background: linear-gradient(145deg, #b3d5eb,#6c88ae); */
-    background: linear-gradient(145deg, #9bc8e6,#8ea7b8);
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-size: 17px;
-}
-
-.dashboard-amount{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.dashboard-view:hover,.wallet:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-
-
 .wallet-header{
     font-size: 18px;
 }
@@ -340,8 +346,84 @@ section h3 {
     font-weight: bold;
 }
 
+.wallet {
+    color: white;
+    height: 150px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid #1fb4ee;
+    position: relative;
+}
+
+.wallet:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.wallet-category{
+    background-color: #1fb4ee;
+    margin: 0;
+    text-align: center;
+    width: 120px;
+    padding: 0;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 4px 0 0 0;
+    font-weight: bold;
+}
+
+/* WALLET CSS */
 
 
+/* wallet tabs */
+
+.tabs-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    cursor: pointer;
+    background: #f9f9f9;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+tab:hover {
+    background: #628da5;
+}
+
+.tab.active {
+    background: #fff;
+    border-bottom: 2px solid #007BFF;
+    color: #007BFF;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+  
+.tab-content.active {
+    display: flex;
+    justify-content: center;
+}
+
+/* wallet tabs */
 .dashboard-btn {
     width: 150px;
     padding: 10px;
@@ -443,26 +525,16 @@ th, td {
 }
 
 .total-balance {
-    color: #508db7;
+    color: #4b617e);
     font-size: 2rem;
     font-weight: bold;
 }
 
-.wallet {
-    /* background: linear-gradient(145deg, #319795, #285e61); */
-    color: white;
-    text-align: center;
-    padding: 15px;
-    border-radius: 10px;
-    margin: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 5px solid #3697be;
-}
 
-.wallet:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+
+
+
+
 
 table {
     width: 100%;
@@ -471,12 +543,12 @@ table {
 }
 
 thead {
-    background: linear-gradient(145deg, #9bc8e6,#8ea7b8);
+    background: linear-gradient(145deg, #8c9fab,#4b617ed3);
     color: white;
 }
 
 thead tr:hover{
-    background: linear-gradient(145deg, #9bc8e6,#8ea7b8);
+    background: linear-gradient(145deg, #8c9fab,#4b617ed3);
     color: white;
 }
 
@@ -533,7 +605,7 @@ tr:hover {
     border-radius: 10px;
     /* background: linear-gradient(90deg, #319795, #285e61); */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: center;/* WALLET CSS */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

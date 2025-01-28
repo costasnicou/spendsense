@@ -20,38 +20,88 @@
 
     <section class="wallet-section dashboard-shadow">
         <h3>{% trans "Your Wallets" %}</h3>
+        
         <div class="wallets">
-            <div class="wallet-flex">
-                {% for wallet in wallets %}
-                    <div class="wallet">
-                        <p>
-                        <span class="wallet-header"><strong>{{ wallet.name }}</strong></span><br>
-                        {% trans "Balance" %}: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>
-                        {% trans "Balance Correction" %}: <span class="wallet-amount">
-                            {% if wallet.fat.amount > 0 %}
-                                 €+{{ wallet.fat.amount }}
-                            {% else %}
-                            €{{ wallet.fat.amount }}
-                            {% endif %}
-                                </span>
-                            
-                      
-                      
-                        </p>
 
-            
+
+            <div class="tabs">
+                <button class="tab active" data-tab="tab1">{% trans "Created by You" %}</button>
+                <button class="tab" data-tab="tab2">{% trans "Predefined" %}</button>
+               
+              </div>
+
+
+            <div class="tabs-container">
+                <div class="tab-content active" id="tab1">
+                    <div class="wallet-flex" >
+
+                        {% if wallets|length == 3 %}
+                            <p>{% trans "No Wallets available" %}</p>
+                        {% endif %}
+
                         
-                       
-                        <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }}); reverseEditWalletForm();" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
-                            {% trans "Edit" %}
-                        </button>
+                        {% for wallet in wallets %}
+                            {% if wallet.is_predefined == False %}
+                                <div class="wallet">
+                                    <p class="wallet-category">{{wallet.category|translate}}</p>
+                                    <p>
+                                    <span class="wallet-header"><strong>{{ wallet.name }}</strong></span><br>
+                                    {% trans "Balance" %}: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>
+                                    {% trans "Balance Correction" %}: <span class="wallet-amount">
+                                        {% if wallet.fat %}
+                                            {% if wallet.fat.amount > 0 %}
+                                                €+{{ wallet.fat.amount }}
+                                            {% else %}
+                                                €{{ wallet.fat.amount }}
+                                            {% endif %}
+                                        {% else %}
+                                            <p>No FAT record for this wallet.</p>
+                                        {% endif %}
+                                            </span>                           
+                                    </p>
+
+                        
+                                    
+                                
+                                    <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }}); reverseEditWalletForm();" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
+                                        {% trans "Edit" %}
+                                    </button>
+                                </div>
+
+                        
+                            {% endif %}
+
+                            {% empty %}
+                            <p>{% trans "No Wallets available" %}</p>
+                                
+                            
+                        {% endfor %}
                     </div>
-                       
-                    {% empty %}
-                      <p>{% trans "No Wallets available" %}</p>
+
+                </div>
+
+                <div class="tab-content" id="tab2">
+                    <div class="wallet-flex">
+                        {% for wallet in wallets %}
+                            
+                            {% if wallet.is_predefined == True %}
+                            <div class="wallet"> <br>
+                                <p class="wallet-category">{{wallet.category|translate}}</p>
+                                <p>
+                                <span class="wallet-header"><strong>{{ wallet.name|translate }}</strong></span><br>
+                                {% trans "Balance" %}: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>        
+                                </p>
+                            </div>
+                            {% endif %}
+                            
+                        {% empty %}
+                        <p>{% trans "No Wallets available" %}</p>
+                            
                         
-                    
-                {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            
             </div>
             <button class="dashboard-btn open-wallet-modal show-form" onclick="openWalletModal()">{% trans "Add Wallet" %}</button>
         </div>
@@ -379,6 +429,8 @@
 </div>
 <div class="overlay hidden"></div>
 {% endfor %}
+
+
 
 <!-- filter transactions -->
 <form method="GET" class="modal filter-trans-modal hidden">

@@ -11,12 +11,15 @@ class Wallet(models.Model):
         ('Debit Card', _('Debit Card')),
         ('Credit Card', _('Credit Card')),
         ('Bank Account', _('Bank Account')),
+        ('Savings', _('Savings')),
+        ('Investment', _('Investmentls')),
+        ('General', _('General')),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wallets')
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-
+    is_predefined = models.BooleanField(default=False)  # New field to distinguish predefined wallets
     def __str__(self):
         return self.name
 
