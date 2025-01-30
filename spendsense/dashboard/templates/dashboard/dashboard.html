@@ -174,12 +174,18 @@
 
                                 
                             </td>
-                            <td>{{ transaction.wallet.name }}</td>
+                            <td>{{ transaction.wallet.name|translate }}</td>
 
                             <td>€{{ transaction.total_balance }}</td>
                           
                             <td>{{ transaction.timestamp|date:"d-m-Y H:i" }}</td>
-                            <td> {{ transaction.description }}</td>
+                            <td>
+                                {% if transaction.description %}
+                                    {{ transaction.description }}
+                                {% else %}
+                                    <p>{% trans "None" %}</p>
+                                {% endif %}
+                            </td>
                             <td>
                              <!-- Edit Button -->
                                 {% if transaction.type == 'Transfer'  %}
@@ -257,7 +263,10 @@
     <h1>{% trans "Add Transaction"  %}</h1>
     <div class="form-group">
         {{  transaction_form.wallet.label_tag }} <br>
-        {{ transaction_form.wallet }}
+        <!-- <select class="form-control" id="">
+        
+        </select> -->
+        {{transaction_form.wallet}}
     </div>
     <div class="form-group">
         {{  transaction_form.type.label_tag }} <br>

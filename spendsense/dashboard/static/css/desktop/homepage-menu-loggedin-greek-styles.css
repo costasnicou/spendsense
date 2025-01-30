@@ -78,8 +78,6 @@
             margin: 20px 0 20px 50px;
     }
 
-
-
     #toggle:checked + .menu {
         visibility: visible;
         margin-top: 42px;
@@ -87,13 +85,11 @@
         opacity: 1;
         height: 208px;
         transition: height 0.5s ease-out;
-        background: #83ab8c;
+        background: linear-gradient(145deg, #4c6b80,#8ea7b8);
         position: relative;
         right: 25px;
         width: 100%;
     }
-        
-
     
 
 

@@ -12,7 +12,7 @@ class Wallet(models.Model):
         ('Credit Card', _('Credit Card')),
         ('Bank Account', _('Bank Account')),
         ('Savings', _('Savings')),
-        ('Investment', _('Investmentls')),
+        ('Investment', _('Investment')),
         ('General', _('General')),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wallets')
@@ -190,7 +190,7 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
     total_balance = models.DecimalField(max_digits=15, decimal_places=2, default=Decimal('0.00'))  # New field
-    description = models.TextField(blank=True, null=True)  # New field for text input
+    description = models.TextField(blank=True,null=True)  # New field for text input
     def __str__(self):
         return f"{self.type} - {self.category} - {self.amount}"
 

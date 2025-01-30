@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-26 18:55+0200\n"
+"POT-Creation-Date: 2025-01-30 22:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Username"
 msgstr "Όνομα Χρήστη"
 
-#: forms.py:26 forms.py:86
+#: forms.py:26 forms.py:109
 msgid "Enter your username"
 msgstr "Εισάγετε το όνομα χρήστη σας"
 
@@ -34,108 +34,117 @@ msgstr "Κωδικός"
 msgid "Enter your password"
 msgstr "Εισάγετε τον κωδικό σας"
 
-#: forms.py:58
+#: forms.py:51 forms.py:78
 msgid "Select Wallet"
 msgstr "Επιλέξτε Πορτοφόλι"
 
-#: forms.py:59 forms.py:250
+#: forms.py:72
+msgid "Add a description (optional)..."
+msgstr "Προσθέστε περιγραφή (προαιρετικό)"
+
+#: forms.py:79 forms.py:273
 msgid "Transaction Type"
 msgstr "Τύπος Συναλλαγής"
 
-#: forms.py:60 forms.py:153 forms.py:257 templates/dashboard/dashboard.html:102
+#: forms.py:80 forms.py:176 forms.py:280 templates/dashboard/dashboard.html:152
 msgid "Category"
 msgstr "Κατηγορία"
 
-#: forms.py:61
+#: forms.py:81
 msgid "Transaction Amount"
 msgstr "Ποσό Συναλλαγής"
 
-#: forms.py:83
+#: forms.py:82 templates/dashboard/dashboard.html:157
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: forms.py:106
 msgid "Username:"
 msgstr "Όνομα Χρήστη:"
 
-#: forms.py:91
+#: forms.py:114
 msgid "Email:"
 msgstr "Ηλεκτρονικό Ταχυδρομείο:"
 
-#: forms.py:94
+#: forms.py:117
 msgid "Enter your Email"
 msgstr "Εισάγετε το email σας"
 
-#: forms.py:98
+#: forms.py:121
 msgid "Password:"
 msgstr "Κωδικός:"
 
-#: forms.py:101
+#: forms.py:124
 msgid "Enter Password"
 msgstr "Εισάγετε τον κωδικό"
 
-#: forms.py:106
+#: forms.py:129
 msgid "Confirm Password:"
 msgstr "Επιβεβαίωση Κωδικού:"
 
-#: forms.py:110
+#: forms.py:133
 msgid "Confirm Password"
 msgstr "Επιβεβαιώστε τον Κωδικό"
 
-#: forms.py:152
+#: forms.py:175
 msgid "Wallet Name"
 msgstr "Όνομα Πορτοφολιού"
 
-#: forms.py:154 templates/dashboard/dashboard.html:29
+#: forms.py:177 templates/dashboard/dashboard.html:49
+#: templates/dashboard/dashboard.html:92
 msgid "Balance"
 msgstr "Υπόλοιπο"
 
-#: forms.py:162
+#: forms.py:185
 msgid "Source Wallet"
 msgstr "Πορτοφόλι Αποστολής"
 
-#: forms.py:167
+#: forms.py:190
 msgid "Destination Wallet"
 msgstr "Πορτοφόλι Παραλαβής"
 
-#: forms.py:174 templates/dashboard/dashboard.html:103
+#: forms.py:197 templates/dashboard/dashboard.html:153
 msgid "Amount"
 msgstr "Ποσό"
 
-#: forms.py:187
+#: forms.py:210
 msgid "Recover Negative Balance Correction"
 msgstr "Ανάκτηση Διόρθωσης Αρνητικού Υπολοίπου"
 
-#: forms.py:193
+#: forms.py:216
 msgid "Choose Wallet"
 msgstr "Επιλέξτε Πορτοφόλι"
 
-#: forms.py:240
+#: forms.py:263
 msgid "All Types"
 msgstr "Όλοι οι Τύποι"
 
-#: forms.py:241 models.py:82 models.py:164
+#: forms.py:264 models.py:85 models.py:167
 msgid "Income"
 msgstr "Έσοδα"
 
-#: forms.py:242 models.py:83
+#: forms.py:265 models.py:86
 msgid "Expense"
 msgstr "Έξοδα"
 
-#: forms.py:243 templates/dashboard/dashboard.html:164
-#: templates/dashboard/dashboard.html:265
+#: forms.py:266 templates/dashboard/dashboard.html:222
+#: templates/dashboard/dashboard.html:332
 msgid "Transfer"
 msgstr "Μεταφορά"
 
-#: forms.py:254 forms.py:293
+#: forms.py:277 forms.py:316
 msgid "All Categories"
 msgstr "Όλες οι Κατηγορίες"
 
-#: forms.py:264 templates/dashboard/dashboard.html:104
+#: forms.py:287 templates/dashboard/dashboard.html:154
 msgid "Wallet"
 msgstr "Πορτοφόλι"
 
-#: forms.py:271
+#: forms.py:294
 msgid "Start Date"
 msgstr "Ημερομηνία Έναρξης"
 
-#: forms.py:278
+#: forms.py:301
 msgid "End Date"
 msgstr "Ημερομηνία Λήξης"
 
@@ -155,287 +164,293 @@ msgstr "Πιστωτική Κάρτα"
 msgid "Bank Account"
 msgstr "Τραπεζικός Λογαριασμός"
 
-#: models.py:87
-msgid "Food & Drinks"
-msgstr "Φαγητό & Ποτά"
-
-#: models.py:88
-msgid "Bar, cafe"
-msgstr "Μπαρ, καφέ"
-
-#: models.py:89
-msgid "Groceries"
-msgstr "Ψώνια"
-
-#: models.py:90 models.py:95
-msgid "Restaurant, fast-food"
-msgstr "Εστιατόριο, γρήγορο φαγητό"
-
-#: models.py:92
-msgid "Shopping"
-msgstr "Αγορές"
-
-#: models.py:93
-msgid "Clothes & Shoes"
-msgstr "Ρούχα & Παπούτσια"
-
-#: models.py:94
-msgid "Drug-store, chemist"
-msgstr "Φαρμακείο, χημικός"
-
-#: models.py:96
-msgid "Electronics, accessories"
-msgstr "Ηλεκτρονικά, αξεσουάρ"
-
-#: models.py:97
-msgid "Free time"
-msgstr "Ελεύθερος Χρόνος"
-
-#: models.py:98
-msgid "Gifts, joy"
-msgstr "Δώρα, χαρά"
-
-#: models.py:99
-msgid "Stationary, tools"
-msgstr "Είδη γραφείου, εργαλεία"
-
-#: models.py:101
-msgid "Housing"
-msgstr "Κατοικία"
-
-#: models.py:102
-msgid "Energy, utilities"
-msgstr "Ενέργεια, κοινόχρηστα"
-
-#: models.py:103
-msgid "Maintenance, repairs"
-msgstr "Συντήρηση, επισκευές"
-
-#: models.py:104
-msgid "Property insurance"
-msgstr "Ασφάλεια ακινήτου"
-
-#: models.py:105
-msgid "Rent"
-msgstr "Ενοίκιο"
-
-#: models.py:106
-msgid "Services"
-msgstr "Υπηρεσίες"
-
-#: models.py:108
-msgid "Transportation"
-msgstr "Μεταφορές"
-
-#: models.py:109
-msgid "Business trips"
-msgstr "Επαγγελματικά ταξίδια"
-
-#: models.py:110
-msgid "Long Distance"
-msgstr "Μεγάλες αποστάσεις"
-
-#: models.py:111
-msgid "Public transport"
-msgstr "Δημόσια συγκοινωνία"
-
-#: models.py:112
-msgid "Taxi"
-msgstr "Ταξί"
-
-#: models.py:114
-msgid "Vehicle"
-msgstr "Όχημα"
-
-#: models.py:115
-msgid "Fuel"
-msgstr "Καύσιμα"
-
-#: models.py:116
-msgid "Leasing"
-msgstr "Μίσθωση"
-
-#: models.py:117
-msgid "Parking"
-msgstr "Στάθμευση"
-
-#: models.py:118 models.py:121
-msgid "Rentals"
-msgstr "Ενοικιάσεις"
-
-#: models.py:119
-msgid "Vehicle insurance"
-msgstr "Ασφάλεια οχήματος"
-
-#: models.py:120
-msgid "Vehicle maintenance"
-msgstr "Συντήρηση οχήματος"
-
-#: models.py:123
-msgid "Life & Entertainment"
-msgstr "Ζωή & Ψυχαγωγία"
-
-#: models.py:124
-msgid "Active sport, fitness"
-msgstr "Δραστήρια αθλήματα, φυσική κατάσταση"
-
-#: models.py:125
-msgid "Alcohol, tobacco"
-msgstr "Αλκοόλ, καπνός"
-
-#: models.py:126
-msgid "Books, audio, subscriptions"
-msgstr "Βιβλία, ήχος, συνδρομές"
-
-#: models.py:127
-msgid "Charity, gifts"
-msgstr "Φιλανθρωπία, δώρα"
-
-#: models.py:128
-msgid "Culture, sport events"
-msgstr "Πολιτισμός, αθλητικές εκδηλώσεις"
-
-#: models.py:129
-msgid "Education, development"
-msgstr "Εκπαίδευση, ανάπτυξη"
-
-#: models.py:130
-msgid "Health care, doctor"
-msgstr "Υγειονομική περίθαλψη, γιατρός"
-
-#: models.py:131
-msgid "Hobbies"
-msgstr "Χόμπι"
-
-#: models.py:132
-msgid "Life Events"
-msgstr "Γεγονότα ζωής"
-
-#: models.py:133 models.py:173
-msgid "Lottery, gambling"
-msgstr "Λοταρία, τυχερά παιχνίδια"
-
-#: models.py:134
-msgid "TV, steaming"
-msgstr "Τηλεόραση, streaming"
-
-#: models.py:135
-msgid "Wellness, beauty"
-msgstr "Ευεξία, ομορφιά"
-
-#: models.py:137
-msgid "Communication, PC"
-msgstr "Επικοινωνία, Υπολογιστές"
-
-#: models.py:138
-msgid "Internet"
-msgstr "Διαδίκτυο"
-
-#: models.py:139
-msgid "Phone, cell phone"
-msgstr "Τηλέφωνο, κινητό τηλέφωνο"
-
-#: models.py:140 models.py:147
-msgid "Postal services"
-msgstr "Ταχυδρομικές υπηρεσίες"
-
-#: models.py:141
-msgid "Software, apps, games"
-msgstr "Λογισμικό, εφαρμογές, παιχνίδια"
-
-#: models.py:144
-msgid "Financial expenses"
-msgstr "Οικονομικά έξοδα"
-
-#: models.py:145
-msgid "Advisory"
-msgstr "Συμβουλευτική"
-
-#: models.py:146
-msgid "Charges, fees"
-msgstr "Χρεώσεις, τέλη"
-
-#: models.py:148 models.py:168
-msgid "Child Support"
-msgstr "Διατροφή παιδιών"
-
-#: models.py:149
-msgid "Fines"
-msgstr "Πρόστιμα"
-
-#: models.py:150
-msgid "Insurances"
-msgstr "Ασφάλειες"
-
-#: models.py:151
-msgid "Loan, interests"
-msgstr "Δάνεια, τόκοι"
-
-#: models.py:152
-msgid "Taxes"
-msgstr "Φόροι"
-
-#: models.py:155
-msgid "Investments"
-msgstr "Επενδύσεις"
-
-#: models.py:156
-msgid "Collections"
-msgstr "Συλλογές"
-
-#: models.py:157
-msgid "Financial Investments"
-msgstr "Χρηματοοικονομικές Επενδύσεις"
-
-#: models.py:158
-msgid "Realty"
-msgstr "Ακίνητα"
-
-#: models.py:159
+#: models.py:14 models.py:162
 msgid "Savings"
 msgstr "Αποταμιεύσεις"
 
+
+
+#: models.py:16
+msgid "General"
+msgstr "Γενικό"
+
+#: models.py:90
+msgid "Food & Drinks"
+msgstr "Φαγητό & Ποτά"
+
+#: models.py:91
+msgid "Bar, cafe"
+msgstr "Μπαρ, καφέ"
+
+#: models.py:92
+msgid "Groceries"
+msgstr "Ψώνια"
+
+#: models.py:93 models.py:98
+msgid "Restaurant, fast-food"
+msgstr "Εστιατόριο, γρήγορο φαγητό"
+
+#: models.py:95
+msgid "Shopping"
+msgstr "Αγορές"
+
+#: models.py:96
+msgid "Clothes & Shoes"
+msgstr "Ρούχα & Παπούτσια"
+
+#: models.py:97
+msgid "Drug-store, chemist"
+msgstr "Φαρμακείο, χημικός"
+
+#: models.py:99
+msgid "Electronics, accessories"
+msgstr "Ηλεκτρονικά, αξεσουάρ"
+
+#: models.py:100
+msgid "Free time"
+msgstr "Ελεύθερος Χρόνος"
+
+#: models.py:101
+msgid "Gifts, joy"
+msgstr "Δώρα, χαρά"
+
+#: models.py:102
+msgid "Stationary, tools"
+msgstr "Είδη γραφείου, εργαλεία"
+
+#: models.py:104
+msgid "Housing"
+msgstr "Κατοικία"
+
+#: models.py:105
+msgid "Energy, utilities"
+msgstr "Ενέργεια, κοινόχρηστα"
+
+#: models.py:106
+msgid "Maintenance, repairs"
+msgstr "Συντήρηση, επισκευές"
+
+#: models.py:107
+msgid "Property insurance"
+msgstr "Ασφάλεια ακινήτου"
+
+#: models.py:108
+msgid "Rent"
+msgstr "Ενοίκιο"
+
+#: models.py:109
+msgid "Services"
+msgstr "Υπηρεσίες"
+
+#: models.py:111
+msgid "Transportation"
+msgstr "Μεταφορές"
+
+#: models.py:112
+msgid "Business trips"
+msgstr "Επαγγελματικά ταξίδια"
+
+#: models.py:113
+msgid "Long Distance"
+msgstr "Μεγάλες αποστάσεις"
+
+#: models.py:114
+msgid "Public transport"
+msgstr "Δημόσια συγκοινωνία"
+
+#: models.py:115
+msgid "Taxi"
+msgstr "Ταξί"
+
+#: models.py:117
+msgid "Vehicle"
+msgstr "Όχημα"
+
+#: models.py:118
+msgid "Fuel"
+msgstr "Καύσιμα"
+
+#: models.py:119
+msgid "Leasing"
+msgstr "Μίσθωση"
+
+#: models.py:120
+msgid "Parking"
+msgstr "Στάθμευση"
+
+#: models.py:121 models.py:124
+msgid "Rentals"
+msgstr "Ενοικιάσεις"
+
+#: models.py:122
+msgid "Vehicle insurance"
+msgstr "Ασφάλεια οχήματος"
+
+#: models.py:123
+msgid "Vehicle maintenance"
+msgstr "Συντήρηση οχήματος"
+
+#: models.py:126
+msgid "Life & Entertainment"
+msgstr "Ζωή & Ψυχαγωγία"
+
+#: models.py:127
+msgid "Active sport, fitness"
+msgstr "Δραστήρια αθλήματα, φυσική κατάσταση"
+
+#: models.py:128
+msgid "Alcohol, tobacco"
+msgstr "Αλκοόλ, καπνός"
+
+#: models.py:129
+msgid "Books, audio, subscriptions"
+msgstr "Βιβλία, ήχος, συνδρομές"
+
+#: models.py:130
+msgid "Charity, gifts"
+msgstr "Φιλανθρωπία, δώρα"
+
+#: models.py:131
+msgid "Culture, sport events"
+msgstr "Πολιτισμός, αθλητικές εκδηλώσεις"
+
+#: models.py:132
+msgid "Education, development"
+msgstr "Εκπαίδευση, ανάπτυξη"
+
+#: models.py:133
+msgid "Health care, doctor"
+msgstr "Υγειονομική περίθαλψη, γιατρός"
+
+#: models.py:134
+msgid "Hobbies"
+msgstr "Χόμπι"
+
+#: models.py:135
+msgid "Life Events"
+msgstr "Γεγονότα ζωής"
+
+#: models.py:136 models.py:176
+msgid "Lottery, gambling"
+msgstr "Λοταρία, τυχερά παιχνίδια"
+
+#: models.py:137
+msgid "TV, steaming"
+msgstr "Τηλεόραση, streaming"
+
+#: models.py:138
+msgid "Wellness, beauty"
+msgstr "Ευεξία, ομορφιά"
+
+#: models.py:140
+msgid "Communication, PC"
+msgstr "Επικοινωνία, Υπολογιστές"
+
+#: models.py:141
+msgid "Internet"
+msgstr "Διαδίκτυο"
+
+#: models.py:142
+msgid "Phone, cell phone"
+msgstr "Τηλέφωνο, κινητό τηλέφωνο"
+
+#: models.py:143 models.py:150
+msgid "Postal services"
+msgstr "Ταχυδρομικές υπηρεσίες"
+
+#: models.py:144
+msgid "Software, apps, games"
+msgstr "Λογισμικό, εφαρμογές, παιχνίδια"
+
+#: models.py:147
+msgid "Financial expenses"
+msgstr "Οικονομικά έξοδα"
+
+#: models.py:148
+msgid "Advisory"
+msgstr "Συμβουλευτική"
+
+#: models.py:149
+msgid "Charges, fees"
+msgstr "Χρεώσεις, τέλη"
+
+#: models.py:151 models.py:171
+msgid "Child Support"
+msgstr "Διατροφή παιδιών"
+
+#: models.py:152
+msgid "Fines"
+msgstr "Πρόστιμα"
+
+#: models.py:153
+msgid "Insurances"
+msgstr "Ασφάλειες"
+
+#: models.py:154
+msgid "Loan, interests"
+msgstr "Δάνεια, τόκοι"
+
+#: models.py:155
+msgid "Taxes"
+msgstr "Φόροι"
+
+#: models.py:158
+msgid "Investment"
+msgstr "Επενδύσεις"
+
+#: models.py:159
+msgid "Collections"
+msgstr "Συλλογές"
+
 #: models.py:160
+msgid "Financial Investments"
+msgstr "Χρηματοοικονομικές Επενδύσεις"
+
+#: models.py:161
+msgid "Realty"
+msgstr "Ακίνητα"
+
+#: models.py:163
 msgid "Vehicles, chattels"
 msgstr "Οχήματα, κινητά αντικείμενα"
 
-#: models.py:165
+#: models.py:168
 msgid "Wage, invoices"
 msgstr "Μισθός, τιμολόγια"
 
-#: models.py:166
+#: models.py:169
 msgid "Sale"
 msgstr "Πώληση"
 
-#: models.py:167
+#: models.py:170
 msgid "Checks, coupons"
 msgstr "Επιταγές, κουπόνια"
 
-#: models.py:169
+#: models.py:172
 msgid "Dues & grants"
 msgstr "Εισφορές & επιχορηγήσεις"
 
-#: models.py:170
+#: models.py:173
 msgid "Gifts"
 msgstr "Δώρα"
 
-#: models.py:171
+#: models.py:174
 msgid "Interest, dividents"
 msgstr "Τόκοι, μερίσματα"
 
-#: models.py:172
+#: models.py:175
 msgid "Lending, renting"
 msgstr "Δανεισμός, ενοικίαση"
 
-#: models.py:174
+#: models.py:177
 msgid "Refunds (tax,purchase)"
 msgstr "Επιστροφές (φόρος, αγορά)"
 
-#: models.py:175
+#: models.py:178
 msgid "Rental Income"
 msgstr "Έσοδα από ενοίκια"
 
-#: models.py:180
+#: models.py:183
 msgid "Other"
 msgstr "Άλλο"
 
@@ -484,114 +499,124 @@ msgstr "Συνολικό Υπόλοιπο"
 msgid "Your Wallets"
 msgstr "Τα Πορτοφόλια σας"
 
-#: templates/dashboard/dashboard.html:30
-msgid "Balance Correction"
-msgstr "Διόρθωση Υπολοίπου"
+#: templates/dashboard/dashboard.html:28
+msgid "Created by You"
+msgstr "Δημιουργημένα από σενα"
 
-#: templates/dashboard/dashboard.html:46 templates/dashboard/dashboard.html:146
-msgid "Edit"
-msgstr "Επεξεργασία"
+#: templates/dashboard/dashboard.html:29
+msgid "Predefined"
+msgstr "Προκαθορισμένα"
 
-#: templates/dashboard/dashboard.html:51
+#: templates/dashboard/dashboard.html:39 templates/dashboard/dashboard.html:75
+#: templates/dashboard/dashboard.html:98
 msgid "No Wallets available"
 msgstr "Δεν υπάρχουν διαθέσιμα πορτοφόλια"
 
-#: templates/dashboard/dashboard.html:56 templates/dashboard/dashboard.html:179
-#: templates/dashboard/dashboard.html:195
+#: templates/dashboard/dashboard.html:50
+msgid "Balance Correction"
+msgstr "Διόρθωση Υπολοίπου"
+
+#: templates/dashboard/dashboard.html:67 templates/dashboard/dashboard.html:204
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: templates/dashboard/dashboard.html:106
+#: templates/dashboard/dashboard.html:237
+#: templates/dashboard/dashboard.html:253
 msgid "Add Wallet"
 msgstr "Προσθήκη Πορτοφολιού"
 
-#: templates/dashboard/dashboard.html:62
+#: templates/dashboard/dashboard.html:112
 msgid "Financial Information"
 msgstr "Οικονομικές Πληροφορίες"
 
-#: templates/dashboard/dashboard.html:66
+#: templates/dashboard/dashboard.html:116
 msgid "Total Income"
 msgstr "Συνολικά Έσοδα"
 
-#: templates/dashboard/dashboard.html:71
+#: templates/dashboard/dashboard.html:121
 msgid "Total Expenses"
 msgstr "Συνολικά Έξοδα"
 
-#: templates/dashboard/dashboard.html:75
+#: templates/dashboard/dashboard.html:125
 msgid "Total Balance Correction"
 msgstr "Συνολική Διόρθωση Υπολοίπου"
 
-#: templates/dashboard/dashboard.html:85
+#: templates/dashboard/dashboard.html:135
 msgid "Net Balance"
 msgstr "Καθαρό Υπόλοιπο"
 
-#: templates/dashboard/dashboard.html:95
+#: templates/dashboard/dashboard.html:145
 msgid "Recent Transactions"
 msgstr "Πρόσφατες Συναλλαγές"
 
-#: templates/dashboard/dashboard.html:101
+#: templates/dashboard/dashboard.html:151
 msgid "Type"
 msgstr "Τύπος"
 
-#: templates/dashboard/dashboard.html:105
+#: templates/dashboard/dashboard.html:155
 msgid "Current Balance"
 msgstr "Τρέχον Υπόλοιπο"
 
-#: templates/dashboard/dashboard.html:106
+#: templates/dashboard/dashboard.html:156
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: templates/dashboard/dashboard.html:107
+#: templates/dashboard/dashboard.html:158
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: templates/dashboard/dashboard.html:134
+#: templates/dashboard/dashboard.html:192
 msgid "No Action"
 msgstr "Καμία Ενέργεια"
 
-#: templates/dashboard/dashboard.html:141
-#: templates/dashboard/dashboard.html:311
-#: templates/dashboard/dashboard.html:359
+#: templates/dashboard/dashboard.html:199
+#: templates/dashboard/dashboard.html:384
+#: templates/dashboard/dashboard.html:432
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: templates/dashboard/dashboard.html:153
+#: templates/dashboard/dashboard.html:211
 msgid "No transactions available."
 msgstr "Δεν υπάρχουν διαθέσιμες συναλλαγές."
 
-#: templates/dashboard/dashboard.html:163
-#: templates/dashboard/dashboard.html:205
-#: templates/dashboard/dashboard.html:223
+#: templates/dashboard/dashboard.html:221
+#: templates/dashboard/dashboard.html:263
+#: templates/dashboard/dashboard.html:290
 msgid "Add Transaction"
 msgstr "Προσθήκη Συναλλαγής"
 
-#: templates/dashboard/dashboard.html:166
-#: templates/dashboard/dashboard.html:371
+#: templates/dashboard/dashboard.html:224
+#: templates/dashboard/dashboard.html:446
 msgid "Filter Transactions"
 msgstr "Φιλτράρισμα Συναλλαγών"
 
-#: templates/dashboard/dashboard.html:167
-#: templates/dashboard/dashboard.html:400
+#: templates/dashboard/dashboard.html:225
+#: templates/dashboard/dashboard.html:475
 msgid "Filter"
 msgstr "Φίλτρο"
 
-#: templates/dashboard/dashboard.html:233
+#: templates/dashboard/dashboard.html:300
 msgid "Transfer Money Between Wallets"
 msgstr "Μεταφορά Χρημάτων Μεταξύ Πορτοφολιών"
 
-#: templates/dashboard/dashboard.html:276
+#: templates/dashboard/dashboard.html:343
 msgid "Edit Transaction"
 msgstr "Επεξεργασία Συναλλαγής"
 
-#: templates/dashboard/dashboard.html:308
+#: templates/dashboard/dashboard.html:381
 msgid "Save changes"
 msgstr "Αποθήκευση αλλαγών"
 
-#: templates/dashboard/dashboard.html:329
+#: templates/dashboard/dashboard.html:402
 msgid "Edit Wallet"
 msgstr "Επεξεργασία Πορτοφολιού"
 
-#: templates/dashboard/dashboard.html:356
+#: templates/dashboard/dashboard.html:429
 msgid "Save Changes"
 msgstr "Αποθήκευση Αλλαγών"
 
-#: templates/dashboard/dashboard.html:401
+#: templates/dashboard/dashboard.html:476
 msgid "Reset"
 msgstr "Επαναφορά"
 
@@ -855,9 +880,11 @@ msgstr "Έχετε ήδη λογαριασμό;"
 msgid "Log in here"
 msgstr "Συνδεθείτε εδώ"
 
-#: views.py:228
+#: views.py:222
 msgid "Balance Adjustment"
 msgstr "Προσαρμογή Υπολοίπου"
+
+
 
 msgid "Balance Adjustment Decrease"
 msgstr "Αρνητική Προσαρμογή Υπολοίπου"
@@ -865,17 +892,8 @@ msgstr "Αρνητική Προσαρμογή Υπολοίπου"
 msgid "Balance Adjustment Increase"
 msgstr "Θετική Προσαρμογή Υπολοίπου"
 
-msgid "Investment"
-msgstr "Επενδύσεις"
-
-msgid "General"
-msgstr "Γενικό"
-
 msgid "Charity"
 msgstr "Φιλανθρωπία"
 
-msgid "Created by You"
-msgstr "Δημιουργημένα από σενα"
-
-msgid "Predefined"
-msgstr "Προκαθορισμένα"
+msgid "None"
+msgstr "Καμία"

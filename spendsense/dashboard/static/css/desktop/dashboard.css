@@ -280,10 +280,6 @@ section h3 {
     padding: 30px;
     text-align: center;
     color: #ffffff;
-    /* background: linear-gradient(135deg, #38b2ac, #285e61); */
-    /* background: linear-gradient(45deg, #83ab8c,#2c5938); */
-    /* background: linear-gradient(45deg, #839bab,#2c3f59);
-    background: linear-gradient(145deg, #b3d5eb,#6c88ae); */
     background: linear-gradient(145deg, #8c9fab,#4b617ed3);
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -348,7 +344,7 @@ section h3 {
 
 .wallet {
     color: white;
-    height: 150px;
+    height: 150px;  
     text-align: center;
     padding: 15px;
     border-radius: 10px;
@@ -449,7 +445,6 @@ table {
 }
 
 thead {
-    background: linear-gradient(145deg, #83ab8c,#32623d);
     background: linear-gradient(45deg, #839bab,#2c3f59);
     color: white;
 }
@@ -563,7 +558,7 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #e6fffa;
+    background-color: #d1dee9;
 }
 
 .dashboard-btn {

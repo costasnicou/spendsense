@@ -34,15 +34,30 @@ class CustomLoginForm(AuthenticationForm):
         })
     )
 
+class WalletChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        """Translate the wallet name before displaying it."""
+        return _(obj.name)  # This will translate the wallet name to Greek if a translation exists
+
+
 # done translation
 class TransactionForm(forms.ModelForm):
     
     
+    wallet = WalletChoiceField(
+        queryset=Wallet.objects.none(), 
+        empty_label="---------",  # "Select a wallet"
+        widget=forms.Select(attrs={'class': 'form-control custom-wallet-class'}) , # Add CSS class here\
+        label=_("Select Wallet")
+
+    )
     class Meta:
         model = Transaction
         fields = ['wallet', 'type', 'category', 'amount', 'description']
+       
+        
         widgets = {
-            'wallet': forms.Select(attrs={'class': 'form-control'}),
+        
             'type': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control', }),
             'amount': NumberInputWithCommas(attrs={
@@ -80,6 +95,8 @@ class TransactionForm(forms.ModelForm):
         else:
             # Default to an empty queryset if no user is provided
             self.fields['wallet'].queryset = Wallet.objects.none()
+
+
 
 
 # done translation
@@ -163,15 +180,20 @@ class WalletForm(forms.ModelForm):
     
 # done translation
 class WalletTransferForm(forms.Form):
-    source_wallet = forms.ModelChoiceField(
-        queryset=Wallet.objects.none(),
-        label=_("Source Wallet"),
-        widget=forms.Select(attrs={'class': 'form-control'})
+    source_wallet = WalletChoiceField(
+        queryset=Wallet.objects.none(), 
+        empty_label="---------",  # "Select a wallet"
+        widget=forms.Select(attrs={'class': 'form-control custom-wallet-class'}) , # Add CSS class here\
+        label=_("Source Wallet")
+
     )
-    destination_wallet = forms.ModelChoiceField(
-        queryset=Wallet.objects.none(),
-        label=_("Destination Wallet"),
-        widget=forms.Select(attrs={'class': 'form-control'})
+
+    destination_wallet = WalletChoiceField(
+        queryset=Wallet.objects.none(), 
+        empty_label="---------",  # "Select a wallet"
+        widget=forms.Select(attrs={'class': 'form-control custom-wallet-class'}) , # Add CSS class here\
+        label=_("Destination Wallet")
+
     )
 
     amount = forms.DecimalField(
