@@ -1,0 +1,21 @@
+@media only screen and (min-width: 320px) and (max-width: 600px) {
+
+    .dashboard-btn.transactional-btn{
+        width: 130px;
+        height: 50px;
+        margin: 20px 10px; 
+        display: inline-block;
+    }
+    
+ 
+
+    .edit-submit-btn{
+        width: 130px;
+        height: 50px;
+    }
+
+    #edit-wallet-save-submit,#edit-trans-save-submit,#add-trans-btn{
+        position: relative;
+        top: 8px;
+    }
+}

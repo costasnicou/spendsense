@@ -285,11 +285,12 @@ class TransactionFilterForm(forms.Form):
         label=_("Category")
     )
 
-    wallet = forms.ModelChoiceField(
-        queryset=Wallet.objects.none(),  # Default queryset
-        required=False,
-        widget=forms.Select(attrs={'class': 'form-control'}),
-        label=_("Wallet")
+    wallet = WalletChoiceField(
+        queryset=Wallet.objects.none(), 
+        empty_label="---------",  # "Select a wallet"
+        widget=forms.Select(attrs={'class': 'form-control custom-wallet-class'}) , # Add CSS class here\
+        label=_("Choose Wallet")
+
     )
 
     start_date = forms.DateField(

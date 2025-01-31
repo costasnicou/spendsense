@@ -218,8 +218,8 @@
           
 
         </div>
-        <button class="dashboard-btn open-trans-modal show-form" onclick="openTransModal()">{% trans "Add Transaction" %}</button>
-        <button class="dashboard-btn open-transfer-modal show-form" onclick="openTransferModal()">{% trans "Transfer" %}</button>
+        <button class="dashboard-btn transactional-btn open-trans-modal show-form" id="add-trans-btn" onclick="openTransModal()">{% trans "Add Transaction" %}</button>
+        <button class="dashboard-btn transactional-btn open-transfer-modal show-form"  onclick="openTransferModal()">{% trans "Transfer" %}</button>
         <div class="filter-transactions">
             <h3>{% trans "Filter Transactions" %}</h3>
             <button onclick="openfilterTransModal()" class="open-filter-form dashboard-btn" >{% trans "Filter" %}</button>
@@ -378,9 +378,9 @@
 
     </div>
     <div class="modal-footer">
-        <button type="submit" name="transaction_form_submitted" class="btn btn-primary">{% trans "Save changes" %}</button>
+        <button type="submit" name="transaction_form_submitted" class="btn btn-primary edit-submit-btn" id="edit-trans-save-submit">{% trans "Save changes" %}</button>
         <!-- Delete Button -->
-        <button type="submit" name="delete_transaction" class="dashboard-btn"  onclick="return confirm('Are you sure you want to delete this transaction?')">
+        <button type="submit" name="delete_transaction" class="dashboard-btn edit-submit-btn"  onclick="return confirm('Are you sure you want to delete this transaction?')">
             {% trans "Delete" %}
         </button>
     </div>
@@ -426,9 +426,9 @@
                     {% endwith %}
                 </div>
                 <div class="modal-footer">
-                    <button type="submit"  class="btn">{% trans "Save Changes" %}</button>
+                    <button type="submit"  class="btn edit-submit-btn" id="edit-wallet-save-submit">{% trans "Save Changes" %}</button>
                    <!-- Delete Button -->
-                   <button type="submit"  name="delete_wallet" class="dashboard-btn" onclick="return confirm('Are you sure you want to delete this wallet?');">
+                   <button type="submit"  name="delete_wallet" class="dashboard-btn edit-submit-btn" onclick="return confirm('Are you sure you want to delete this wallet?');">
                     {% trans "Delete" %}
                     </button>
                 </div>

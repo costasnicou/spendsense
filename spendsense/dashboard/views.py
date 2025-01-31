@@ -337,14 +337,7 @@ def dashboard(request,user):
     transaction_form = TransactionForm(user=request.user)
     is_dashboard = True
     wallets = Wallet.objects.filter(user=request.user)
-    # predefined_wallets = Wallet.objects.filter(user=request.user,is_predefined=True)
-    # pre_wallets = Wallet.objects.filter(user=request.user)
-    user_created_wallets = Wallet.objects.filter(user=request.user)
     wallet_forms = {wallet.id: WalletForm(instance=wallet) for wallet in wallets}
-    # if predefined_wallets:
-    # predefined_wallet_forms = {wallet.id: WalletForm(instance=wallet) for wallet in predefined_wallets}
-    # elif user_created_wallets:
-    # user_created_wallets_forms = {wallet.id: WalletForm(instance=wallet) for wallet in user_created_wallets}
     transactions = Transaction.objects.filter(wallet__user=request.user).order_by('-timestamp')
     for transaction in transactions:
         transaction.edit_form = TransactionForm(instance=transaction, user=request.user)
@@ -357,10 +350,6 @@ def dashboard(request,user):
     
     # transfer form
     transferform = WalletTransferForm(user=request.user)
-    # transferform.fields['source_wallet'].queryset = Wallet.objects.filter(user=request.user)
-    # transferform.fields['destination_wallet'].queryset = Wallet.objects.filter(user=request.user)
-
-    # filtering transactions
     filter_transactions_form = TransactionFilterForm(data=request.GET, user=request.user)
     
     if filter_transactions_form.is_valid():
@@ -426,10 +415,7 @@ def dashboard(request,user):
 
   
     return render(request, 'dashboard/dashboard.html',  {
-        'pre_wallets': pre_wallets,
         'wallets': wallets,
-        # # 'predefined_wallets': predefined_wallets,
-        'user_created_wallets': user_created_wallets,
         'wallet_forms': wallet_forms,
         'transactions': transactions,
         'total_balance': total_balance,
@@ -443,8 +429,6 @@ def dashboard(request,user):
         'filter_transactions_form':filter_transactions_form,
         'user': request.user,
         'is_dashboard':is_dashboard,
-        'predefined_wallet_forms':predefined_wallet_forms,
-        'user_created_wallets_forms':user_created_wallets_forms,
         
          
     })

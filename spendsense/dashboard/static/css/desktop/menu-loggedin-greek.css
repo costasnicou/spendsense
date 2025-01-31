@@ -34,14 +34,15 @@
         color: white;
         font-size: larger;
         position: absolute;
-        top: -6px;
+        top: -8px;
         font-size: 35px;
     }
     
     
-      .logout-form {
+    .logout-form {
         position: absolute;
         right: 50px;
+        top: 13px;
     }
 
 
