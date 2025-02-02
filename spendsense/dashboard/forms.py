@@ -51,9 +51,39 @@ class TransactionForm(forms.ModelForm):
         label=_("Select Wallet")
 
     )
+
+    # Additional fields for income transactions
+    savings_percentage = forms.DecimalField(
+        required=False,
+        label=_("Savings Percentage"),
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control income-field',
+            'placeholder': _('Enter savings %'),
+            # 'style': 'display:none;'
+        })
+    )
+    investment_percentage = forms.DecimalField(
+        required=False,
+        label=_("Investment Percentage"),
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control income-field',
+            'placeholder': _('Enter investment %'),
+            # 'style': 'display:none;'
+        })
+    )
+    charity_percentage = forms.DecimalField(
+        required=False,
+        label=_("Charity Percentage"),
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control income-field',
+            'placeholder': _('Enter charity %'),
+            # 'style': 'display:none;'
+        })
+    )
+
     class Meta:
         model = Transaction
-        fields = ['wallet', 'type', 'category', 'amount', 'description']
+        fields = ['wallet', 'type', 'savings_percentage', 'investment_percentage','charity_percentage','category', 'amount', 'description']
        
         
         widgets = {
@@ -97,6 +127,34 @@ class TransactionForm(forms.ModelForm):
             self.fields['wallet'].queryset = Wallet.objects.none()
 
 
+    def clean(self):
+        """
+        If the transaction is an income, calculate the amounts for savings,
+        investment, and charity based on the percentages and the income amount.
+        """
+        cleaned_data = super().clean()
+        transaction_type = cleaned_data.get("type")
+        amount = cleaned_data.get("amount")
+        if transaction_type == "Income" and amount is not None:
+            # Get percentages; default to 0 if not provided.
+            savings_pct = cleaned_data.get("savings_percentage") or 0
+            investment_pct = cleaned_data.get("investment_percentage") or 0
+            charity_pct = cleaned_data.get("charity_percentage") or 0
+
+            # Calculate the respective amounts.
+            cleaned_data["savings_amount"] = amount * savings_pct / 100
+            cleaned_data["investment_amount"] = amount * investment_pct / 100
+            cleaned_data["charity_amount"] = amount * charity_pct / 100
+
+            # Optionally, you might want to enforce that the percentages do not exceed 100%
+            # or that the sum of percentages does not exceed 100.
+            total_pct = savings_pct + investment_pct + charity_pct
+            if total_pct > 100:
+                raise forms.ValidationError(
+                    _("The total percentage allocation cannot exceed 100%.")
+                )
+
+        return cleaned_data
 
 
 # done translation

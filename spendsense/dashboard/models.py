@@ -191,6 +191,35 @@ class Transaction(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     total_balance = models.DecimalField(max_digits=15, decimal_places=2, default=Decimal('0.00'))  # New field
     description = models.TextField(blank=True,null=True)  # New field for text input
+
+      # New fields for storing percentage allocations (for income transactions)
+    savings_percentage = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True,
+        help_text=_("Percentage allocated for savings (e.g., 10 for 10%)")
+    )
+    investment_percentage = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True,
+        help_text=_("Percentage allocated for investment (e.g., 10 for 10%)")
+    )
+    charity_percentage = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True,
+        help_text=_("Percentage allocated for charity (e.g., 10 for 10%)")
+    )
+
+    # Optional: Fields for storing computed amounts (if needed)
+    savings_amount = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
+    investment_amount = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
+    charity_amount = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
+
+
+
+
     def __str__(self):
         return f"{self.type} - {self.category} - {self.amount}"
 

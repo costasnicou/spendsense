@@ -32,6 +32,8 @@ class CustomLoginView(LoginView):
         return reverse('dashboard', kwargs={'user': self.request.user.username})
 
 
+
+
 def homepage(request):
     context = {
         'LANGUAGES': settings.LANGUAGES,  # Pass LANGUAGES explicitly
@@ -80,13 +82,56 @@ def dashboard(request,user):
                 wallet = transaction_form_submitted.cleaned_data['wallet']
                 transaction.wallet = wallet
                 if transaction.type == 'Income':
-                    wallet.balance += Decimal(transaction.amount)
+                    
+                   
+                    # Retrieve percentages from the form cleaned_data; default to None if not provided.
+                    transaction.savings_percentage = transaction_form_submitted.cleaned_data.get("savings_percentage")
+                    transaction.investment_percentage = transaction_form_submitted.cleaned_data.get("investment_percentage")
+                    transaction.charity_percentage = transaction_form_submitted.cleaned_data.get("charity_percentage")
+                    
+                    # Also assign computed amounts (if you added these fields in your model)
+                    transaction.savings_amount = transaction.amount * (transaction.savings_percentage or Decimal('0')) / Decimal('100')
+                    transaction.investment_amount = transaction.amount * (transaction.investment_percentage or Decimal('0')) / Decimal('100')
+                    transaction.charity_amount = transaction.amount * (transaction.charity_percentage or Decimal('0')) / Decimal('100')
+            
+                    try:
+                        savings_wallet = Wallet.objects.get(user=request.user, name='Savings', is_predefined=True)
+                        savings_wallet.balance +=  transaction.savings_amount
+                        savings_wallet.save()
+                    except Wallet.DoesNotExist:
+                        # Optionally, handle the missing wallet (e.g., log an error)
+                        pass
+
+                    # Update the Investment Wallet.
+                    try:
+                        investment_wallet = Wallet.objects.get(user=request.user, name='Investment', is_predefined=True)
+                        investment_wallet.balance += transaction.investment_amount
+                        investment_wallet.save()
+                    except Wallet.DoesNotExist:
+                        pass
+
+                    # Update the Charity Wallet.
+                    try:
+                        charity_wallet = Wallet.objects.get(user=request.user, name='Charity', is_predefined=True)
+                        charity_wallet.balance +=  transaction.charity_amount
+                        charity_wallet.save()
+                    except Wallet.DoesNotExist:
+                        pass
+
+                    cleared_balance = transaction.amount - (transaction.savings_amount + transaction.investment_amount + transaction.charity_amount)
+                    wallet.balance += Decimal(cleared_balance)
+                    total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
+                    transaction.total_balance = total_balance + Decimal(cleared_balance)
+                    
                 else:
                     wallet.balance -= Decimal(transaction.amount)
-                total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
+                
                 if transaction.type == 'Income':
-                    transaction.total_balance = total_balance + Decimal(transaction.amount)
+                    pass
+                   
                 else:
+                    
+                    total_balance = Decimal(sum(Decimal(w.balance) for w in Wallet.objects.filter(user=request.user)))
                     transaction.total_balance = total_balance - Decimal(transaction.amount)
                 transaction.save()
                 wallet.save()
@@ -97,8 +142,9 @@ def dashboard(request,user):
             # print(f"POST request received for transaction ID: {transaction_id}")
         
             wallet = transaction.wallet
-            if transaction.type == 'Income':
+            if transaction.type == 'Income': 
                 wallet.balance -= Decimal(transaction.amount)
+
 
             
             elif transaction.type == 'Expense':
@@ -132,15 +178,7 @@ def dashboard(request,user):
             original_wallet = transaction.wallet
             original_type = transaction.type
             original_amount = Decimal(transaction.amount)
-           
-            if transaction.wallet.fat and transaction.wallet.fat.amount is not None:
-                original_fat_amount = transaction.wallet.fat.amount
-            else:
-                original_fat_amount = Decimal(0.00)
             transaction_form_submitted = TransactionForm(request.POST, user=request.user, instance=transaction)
-
-            # transaction_form_balance_adjustment_submitted = TransactionForm(request.POST, user=request.user, instance=transaction)
-             
 
             if transaction_form_submitted.is_valid():
               
@@ -149,10 +187,38 @@ def dashboard(request,user):
                     # print("POST data:", request.POST)
                     wallet = transaction.wallet
                     if transaction.type == 'Income':
-                        wallet.balance -= Decimal(transaction.amount)
 
+                        cleared_balance = transaction.amount - (transaction.savings_amount+transaction.investment_amount+transaction.charity_amount)
+
+                        wallet.balance -= Decimal(cleared_balance)
+
+
+                        try:
+                            savings_wallet = Wallet.objects.get(user=request.user, name='Savings', is_predefined=True)
+                            savings_wallet.balance -=  transaction.savings_amount
+                            savings_wallet.save()
+                        except Wallet.DoesNotExist:
+                            # Optionally, handle the missing wallet (e.g., log an error)
+                            pass
+
+                        # Update the Investment Wallet.
+                        try:
+                            investment_wallet = Wallet.objects.get(user=request.user, name='Investment', is_predefined=True)
+                            investment_wallet.balance -= transaction.investment_amount
+                            investment_wallet.save()
+                        except Wallet.DoesNotExist:
+                            pass
+
+                        # Update the Charity Wallet.
+                        try:
+                            charity_wallet = Wallet.objects.get(user=request.user, name='Charity', is_predefined=True)
+                            charity_wallet.balance -=  transaction.charity_amount
+                            charity_wallet.save()
+                        except Wallet.DoesNotExist:
+                            pass
                     
                     elif transaction.type == 'Expense':
+                        
                         wallet.balance += Decimal(transaction.amount)
                         
                     wallet.save()
@@ -162,29 +228,247 @@ def dashboard(request,user):
 
                 updated_transaction = transaction_form_submitted.save(commit=False)
                 
+                # cleared_balance = updated_transaction.amount - (updated_transaction.savings_amount+updated_transaction.investment_amount+updated_transaction.charity_amount)                 
                 if original_wallet != updated_transaction.wallet:
-                    if original_type == 'Income':
-                        original_wallet.balance -= Decimal(original_amount)
+                    if original_type == 'Income':     
+                      
+                        cleared_balance = updated_transaction.amount - (updated_transaction.savings_amount+updated_transaction.investment_amount+updated_transaction.charity_amount)                 
+                        original_wallet.balance -= Decimal(cleared_balance)
                     elif original_type == 'Expense':
+                        # REVERSE PREDEFINED WALLETS AMOUNTS
+                        try:
+                            savings_wallet = Wallet.objects.get(user=request.user, name='Savings', is_predefined=True)
+                            savings_wallet.balance -=  updated_transaction.savings_amount
+                            savings_wallet.save()
+                            updated_transaction.savings_amount = Decimal(0.00)
+                            
+                        except Wallet.DoesNotExist:
+                            # Optionally, handle the missing wallet (e.g., log an error)
+                            pass
+
+                        # Update the Investment Wallet.
+                        try:
+                            investment_wallet = Wallet.objects.get(user=request.user, name='Investment', is_predefined=True)
+                            investment_wallet.balance -= updated_transaction.investment_amount
+                            investment_wallet.save()
+                            updated_transaction.investment_amount = Decimal(0.00)
+                        except Wallet.DoesNotExist:
+                            pass
+
+                        # Update the Charity Wallet.
+                        try:
+                            charity_wallet = Wallet.objects.get(user=request.user, name='Charity', is_predefined=True)
+                            charity_wallet.balance -=  updated_transaction.charity_amount
+                            charity_wallet.save()
+                            updated_transaction.charity_amount = Decimal(0.00)
+                        except Wallet.DoesNotExist:
+                            pass
+
+
+
                         original_wallet.balance += Decimal(original_amount)
                     original_wallet.save()
 
                     new_wallet = updated_transaction.wallet
                     if updated_transaction.type == 'Income':
-                        new_wallet.balance += Decimal(updated_transaction.amount)
+                        if updated_transaction.savings_amount == 0 and updated_transaction.investment_amount == 0 and updated_transaction.charity_amount == 0:
+                             # Also assign computed amounts (if you added these fields in your model)
+                            updated_transaction.savings_amount = transaction.amount * (transaction.savings_percentage or Decimal('0')) / Decimal('100')
+                            updated_transaction.investment_amount = transaction.amount * (transaction.investment_percentage or Decimal('0')) / Decimal('100')
+                            updated_transaction.charity_amount = transaction.amount * (transaction.charity_percentage or Decimal('0')) / Decimal('100')
+                    
+                            try:
+                                savings_wallet = Wallet.objects.get(user=request.user, name='Savings', is_predefined=True)
+                                savings_wallet.balance +=  updated_transaction.savings_amount
+                                savings_wallet.save()
+                            except Wallet.DoesNotExist:
+                                # Optionally, handle the missing wallet (e.g., log an error)
+                                pass
+
+                            # Update the Investment Wallet.
+                            try:
+                                investment_wallet = Wallet.objects.get(user=request.user, name='Investment', is_predefined=True)
+                                investment_wallet.balance += updated_transaction.investment_amount
+                                investment_wallet.save()
+                            except Wallet.DoesNotExist:
+                                pass
+
+                            # Update the Charity Wallet.
+                            try:
+                                charity_wallet = Wallet.objects.get(user=request.user, name='Charity', is_predefined=True)
+                                charity_wallet.balance +=  updated_transaction.charity_amount
+                                charity_wallet.save()
+                            except Wallet.DoesNotExist:
+                                pass
+                        cleared_balance = updated_transaction.amount - (updated_transaction.savings_amount+updated_transaction.investment_amount+updated_transaction.charity_amount)                 
+                        new_wallet.balance += Decimal(cleared_balance)
                     elif updated_transaction.type == 'Expense':
+                        # REVERSE PREDEFINED WALLETS AMOUNTS
+                        try:
+                            savings_wallet = Wallet.objects.get(user=request.user, name='Savings', is_predefined=True)
+                            savings_wallet.balance -=  updated_transaction.savings_amount
+                            savings_wallet.save()
+                            updated_transaction.savings_amount = Decimal(0.00)
+                        except Wallet.DoesNotExist:
+                            # Optionally, handle the missing wallet (e.g., log an error)
+                            pass
+
+                        # Update the Investment Wallet.
+                        try:
+                            investment_wallet = Wallet.objects.get(user=request.user, name='Investment', is_predefined=True)
+                            investment_wallet.balance -= updated_transaction.investment_amount
+                            investment_wallet.save()
+                            updated_transaction.investment_amount = Decimal(0.00)
+                        except Wallet.DoesNotExist:
+                            pass
+
+                        # Update the Charity Wallet.
+                        try:
+                            charity_wallet = Wallet.objects.get(user=request.user, name='Charity', is_predefined=True)
+                            charity_wallet.balance -=  updated_transaction.charity_amount
+                            charity_wallet.save()
+                            updated_transaction.charity_amount = Decimal(0.00)
+                        except Wallet.DoesNotExist:
+                            pass
+
+
                         new_wallet.balance -= Decimal(updated_transaction.amount)
                     new_wallet.save()
-                else:
-                    if original_type == 'Income':
-                        original_wallet.balance -= Decimal(original_amount)
-                    elif original_type == 'Expense':
-                        original_wallet.balance += Decimal(original_amount)
+                else: 
+                    # Retrieve the predefined wallets (they must exist)
+                    try:
+                        savings_wallet = Wallet.objects.get(user=request.user, name='Savings', is_predefined=True)
+                    except Wallet.DoesNotExist:
+                        savings_wallet = None
 
-                    if updated_transaction.type == 'Income':
-                        original_wallet.balance += Decimal(updated_transaction.amount)
+                    try:
+                        investment_wallet = Wallet.objects.get(user=request.user, name='Investment', is_predefined=True)
+                    except Wallet.DoesNotExist:
+                        investment_wallet = None
+
+                    try:
+                        charity_wallet = Wallet.objects.get(user=request.user, name='Charity', is_predefined=True)
+                    except Wallet.DoesNotExist:
+                        charity_wallet = None
+
+                    
+                     # CASE 1: Changing from Expense to Income
+                    if original_type == 'Expense' and updated_transaction.type == 'Income':
+                        # 1. Revert the full expense effect by adding back the old transaction amount to the original wallet.
+                        original_wallet.balance += transaction.amount
+                        original_wallet.save()
+                        # 2. (Now, the original wallet is “restored” as if the transaction were never an expense.)
+                        # 3. Calculate new allocations based on the updated amount and percentages.
+                        updated_amount = updated_transaction.amount
+                        new_savings = updated_amount * (updated_transaction.savings_percentage or Decimal('0')) / Decimal('100')
+                        new_investment = updated_amount * (updated_transaction.investment_percentage or Decimal('0')) / Decimal('100')
+                        new_charity = updated_amount * (updated_transaction.charity_percentage or Decimal('0')) / Decimal('100')
+                        total_allocated = new_savings + new_investment + new_charity
+
+                        # 4. Deduct the new allocations from the original wallet.
+                        original_wallet.balance = updated_amount - total_allocated 
+                        original_wallet.save()
+
+                        # 5. Update the predefined wallets by adding the new allocated amounts.
+                        if savings_wallet:
+                            savings_wallet.balance += new_savings
+                            savings_wallet.save()
+                        if investment_wallet:
+                            investment_wallet.balance += new_investment
+                            investment_wallet.save()
+                        if charity_wallet:
+                            charity_wallet.balance += new_charity
+                            charity_wallet.save()
+
+                        #  6. Update the allocation fields on the transaction.
+                        updated_transaction.savings_amount = new_savings
+                        updated_transaction.investment_amount = new_investment
+                        updated_transaction.charity_amount = new_charity
+                       
+                            
+                        # total_allocated = updated_transaction.savings_amount + updated_transaction.investment_amount + updated_transaction.charity_amount
+                        
+                        # original_wallet.balance = updated_amount - total_allocated 
+                          
+                   # CASE 2: Updating an Income Transaction (Income → Income)
+                    elif original_type == 'Income' and updated_transaction.type == 'Income':
+                        # 1. Reverse the previous allocations by subtracting the old allocated amounts from the predefined wallets.
+                        updated_amount = updated_transaction.amount    
+                        if savings_wallet:
+                            savings_wallet.balance -= transaction.savings_amount or Decimal('0')
+                            savings_wallet.save()
+                        if investment_wallet:
+                            investment_wallet.balance -= transaction.investment_amount or Decimal('0')
+                            investment_wallet.save()
+                        if charity_wallet:
+                            charity_wallet.balance -= transaction.charity_amount or Decimal('0')
+                            charity_wallet.save()
+
+                        # 2. Calculate new allocated amounts.
+                        new_savings = updated_amount * (updated_transaction.savings_percentage or Decimal('0')) / Decimal('100')
+                        new_investment = updated_amount * (updated_transaction.investment_percentage or Decimal('0')) / Decimal('100')
+                        new_charity = updated_amount * (updated_transaction.charity_percentage or Decimal('0')) / Decimal('100')
+                        total_allocated = new_savings + new_investment + new_charity
+
+                        # 3. Update the original wallet so that its balance becomes the updated amount minus the new allocations.
+                        original_wallet.balance = updated_amount - total_allocated
+                        original_wallet.save()
+
+                        # 4. Add the new allocated amounts to the predefined wallets.
+                        if savings_wallet:
+                            savings_wallet.balance += new_savings
+                            savings_wallet.save()
+                        if investment_wallet:
+                            investment_wallet.balance += new_investment
+                            investment_wallet.save()
+                        if charity_wallet:
+                            charity_wallet.balance += new_charity
+                            charity_wallet.save()
+
+                        # 5. Update the transaction's allocation fields.
+                        updated_transaction.savings_amount = new_savings
+                        updated_transaction.investment_amount = new_investment
+                        updated_transaction.charity_amount = new_charity
+
+                                    
+
                     elif updated_transaction.type == 'Expense':
-                        original_wallet.balance -= Decimal(updated_transaction.amount)
+                          # Step 1: Reverse the previous allocation
+                        try:
+                            savings_wallet = Wallet.objects.get(user=request.user, name='Savings', is_predefined=True)
+                            savings_wallet.balance -= transaction.savings_amount  # Remove previous allocation
+                            savings_wallet.save()
+                        except Wallet.DoesNotExist:
+                            pass  
+
+                        try:
+                            investment_wallet = Wallet.objects.get(user=request.user, name='Investment', is_predefined=True)
+                            investment_wallet.balance -= transaction.investment_amount  # Remove previous allocation
+                            investment_wallet.save()
+                        except Wallet.DoesNotExist:
+                            pass  
+
+                        try:
+                            charity_wallet = Wallet.objects.get(user=request.user, name='Charity', is_predefined=True)
+                            charity_wallet.balance -= transaction.charity_amount  # Remove previous allocation
+                            charity_wallet.save()
+                        except Wallet.DoesNotExist:
+                            pass  
+
+                        updated_amount = updated_transaction.amount
+                        # Instead of deducting the full updated_amount, we only deduct what was actually used
+                        amount_to_deduct = updated_amount - (updated_transaction.savings_amount + updated_transaction.investment_amount + updated_transaction.charity_amount)
+                        # total_allocated = updated_transaction.savings_amount + updated_transaction.investment_amount + updated_transaction.charity_amount
+                        
+                        original_wallet.balance -= Decimal(updated_amount + amount_to_deduct)
+
+                        # 4. Reset all allocation fields for the expense.
+                        updated_transaction.savings_percentage = Decimal('0')
+                        updated_transaction.investment_percentage = Decimal('0')
+                        updated_transaction.charity_percentage = Decimal('0')
+                        updated_transaction.savings_amount = Decimal('0')
+                        updated_transaction.investment_amount = Decimal('0')
+                        updated_transaction.charity_amount = Decimal('0')
 
                     original_wallet.save()
                

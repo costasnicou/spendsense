@@ -11,7 +11,8 @@ const transaction_type = document.querySelectorAll('.transaction-type');
 // ------------OPEN MODALS----------------------//
 // open wallet modal
 const openWalletModal = function () {
-  
+
+
   walletModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
 };
@@ -141,4 +142,86 @@ document.addEventListener("DOMContentLoaded", () => {
       tabContent.classList.add("active");
     });
   });
+});
+
+
+// show percentagte fileds on transaction form
+document.addEventListener("DOMContentLoaded", function() {
+  // Adjust the ID if necessary.
+  const typeSelect = document.getElementById("id_type");
+  // Get all income-related fields by their class.
+  const incomeFields = document.querySelectorAll(".income-field");
+
+  function toggleIncomeFields() {
+      if (typeSelect.value === "Income") {
+          incomeFields.forEach(function(field) {
+              // Show the field (or its container, if your markup wraps it)
+              if (field.closest(".form-group")) {
+                  field.closest(".form-group").style.display = "block";
+              } else {
+                  field.style.display = "block";
+              }
+          });
+      } else {
+          incomeFields.forEach(function(field) {
+              if (field.closest(".form-group")) {
+                  field.closest(".form-group").style.display = "none";
+              } else {
+                  field.style.display = "none";
+              }
+          });
+      }
+  }
+
+  // Bind the change event to the type select.
+  typeSelect.addEventListener("change", toggleIncomeFields);
+  // // Call once on page load to ensure correct visibility.
+  toggleIncomeFields();
+});
+
+
+
+
+// show percentage fields on editing form
+document.addEventListener("DOMContentLoaded", function() {
+    // Select all modals related to transactions
+    const modal = document.querySelector(".edit-trans-modal");
+
+
+      // Get the transaction ID from the modal’s data attribute
+      const transactionId = modal.getAttribute("data-transaction-id");
+
+      // Find the type field and percentage fields inside this modal
+      const typeField = document.querySelector(`#editTransactionModal${transactionId} select[name="type"]`);
+      const percentageFields = document.querySelectorAll(`#editTransactionModal${transactionId} .income-field`);
+
+      function toggleIncomeFields() {
+          if (typeField.value === "Income") {
+              percentageFields.forEach(function(field) {
+                if (field.closest(".form-group")) {
+                  field.closest(".form-group").style.display = "block";
+                }else{
+                  field.closest(".form-group").style.display = "none";
+                }
+                
+              });
+              // console.log(field);
+          } else {
+              percentageFields.forEach(function(field) {
+                  if (field.closest(".form-group")) {
+                    field.closest(".form-group").style.display = "none";
+                  }else{
+                    field.closest(".form-group").style.display = "block";
+                  }
+              });
+          }
+      }
+
+      if (typeField) {
+          typeField.addEventListener("change", toggleIncomeFields);
+          // Set initial state based on current value
+          toggleIncomeFields();
+      }
+  
+
 });

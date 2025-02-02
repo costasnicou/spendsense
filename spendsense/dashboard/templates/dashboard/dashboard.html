@@ -32,7 +32,9 @@
 
 
             <div class="tabs-container">
+                
                 <div class="tab-content active" id="tab1">
+                    <!-- wallets by user -->
                     <div class="wallet-flex" >
 
                         {% if wallets|length == 3 %}
@@ -81,6 +83,7 @@
                 </div>
 
                 <div class="tab-content" id="tab2">
+                    <!-- predefined wallets -->
                     <div class="wallet-flex">
                         {% for wallet in wallets %}
                             
@@ -91,11 +94,13 @@
                                 <span class="wallet-header"><strong>{{ wallet.name|translate }}</strong></span><br>
                                 {% trans "Balance" %}: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>        
                                 </p>
+                            
+                                <!-- <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }}); reverseEditWalletForm();" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
+                                    {% trans "Edit" %}
+                                </button>
+                             -->
                             </div>
                             {% endif %}
-                            
-                        {% empty %}
-                        <p>{% trans "No Wallets available" %}</p>
                             
                         
                         {% endfor %}
@@ -272,6 +277,8 @@
         {{  transaction_form.type.label_tag }} <br>
         {{ transaction_form.type }}
     </div>
+
+    
     <div class="form-group">
         {{  transaction_form.category.label_tag }} <br>
         {{ transaction_form.category }}
@@ -285,6 +292,22 @@
     <div class="form-group">
         {{  transaction_form.amount.label_tag }} <br>
         {{ transaction_form.amount }}
+    </div>
+
+     <!-- display income,charity,percentage -->
+     <div class="form-group">
+        {{  transaction_form.savings_percentage.label_tag }} <br>
+        {{ transaction_form.savings_percentage}}
+    </div>
+
+    <div class="form-group">
+        {{  transaction_form.investment_percentage.label_tag }} <br>
+        {{ transaction_form.investment_percentage }}
+    </div>
+
+    <div class="form-group">
+        {{  transaction_form.charity_percentage.label_tag }} <br>
+        {{ transaction_form.charity_percentage }}
     </div>
 
     <button type="submit" name="submit_transaction_form" class="btn">{% trans "Add Transaction" %}</button>
@@ -337,7 +360,7 @@
 <!-- Modal for Editing Transaction -->
 {% for transaction in transactions %}
 
-<form class="modal edit-trans-modal hidden" id="editTransactionModal{{ transaction.id }}" method="POST">
+<form class="modal edit-trans-modal hidden" id="editTransactionModal{{ transaction.id }}" data-transaction-id="{{ transaction.id }}" method="POST">
     {% csrf_token %}
     <div class="modal-header">
         <h1 class="modal-title" id="editTransactionModalLabel{{ transaction.id }}">{% trans "Edit Transaction" %}</h1>
@@ -372,6 +395,22 @@
         <div class="form-group">
             {{ transaction.edit_form.amount.label_tag }} <br>
             {{ transaction.edit_form.amount }}
+        </div>
+
+          <!-- display income,charity,percentage -->
+        <div class="form-group">
+            {{  transaction.edit_form.savings_percentage.label_tag }} <br>
+            {{ transaction.edit_form.savings_percentage}}
+        </div>
+
+        <div class="form-group">
+            {{  transaction.edit_form.investment_percentage.label_tag }} <br>
+            {{ transaction.edit_form.investment_percentage }}
+        </div>
+
+        <div class="form-group">
+            {{  transaction.edit_form.charity_percentage.label_tag }} <br>
+            {{ transaction.edit_form.charity_percentage }}
         </div>
 
 
