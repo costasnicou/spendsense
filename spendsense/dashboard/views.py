@@ -25,6 +25,7 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
+
 class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
     def get_success_url(self):
@@ -94,6 +95,10 @@ def dashboard(request,user):
                     transaction.investment_amount = transaction.amount * (transaction.investment_percentage or Decimal('0')) / Decimal('100')
                     transaction.charity_amount = transaction.amount * (transaction.charity_percentage or Decimal('0')) / Decimal('100')
             
+                    
+                    
+                    
+                    
                     try:
                         savings_wallet = Wallet.objects.get(user=request.user, name='Savings', is_predefined=True)
                         savings_wallet.balance +=  transaction.savings_amount
@@ -136,6 +141,9 @@ def dashboard(request,user):
                 transaction.save()
                 wallet.save()
                 return redirect(reverse('dashboard', kwargs={'user': request.user.username}))
+            else:
+                transaction_form = TransactionForm(user=request.user)
+
         elif 'delete_balance_adjustment' in request.POST:
             transaction_id = request.POST.get('transaction_id')
             transaction = get_object_or_404(Transaction, id=transaction_id)
@@ -231,7 +239,6 @@ def dashboard(request,user):
                 # cleared_balance = updated_transaction.amount - (updated_transaction.savings_amount+updated_transaction.investment_amount+updated_transaction.charity_amount)                 
                 if original_wallet != updated_transaction.wallet:
                     if original_type == 'Income':     
-                      
                         cleared_balance = updated_transaction.amount - (updated_transaction.savings_amount+updated_transaction.investment_amount+updated_transaction.charity_amount)                 
                         original_wallet.balance -= Decimal(cleared_balance)
                     elif original_type == 'Expense':
@@ -366,7 +373,7 @@ def dashboard(request,user):
                         total_allocated = new_savings + new_investment + new_charity
 
                         # 4. Deduct the new allocations from the original wallet.
-                        original_wallet.balance = updated_amount - total_allocated 
+                        original_wallet.balance += updated_amount - total_allocated 
                         original_wallet.save()
 
                         # 5. Update the predefined wallets by adding the new allocated amounts.
@@ -411,7 +418,7 @@ def dashboard(request,user):
                         total_allocated = new_savings + new_investment + new_charity
 
                         # 3. Update the original wallet so that its balance becomes the updated amount minus the new allocations.
-                        original_wallet.balance = updated_amount - total_allocated
+                        original_wallet.balance += updated_amount - total_allocated
                         original_wallet.save()
 
                         # 4. Add the new allocated amounts to the predefined wallets.

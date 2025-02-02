@@ -14,6 +14,7 @@
 {% endblock %}
 {% block main %}
 <div class="dashboard wrapper  ">
+   
     <h1>{% trans "Welcome" %}, {{ user.username }}</h1>
     <h2>{% trans "Total Balance" %}: <span class="total-balance">€{{ total_balance }}</span></h2>
 
@@ -95,10 +96,10 @@
                                 {% trans "Balance" %}: <span class="wallet-amount"> €{{ wallet.balance }}</span><br>        
                                 </p>
                             
-                                <!-- <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }}); reverseEditWalletForm();" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
+                                <button type="button" class="wallet-btn open-edit-wallet-modal" onclick="openEditWalletModal({{ wallet.id }}); reverseEditWalletForm();" data-toggle="modal" data-target="#editWalletModal{{ wallet.id }}">
                                     {% trans "Edit" %}
                                 </button>
-                             -->
+                             
                             </div>
                             {% endif %}
                             
@@ -265,12 +266,11 @@
     <button type="button" class="close-form" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
         <span aria-hidden="true">&times;</span>
     </button>
+    
     <h1>{% trans "Add Transaction"  %}</h1>
+    <!-- Display Non-field Errors -->
     <div class="form-group">
         {{  transaction_form.wallet.label_tag }} <br>
-        <!-- <select class="form-control" id="">
-        
-        </select> -->
         {{transaction_form.wallet}}
     </div>
     <div class="form-group">

@@ -83,7 +83,10 @@ class TransactionForm(forms.ModelForm):
 
     class Meta:
         model = Transaction
-        fields = ['wallet', 'type', 'savings_percentage', 'investment_percentage','charity_percentage','category', 'amount', 'description']
+        fields = ['wallet', 'type', 'savings_percentage',
+                  'investment_percentage','charity_percentage',
+                  'category', 'amount', 'description'
+                ]
        
         
         widgets = {
@@ -140,7 +143,7 @@ class TransactionForm(forms.ModelForm):
             savings_pct = cleaned_data.get("savings_percentage") or 0
             investment_pct = cleaned_data.get("investment_percentage") or 0
             charity_pct = cleaned_data.get("charity_percentage") or 0
-
+            wallet = cleaned_data.get('wallet')
             # Calculate the respective amounts.
             cleaned_data["savings_amount"] = amount * savings_pct / 100
             cleaned_data["investment_amount"] = amount * investment_pct / 100
@@ -153,6 +156,15 @@ class TransactionForm(forms.ModelForm):
                 raise forms.ValidationError(
                     _("The total percentage allocation cannot exceed 100%.")
                 )
+            # If a predefined wallet is selected, disallow a percentage for that same wallet
+            if wallet and wallet.is_predefined:
+                if wallet.name.lower() == 'savings' and savings_pct != Decimal('0'):
+                    raise ValidationError(_("You cannot add a savings percentage when the Savings wallet is selected."))
+                if wallet.name.lower() == 'investment' and investment_pct != Decimal('0'):
+                    raise ValidationError(_("You cannot add an investment percentage when the Investment wallet is selected."))
+                if wallet.name.lower() == 'charity' and charity_pct != Decimal('0'):
+                    raise ValidationError(_("You cannot add a charity percentage when the Charity wallet is selected."))
+
 
         return cleaned_data
 

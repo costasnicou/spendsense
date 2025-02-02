@@ -635,3 +635,10 @@ tr:hover {
 .d-none{
     display: none;
 }
+
+/* transactional form, edit-trans-form */
+.trans-modal,.edit-trans-modal{
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
