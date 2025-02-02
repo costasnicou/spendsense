@@ -160,6 +160,27 @@ class TransactionForm(forms.ModelForm):
 # done translation
 class SignupForm(UserCreationForm):
 
+     # New fields for name and surname
+    first_name = forms.CharField(
+        label=_("First Name:"),
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': _('Enter your first name')
+        }),
+        required=True  # Mark as required or False as needed
+    )
+    
+    last_name = forms.CharField(
+        label=_("Last Name:"),
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': _('Enter your last name')
+        }),
+        required=True
+    )
+
+
+
     username = forms.CharField(
         label=_("Username:"),
         widget=forms.TextInput(attrs={
@@ -195,7 +216,7 @@ class SignupForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['first_name','last_name','username', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

@@ -19,6 +19,20 @@
     <form method="post">
         {% csrf_token %}
         <div class="form-group">
+            <div class="fullname-flex">
+                <div class="firstname">
+                    {{ form.first_name.label_tag }} <br>
+                    {{ form.first_name }}
+                </div>
+
+                <div class="lastname">
+                    {{ form.last_name.label_tag }} <br>
+                    {{ form.last_name }}
+                </div>
+            </div>
+           
+        </div>
+        <div class="form-group">
             {{ form.username.label_tag }} <br>
             {{ form.username }}
         </div>
@@ -40,7 +54,7 @@
 
         
        
-        <div>
+        <div class="btn-wrapper">
             <button class="btn btn-signup" type="submit">{% trans "Sign Up" %}</button>
         </div>
     </form>

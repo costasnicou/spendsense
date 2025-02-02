@@ -9,10 +9,24 @@
     flex-direction: column;
     align-items: center;
     min-height: 750px;
+    text-align: left;
 }
+
+
+
 
 .signup-container h1{
     font-size: 40px;
+}
+
+.fullname-flex{
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.fullname-flex > * {
+    width: 48%;
 }
 .signup-container form{
     width: 70%;
@@ -37,6 +51,9 @@
     
 }
 
+.btn-wrapper{
+    text-align: center;
+}
 .btn-signup{
     margin: 20px 0;
 }

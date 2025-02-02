@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-30 22:51+0200\n"
+"POT-Creation-Date: 2025-02-02 18:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Username"
 msgstr "Όνομα Χρήστη"
 
-#: forms.py:26 forms.py:109
+#: forms.py:26 forms.py:188
 msgid "Enter your username"
 msgstr "Εισάγετε το όνομα χρήστη σας"
 
@@ -34,117 +34,159 @@ msgstr "Κωδικός"
 msgid "Enter your password"
 msgstr "Εισάγετε τον κωδικό σας"
 
-#: forms.py:51 forms.py:78
+#: forms.py:51 forms.py:108
 msgid "Select Wallet"
 msgstr "Επιλέξτε Πορτοφόλι"
 
-#: forms.py:72
+#: forms.py:58
+msgid "Savings Percentage"
+msgstr "Ποσοστό αποτομίευσης"
+
+#: forms.py:61
+msgid "Enter savings %"
+msgstr "Προσθέστε % αποταμίευσης"
+
+#: forms.py:67
+msgid "Investment Percentage"
+msgstr "Ποσοστό επενδύσης"
+
+#: forms.py:70
+msgid "Enter investment %"
+msgstr "Προσθέστε % επενδύσης"
+
+#: forms.py:76
+msgid "Charity Percentage"
+msgstr "Ποσοστό Φιλανθρωπίας"
+
+#: forms.py:79
+msgid "Enter charity %"
+msgstr "Προσθέστε % φιλανθρωπίας"
+
+#: forms.py:102
 msgid "Add a description (optional)..."
 msgstr "Προσθέστε περιγραφή (προαιρετικό)"
 
-#: forms.py:79 forms.py:273
+#: forms.py:109 forms.py:357
 msgid "Transaction Type"
 msgstr "Τύπος Συναλλαγής"
 
-#: forms.py:80 forms.py:176 forms.py:280 templates/dashboard/dashboard.html:152
+#: forms.py:110 forms.py:255 forms.py:364
+#: templates/dashboard/dashboard.html:157
 msgid "Category"
 msgstr "Κατηγορία"
 
-#: forms.py:81
+#: forms.py:111
 msgid "Transaction Amount"
 msgstr "Ποσό Συναλλαγής"
 
-#: forms.py:82 templates/dashboard/dashboard.html:157
+#: forms.py:112 templates/dashboard/dashboard.html:162
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: forms.py:106
+#: forms.py:154
+msgid "The total percentage allocation cannot exceed 100%."
+msgstr ""
+
+#: forms.py:165
+msgid "First Name:"
+msgstr "Όνομα"
+
+#: forms.py:168
+msgid "Enter your first name"
+msgstr "Εισάγετε το όνομα σας"
+
+#: forms.py:174
+msgid "Last Name:"
+msgstr "Έπίθετο"
+
+#: forms.py:177
+msgid "Enter your last name"
+msgstr "Εισάγετε το επίθετο σας"
+
+#: forms.py:185
 msgid "Username:"
 msgstr "Όνομα Χρήστη:"
 
-#: forms.py:114
+#: forms.py:193
 msgid "Email:"
 msgstr "Ηλεκτρονικό Ταχυδρομείο:"
 
-#: forms.py:117
+#: forms.py:196
 msgid "Enter your Email"
 msgstr "Εισάγετε το email σας"
 
-#: forms.py:121
+
+#: forms.py:200
 msgid "Password:"
 msgstr "Κωδικός:"
 
-#: forms.py:124
+#: forms.py:203
 msgid "Enter Password"
 msgstr "Εισάγετε τον κωδικό"
 
-#: forms.py:129
+#: forms.py:208
 msgid "Confirm Password:"
 msgstr "Επιβεβαίωση Κωδικού:"
 
-#: forms.py:133
+#: forms.py:212
 msgid "Confirm Password"
 msgstr "Επιβεβαιώστε τον Κωδικό"
 
-#: forms.py:175
+#: forms.py:254
 msgid "Wallet Name"
 msgstr "Όνομα Πορτοφολιού"
 
-#: forms.py:177 templates/dashboard/dashboard.html:49
-#: templates/dashboard/dashboard.html:92
+#: forms.py:256 templates/dashboard/dashboard.html:51
+#: templates/dashboard/dashboard.html:95
 msgid "Balance"
 msgstr "Υπόλοιπο"
 
-#: forms.py:185
+#: forms.py:266
 msgid "Source Wallet"
 msgstr "Πορτοφόλι Αποστολής"
 
-#: forms.py:190
+#: forms.py:274
 msgid "Destination Wallet"
 msgstr "Πορτοφόλι Παραλαβής"
 
-#: forms.py:197 templates/dashboard/dashboard.html:153
+#: forms.py:281 templates/dashboard/dashboard.html:158
 msgid "Amount"
 msgstr "Ποσό"
 
-#: forms.py:210
+#: forms.py:294
 msgid "Recover Negative Balance Correction"
 msgstr "Ανάκτηση Διόρθωσης Αρνητικού Υπολοίπου"
 
-#: forms.py:216
+#: forms.py:300 forms.py:371
 msgid "Choose Wallet"
 msgstr "Επιλέξτε Πορτοφόλι"
 
-#: forms.py:263
+#: forms.py:347
 msgid "All Types"
 msgstr "Όλοι οι Τύποι"
 
-#: forms.py:264 models.py:85 models.py:167
+#: forms.py:348 models.py:85 models.py:167
 msgid "Income"
 msgstr "Έσοδα"
 
-#: forms.py:265 models.py:86
+#: forms.py:349 models.py:86
 msgid "Expense"
 msgstr "Έξοδα"
 
-#: forms.py:266 templates/dashboard/dashboard.html:222
-#: templates/dashboard/dashboard.html:332
+#: forms.py:350 templates/dashboard/dashboard.html:227
+#: templates/dashboard/dashboard.html:355
 msgid "Transfer"
 msgstr "Μεταφορά"
 
-#: forms.py:277 forms.py:316
+#: forms.py:361 forms.py:401
 msgid "All Categories"
 msgstr "Όλες οι Κατηγορίες"
 
-#: forms.py:287 templates/dashboard/dashboard.html:154
-msgid "Wallet"
-msgstr "Πορτοφόλι"
-
-#: forms.py:294
+#: forms.py:379
 msgid "Start Date"
 msgstr "Ημερομηνία Έναρξης"
 
-#: forms.py:301
+#: forms.py:386
 msgid "End Date"
 msgstr "Ημερομηνία Λήξης"
 
@@ -168,7 +210,9 @@ msgstr "Τραπεζικός Λογαριασμός"
 msgid "Savings"
 msgstr "Αποταμιεύσεις"
 
-
+#: models.py:15
+msgid "Investment"
+msgstr "Επενδύσεις"
 
 #: models.py:16
 msgid "General"
@@ -395,7 +439,9 @@ msgid "Taxes"
 msgstr "Φόροι"
 
 #: models.py:158
-msgid "Investment"
+#, fuzzy
+#| msgid "Investment"
+msgid "Investments"
 msgstr "Επενδύσεις"
 
 #: models.py:159
@@ -454,36 +500,48 @@ msgstr "Έσοδα από ενοίκια"
 msgid "Other"
 msgstr "Άλλο"
 
-#: templates/dashboard/base.html:89 templates/dashboard/base.html:108
+#: models.py:198
+msgid "Percentage allocated for savings (e.g., 10 for 10%)"
+msgstr ""
+
+#: models.py:202
+msgid "Percentage allocated for investment (e.g., 10 for 10%)"
+msgstr ""
+
+#: models.py:206
+msgid "Percentage allocated for charity (e.g., 10 for 10%)"
+msgstr ""
+
+#: templates/dashboard/base.html:90 templates/dashboard/base.html:109
 msgid "Home"
 msgstr "Αρχική"
 
-#: templates/dashboard/base.html:90
+#: templates/dashboard/base.html:91
 msgid "Dashboard"
 msgstr "Πίνακας Διαχείρησης"
 
-#: templates/dashboard/base.html:100
+#: templates/dashboard/base.html:101
 msgid "Log Out"
 msgstr "Αποσύνδεση"
 
-#: templates/dashboard/base.html:109 templates/dashboard/login.html:19
+#: templates/dashboard/base.html:110 templates/dashboard/login.html:19
 msgid "Login"
 msgstr "Σύνδεση"
 
-#: templates/dashboard/base.html:110 templates/dashboard/signup.html:18
-#: templates/dashboard/signup.html:44
+#: templates/dashboard/base.html:111 templates/dashboard/signup.html:18
+#: templates/dashboard/signup.html:58
 msgid "Sign Up"
 msgstr "Εγγραφή"
 
-#: templates/dashboard/base.html:186
+#: templates/dashboard/base.html:187
 msgid "Copyright"
 msgstr "Πνευματικά δικαιώματα"
 
-#: templates/dashboard/base.html:186
+#: templates/dashboard/base.html:187
 msgid "Designed and Developed by"
 msgstr "Σχεδιάστηκε και κατασκευάστηκε από"
 
-#: templates/dashboard/base.html:186
+#: templates/dashboard/base.html:187
 msgid "Costas Nicou"
 msgstr "Κώστας Νίκου "
 
@@ -501,122 +559,130 @@ msgstr "Τα Πορτοφόλια σας"
 
 #: templates/dashboard/dashboard.html:28
 msgid "Created by You"
-msgstr "Δημιουργημένα από σενα"
+msgstr "Δημιουργημένα από σένα"
 
 #: templates/dashboard/dashboard.html:29
 msgid "Predefined"
 msgstr "Προκαθορισμένα"
 
-#: templates/dashboard/dashboard.html:39 templates/dashboard/dashboard.html:75
-#: templates/dashboard/dashboard.html:98
+#: templates/dashboard/dashboard.html:41 templates/dashboard/dashboard.html:77
 msgid "No Wallets available"
 msgstr "Δεν υπάρχουν διαθέσιμα πορτοφόλια"
 
-#: templates/dashboard/dashboard.html:50
+#: templates/dashboard/dashboard.html:52
 msgid "Balance Correction"
 msgstr "Διόρθωση Υπολοίπου"
 
-#: templates/dashboard/dashboard.html:67 templates/dashboard/dashboard.html:204
+#: templates/dashboard/dashboard.html:69 templates/dashboard/dashboard.html:99
+#: templates/dashboard/dashboard.html:209
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: templates/dashboard/dashboard.html:106
-#: templates/dashboard/dashboard.html:237
-#: templates/dashboard/dashboard.html:253
+#: templates/dashboard/dashboard.html:111
+#: templates/dashboard/dashboard.html:242
+#: templates/dashboard/dashboard.html:258
 msgid "Add Wallet"
 msgstr "Προσθήκη Πορτοφολιού"
 
-#: templates/dashboard/dashboard.html:112
+#: templates/dashboard/dashboard.html:117
 msgid "Financial Information"
 msgstr "Οικονομικές Πληροφορίες"
 
-#: templates/dashboard/dashboard.html:116
+#: templates/dashboard/dashboard.html:121
 msgid "Total Income"
 msgstr "Συνολικά Έσοδα"
 
-#: templates/dashboard/dashboard.html:121
+#: templates/dashboard/dashboard.html:126
 msgid "Total Expenses"
 msgstr "Συνολικά Έξοδα"
 
-#: templates/dashboard/dashboard.html:125
+#: templates/dashboard/dashboard.html:130
 msgid "Total Balance Correction"
 msgstr "Συνολική Διόρθωση Υπολοίπου"
 
-#: templates/dashboard/dashboard.html:135
+#: templates/dashboard/dashboard.html:140
 msgid "Net Balance"
 msgstr "Καθαρό Υπόλοιπο"
 
-#: templates/dashboard/dashboard.html:145
+#: templates/dashboard/dashboard.html:150
 msgid "Recent Transactions"
 msgstr "Πρόσφατες Συναλλαγές"
 
-#: templates/dashboard/dashboard.html:151
+#: templates/dashboard/dashboard.html:156
 msgid "Type"
 msgstr "Τύπος"
 
-#: templates/dashboard/dashboard.html:155
+#: templates/dashboard/dashboard.html:159
+msgid "Wallet"
+msgstr "Πορτοφόλι"
+
+#: templates/dashboard/dashboard.html:160
 msgid "Current Balance"
 msgstr "Τρέχον Υπόλοιπο"
 
-#: templates/dashboard/dashboard.html:156
+#: templates/dashboard/dashboard.html:161
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: templates/dashboard/dashboard.html:158
+#: templates/dashboard/dashboard.html:163
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: templates/dashboard/dashboard.html:192
+#: templates/dashboard/dashboard.html:191
+msgid "None"
+msgstr "Καμία"
+
+#: templates/dashboard/dashboard.html:197
 msgid "No Action"
 msgstr "Καμία Ενέργεια"
 
-#: templates/dashboard/dashboard.html:199
-#: templates/dashboard/dashboard.html:384
-#: templates/dashboard/dashboard.html:432
+#: templates/dashboard/dashboard.html:204
+#: templates/dashboard/dashboard.html:423
+#: templates/dashboard/dashboard.html:471
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: templates/dashboard/dashboard.html:211
+#: templates/dashboard/dashboard.html:216
 msgid "No transactions available."
 msgstr "Δεν υπάρχουν διαθέσιμες συναλλαγές."
 
-#: templates/dashboard/dashboard.html:221
-#: templates/dashboard/dashboard.html:263
-#: templates/dashboard/dashboard.html:290
+#: templates/dashboard/dashboard.html:226
+#: templates/dashboard/dashboard.html:268
+#: templates/dashboard/dashboard.html:313
 msgid "Add Transaction"
 msgstr "Προσθήκη Συναλλαγής"
 
-#: templates/dashboard/dashboard.html:224
-#: templates/dashboard/dashboard.html:446
+#: templates/dashboard/dashboard.html:229
+#: templates/dashboard/dashboard.html:485
 msgid "Filter Transactions"
 msgstr "Φιλτράρισμα Συναλλαγών"
 
-#: templates/dashboard/dashboard.html:225
-#: templates/dashboard/dashboard.html:475
+#: templates/dashboard/dashboard.html:230
+#: templates/dashboard/dashboard.html:514
 msgid "Filter"
 msgstr "Φίλτρο"
 
-#: templates/dashboard/dashboard.html:300
+#: templates/dashboard/dashboard.html:323
 msgid "Transfer Money Between Wallets"
 msgstr "Μεταφορά Χρημάτων Μεταξύ Πορτοφολιών"
 
-#: templates/dashboard/dashboard.html:343
+#: templates/dashboard/dashboard.html:366
 msgid "Edit Transaction"
 msgstr "Επεξεργασία Συναλλαγής"
 
-#: templates/dashboard/dashboard.html:381
+#: templates/dashboard/dashboard.html:420
 msgid "Save changes"
 msgstr "Αποθήκευση αλλαγών"
 
-#: templates/dashboard/dashboard.html:402
+#: templates/dashboard/dashboard.html:441
 msgid "Edit Wallet"
 msgstr "Επεξεργασία Πορτοφολιού"
 
-#: templates/dashboard/dashboard.html:429
+#: templates/dashboard/dashboard.html:468
 msgid "Save Changes"
 msgstr "Αποθήκευση Αλλαγών"
 
-#: templates/dashboard/dashboard.html:476
+#: templates/dashboard/dashboard.html:515
 msgid "Reset"
 msgstr "Επαναφορά"
 
@@ -872,19 +938,17 @@ msgstr "Δεν έχετε λογαριασμό;"
 msgid "Sign up here."
 msgstr "Εγγραφείτε εδώ."
 
-#: templates/dashboard/signup.html:48
+#: templates/dashboard/signup.html:62
 msgid "Already have an account? "
 msgstr "Έχετε ήδη λογαριασμό;"
 
-#: templates/dashboard/signup.html:48
+#: templates/dashboard/signup.html:62
 msgid "Log in here"
 msgstr "Συνδεθείτε εδώ"
 
-#: views.py:222
+#: views.py:506
 msgid "Balance Adjustment"
 msgstr "Προσαρμογή Υπολοίπου"
-
-
 
 msgid "Balance Adjustment Decrease"
 msgstr "Αρνητική Προσαρμογή Υπολοίπου"
@@ -894,6 +958,3 @@ msgstr "Θετική Προσαρμογή Υπολοίπου"
 
 msgid "Charity"
 msgstr "Φιλανθρωπία"
-
-msgid "None"
-msgstr "Καμία"
